@@ -4,53 +4,56 @@ _Actualizado: 2026-09-09_
 
 ## Dónde estamos
 
-**Cimientos montados. Sin código de aplicación todavía.**
+**Andamiaje Vite montado y verde.** Cimientos + proyecto base funcionando.
 
-Hecho hoy:
+### Cimientos (sesión 1)
 
-- `git init` en `main`.
-- `.gitignore` (Vite/Node) y `.nvmrc` (Node 22).
-- Hook `Stop` de copia de seguridad automática: `.claude/hooks/auto-commit.mjs` +
-  `.claude/settings.json`. Confirma en local tras cada turno; hará push cuando haya remoto.
-- `CLAUDE.md` con stack, estructura, modelo de estado y dirección visual.
-- `docs/`: `business.md`, `architecture.md`, `decisions.md`, `todos.md`, este archivo, y
-  `handoff.md` (la especificación original, movida aquí).
+- `git init` en `main`; `.gitignore`, `.gitattributes`, `.editorconfig`, `.nvmrc` (Node 22).
+- Hook `Stop` de copia de seguridad: `.claude/hooks/auto-commit.mjs` + `.claude/settings.json`.
+- `CLAUDE.md` + `docs/` (`business`, `architecture`, `decisions`, `todos`, este archivo, `handoff`).
+- Remoto: `origin` = https://github.com/Cheshnark/mordheim-turner.git, `main` rastrea `origin/main`.
 
-Decidido (detalle y motivo en `docs/decisions.md`):
+### Andamiaje (sesión 2 — esta)
 
-- Vite + React + TS, sin Next.
-- Zustand + `persist` sobre una clave única de `localStorage`.
-- CSS Modules + `tokens.css`, sin Tailwind.
-- Titulares en Grenze Gotisch self-hosted; resto en sans del sistema.
-- Paleta del handoff + segundo acento wyrdstone + viñeta y textura de hollín estáticas.
+- **Vite 8 + React 19 + TypeScript 6** (template `react-ts` de create-vite 9, personalizado).
+- **ESLint 10 flat config + Prettier** (Prettier ignora `*.md` — ver nota abajo).
+- **Vitest 5 + Testing Library** (jsdom), `src/test/setup.ts`.
+- **react-router-dom 7** con `<BrowserRouter>` / `<Routes>`; **zustand 5** instalado (aún sin store).
+- Alias `@/` → `src/` vía `resolve.tsconfigPaths` nativo de Vite (sin plugin).
+- CI en `.github/workflows/ci.yml`: lint + typecheck + test + build.
+- Estructura de `src/` según `docs/architecture.md`. Creado:
+  - `src/main.tsx`, `src/App.tsx` (router con las 4 rutas)
+  - `src/routes/Home.tsx` + `Home.module.css` + `Home.test.tsx` — los 4 accesos, con estilo
+  - `src/routes/{Prebattle,Battle,Postgame}.tsx` — **stubs** (solo título + enlace a Home)
+  - `src/styles/tokens.css` (paleta de `decisions.md`) + `src/styles/global.css`
+    (reset, viñeta, textura de hollín SVG, helpers `.stack` / `.row`, `prefers-reduced-motion`)
+  - `src/store/tipos.ts` — tipos de dominio del handoff §3
+  - `src/lib/battle/fases.ts` + `fases.test.ts` — `ORDEN_FASES`, `faseSiguiente`, `cierraRonda`
+- **Verificado:** `npm run lint`, `typecheck`, `test` (6/6), `format:check`, `build` — todo pasa.
 
-## Siguiente paso (sesión nueva)
+### Nota sobre Prettier y markdown
 
-**Andamiaje del proyecto Vite.** En un chat nuevo, con este prompt de arranque:
+`*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
+Los `.md` se mantienen a mano.
 
-> Lee `docs/project_state.md`, `docs/architecture.md` y `docs/decisions.md`. Anda el
-> proyecto: Vite + React + TS, Vitest + Testing Library, ESLint flat + Prettier, scripts
-> de npm equivalentes a `../mortgage-calculator`, CI en GitHub Actions, la estructura de
-> carpetas de `architecture.md`, `src/styles/tokens.css` con la paleta de `decisions.md`,
-> y la fuente Grenze Gotisch self-hosted. Sin pantallas todavía o sólo Home con los 4
-> accesos.
+## Siguiente paso
 
-Después, en orden sugerido:
+Contenido y lógica, en este orden (cada bloque = sesión nueva):
 
-1. `src/data/` con el contenido de las checklists (handoff §5–7).
-2. `src/lib/battle/fases.ts` + tests: avance de fase, cierre de ronda, limpieza.
-3. Store zustand + `persist` + tests de rehidratación.
-4. Pantallas: Home → Battle (bucle) → Prebattle → Postgame.
-5. Capa visual (tokens, viñeta, textura, tipografía) sobre el mockup de referencia.
+1. **`src/data/`** — checklists de Prebattle, Battle (4 fases) y Postgame desde `handoff.md`
+   §5–7 como `ChecklistItem[]`, con `texto_explicado` y `link_regla`. Más las notas fijas
+   (Fase de Combate §5, cierre de Postgame §7).
+2. **Store zustand + `persist`** — `EstadoApp` en una clave única de `localStorage`;
+   acción de avance de fase que usa `faseSiguiente` / `cierraRonda` y limpia el checklist
+   al cerrar ronda. Tests de rehidratación.
+3. **Pantallas reales** — Battle (selección de modo + bucle ronda/fase con toggle
+   tutorial/rápido) → Prebattle → Postgame. Reemplazan los stubs.
+4. **Capa visual** — aplicar tokens y estética grimdark a checklists y fase activa
+   (rojo sangre + filo wyrdstone) sobre el mockup de referencia.
+5. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
 
-## Bloqueos / dependencias
+## Bloqueos / pendientes de terceros
 
-- El mockup `mordheim-battle-mockup.html` que menciona `handoff.md` §9 **no está** en el
-  repo. Pedirlo al usuario antes de la capa visual de Battle.
-
-## Resuelto
-
-- **Remoto en GitHub** (2026-09-09): `origin` =
-  https://github.com/Cheshnark/mordheim-turner.git, `main` rastrea `origin/main`. El hook
-  `Stop` confirma y hace push. `gh` CLI no se pudo instalar (winget/choco sin permisos de
-  administrador); el repo se creó por web.
+- El mockup `mordheim-battle-mockup.html` (`handoff.md` §9) **no está** en el repo.
+  Pedirlo al usuario antes de la capa visual de Battle.
+- `gh` CLI no instalado (winget/choco sin permisos de admin). No bloquea nada ahora.

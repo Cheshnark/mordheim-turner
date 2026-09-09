@@ -1,53 +1,59 @@
 # Arquitectura
 
-> Estado: **previsto**. Todavía no hay código; este documento fija el objetivo del
-> andamiaje. Las decisiones y su motivo están en `docs/decisions.md`.
+> Estado: **andamiaje montado** (2026-09-09). Base verde: lint, typecheck, test y build
+> pasan. Pantallas Prebattle/Battle/Postgame son stubs. Decisiones y motivo en
+> `docs/decisions.md`; estado y siguiente paso en `docs/project_state.md`.
 
 ## Stack
 
-| Área | Elección | Motivo (resumen) |
+| Área | Elección | Notas |
 |---|---|---|
-| Build / framework | **Vite + React + TypeScript** | SPA en cliente puro; sin SSR porque el SEO no es objetivo |
-| Estado | **Zustand** + middleware `persist` | Modelo de estado pequeño; `persist` cubre el `localStorage` único |
-| Estilos | **CSS Modules + `tokens.css`** | Identidad visual muy personalizada; Tailwind estorbaría (ver decisiones) |
-| Tests | **Vitest + Testing Library**, jsdom | Igual que `mortgage-calculator`; tests colocados |
-| Lint / formato | **ESLint flat config + Prettier** | Prettier manda en formato; ESLint sólo reglas |
+| Build / framework | **Vite 8 + React 19 + TypeScript 6** | SPA en cliente puro; sin SSR (el SEO no es objetivo). Template `react-ts` de create-vite 9, personalizado |
+| Routing | **react-router-dom 7** | `<BrowserRouter>` + `<Routes>` en `App.tsx`. 4 rutas: `/`, `/prebattle`, `/battle`, `/postgame` |
+| Estado | **Zustand 5** + middleware `persist` | Instalado; store aún sin escribir. `persist` cubre el `localStorage` único |
+| Estilos | **CSS Modules + `tokens.css`** | Identidad muy personalizada; Tailwind estorbaría (ver decisiones) |
+| Tests | **Vitest 5 + Testing Library**, jsdom | Entorno `jsdom` por defecto; setup en `src/test/setup.ts`; tests colocados |
+| Lint / formato | **ESLint 10 flat + Prettier 3** | Prettier manda en formato. Prettier **ignora `*.md`** (destroza tablas de prosa) |
+| Alias | `@/` → `src/` | `resolve.tsconfigPaths: true` nativo de Vite 8 (sin plugin) + `paths` en `tsconfig.app.json` |
 | Runtime | **Node 22** (`.nvmrc`) | Única fuente de verdad para local y CI |
-| CI | **GitHub Actions** | lint + typecheck + test + build en push/PR a `main` |
+| CI | **GitHub Actions** (`.github/workflows/ci.yml`) | lint + typecheck + test + build en push/PR a `main` |
 
-Proyecto de referencia para convenciones: `../mortgage-calculator` (mismo autor). De ahí
-se copian scripts de npm, configs y el patrón de carpetas por componente. **No** se copia
-Next ni `next-intl`: aquí no hay SSR ni i18n (contenido sólo en español).
+Proyecto de referencia para convenciones: `../mortgage-calculator` (mismo autor) — scripts
+de npm, filosofía de config, patrón de carpetas por componente. **No** se copia Next ni
+`next-intl`: aquí no hay SSR ni i18n (contenido sólo en español). El template nuevo de Vite
+trae `oxlint`; se sustituyó por ESLint flat + Prettier para alinear con el proyecto hermano.
 
-## Estructura de carpetas (objetivo)
+## Estructura de carpetas
+
+`[x]` existe · `[ ]` previsto
 
 ```
 src/
-  main.tsx              punto de entrada
-  App.tsx               router + layout raíz
+  [x] main.tsx              punto de entrada: BrowserRouter + tokens.css + global.css
+  [x] App.tsx               <Routes> con las 4 rutas
   routes/
-    Home.tsx            4 accesos al mismo nivel
-    Prebattle.tsx       checklist plana
-    Battle.tsx          selección de modo + bucle ronda/fase
-    Postgame.tsx        checklist plana
-  components/
-    <Nombre>/<Nombre>.tsx
-    <Nombre>/<Nombre>.module.css
-    <Nombre>/<Nombre>.test.tsx
+    [x] Home.tsx / .module.css / .test.tsx   4 accesos al mismo nivel, con estilo
+    [x] Prebattle.tsx        STUB (título + volver a Home)
+    [x] Battle.tsx           STUB
+    [x] Postgame.tsx         STUB
+  components/                (vacío) patrón: <Nombre>/<Nombre>.{tsx,module.css,test.tsx}
   store/
-    estadoApp.ts         store zustand + persist (clave única de localStorage)
-  data/
-    prebattle.ts         ChecklistItem[]
-    postgame.ts          ChecklistItem[]
-    battle.ts            por fase: ChecklistItem[] + notas fijas
+    [x] tipos.ts             tipos de dominio (handoff §3)
+    [ ] estadoApp.ts         store zustand + persist (clave única de localStorage)
+  data/                      (vacío)
+    [ ] prebattle.ts         ChecklistItem[]
+    [ ] postgame.ts          ChecklistItem[]
+    [ ] battle.ts            por fase: ChecklistItem[] + notas fijas
   lib/
-    battle/fases.ts      avance de fase, cierre de ronda, limpieza de checklist (lógica pura)
-    battle/fases.test.ts
+    [x] battle/fases.ts      ORDEN_FASES, faseSiguiente, cierraRonda (lógica pura)
+    [x] battle/fases.test.ts
   styles/
-    tokens.css           custom properties (color, espaciado, tipografía)
-    global.css           reset + base + helpers .stack / .row
-  fonts/
-    grenze-gotisch-*.woff2
+    [x] tokens.css           custom properties (color, espaciado, tipografía)
+    [x] global.css           reset + viñeta + textura de hollín SVG + .stack / .row + reduced-motion
+  test/
+    [x] setup.ts             jest-dom + cleanup por test
+  fonts/                     (vacío)
+    [ ] grenze-gotisch-*.woff2
 ```
 
 ## Tipos de dominio (del handoff)
@@ -84,11 +90,14 @@ usuario desmarca a mano si quiere reiniciar.
 
 ## Estrategia de tests
 
-- **`src/lib/`**: lógica pura (avance de ronda/fase, limpieza de checklist). Tests unitarios,
-  entorno `node`.
-- **`src/components/`** y **`src/store/`**: Testing Library + jsdom. Cubrir el bucle de
-  Battle (completar checklist → habilitar "Siguiente fase" → cerrar ronda) y la
-  rehidratación desde `localStorage`.
+Entorno **`jsdom` por defecto** para todos los tests (`vite.config.ts` → `test.environment`).
+La lógica pura de `src/lib/` corre igual sin coste real; se evita el boilerplate de
+`// @vitest-environment` por archivo.
+
+- **`src/lib/`**: lógica pura (avance de ronda/fase, limpieza de checklist). Tests unitarios.
+- **`src/components/`** y **`src/store/`**: Testing Library. Cubrir el bucle de Battle
+  (completar checklist → habilitar "Siguiente fase" → cerrar ronda) y la rehidratación
+  desde `localStorage`.
 
 ## Dependencias externas
 

@@ -1,0 +1,52 @@
+/* Design tokens — Mordheim Turn Companion.
+   Paleta, tipografía y motivo en docs/decisions.md (entrada 2026-09-09). */
+:root {
+  /* --- Color: base grimdark cálida (handoff §8) --- */
+  --color-fondo: #1a1614;
+  --color-superficie: #241f1c;
+  --color-superficie-2: #2e2723;
+  --color-linea: #3a322c;
+  --color-acento: #8b3a3a; /* rojo sangre seca: acción principal / fase activa */
+  --color-acento-suave: #5c2a2a;
+  --color-wyrdstone: #6f8f3e; /* segundo acento: filo del paso activo (ajustable) */
+  --color-texto: #ede6dc; /* hueso */
+  --color-texto-2: #9c9086;
+  --color-completado: #5b7553;
+  --color-enlace-externo: #c98a6a; /* ámbar de antorcha */
+
+  /* --- Tipografía --- */
+  --fuente-titular: 'Grenze Gotisch', Georgia, 'Times New Roman', serif;
+  --fuente-texto:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+
+  --texto-xs: 0.75rem;
+  --texto-s: 0.875rem;
+  --texto-m: 1rem;
+  --texto-l: 1.25rem;
+  --texto-xl: 1.75rem;
+  --texto-xxl: 2.5rem;
+
+  --peso-normal: 400;
+  --peso-fuerte: 600;
+  --interlineado-texto: 1.55;
+  --interlineado-titular: 1.1;
+
+  /* --- Espaciado: escala base 4 --- */
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 0.75rem;
+  --espacio-4: 1rem;
+  --espacio-5: 1.5rem;
+  --espacio-6: 2rem;
+  --espacio-8: 3rem;
+
+  /* --- Geometría: bloques planos, casi sin radio --- */
+  --radio: 2px;
+  --borde: 1px solid var(--color-linea);
+
+  /* Objetivo táctil mínimo (uso en mesa, luz mala). */
+  --toque-min: 52px;
+
+  /* Ancho de lectura cómodo (< 80 caracteres). */
+  --ancho-columna: 33rem;
+}

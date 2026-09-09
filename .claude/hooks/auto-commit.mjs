@@ -9,49 +9,58 @@
  *
  * Configurado en `.claude/settings.json` (evento `Stop`).
  */
-import { execFileSync } from "node:child_process";
+import { execFileSync } from 'node:child_process'
 
 function tryGit(args) {
   try {
-    const out = execFileSync("git", args, {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-    return { ok: true, out: out.trim() };
+    const out = execFileSync('git', args, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+    return { ok: true, out: out.trim() }
   } catch (err) {
-    return { ok: false, out: `${err.stdout ?? ""}${err.stderr ?? ""}`.trim() };
+    return { ok: false, out: `${err.stdout ?? ''}${err.stderr ?? ''}`.trim() }
   }
 }
 
 function emit(systemMessage) {
-  if (systemMessage) process.stdout.write(JSON.stringify({ systemMessage }));
+  if (systemMessage) process.stdout.write(JSON.stringify({ systemMessage }))
 }
 
-const firstLine = (s) => s.split("\n")[0]?.trim() ?? "";
+const firstLine = (s) => s.split('\n')[0]?.trim() ?? ''
 
 // 1. Estar dentro de un repositorio git.
-if (!tryGit(["rev-parse", "--is-inside-work-tree"]).ok) process.exit(0);
+if (!tryGit(['rev-parse', '--is-inside-work-tree']).ok) process.exit(0)
 
 // 2. Preparar todo el árbol.
-tryGit(["add", "-A"]);
+tryGit(['add', '-A'])
 
 // 3. `git diff --cached --quiet` termina con 0 si NO hay nada preparado.
-if (tryGit(["diff", "--cached", "--quiet"]).ok) process.exit(0);
+if (tryGit(['diff', '--cached', '--quiet']).ok) process.exit(0)
 
 // 4. Confirmar.
-const stamp = new Date().toISOString().slice(0, 16).replace("T", " ");
-const commit = tryGit(["commit", "--quiet", "-m", `chore: guardado automático (${stamp})`]);
+const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ')
+const commit = tryGit([
+  'commit',
+  '--quiet',
+  '-m',
+  `chore: guardado automático (${stamp})`,
+])
 if (!commit.ok) {
-  emit(`Auto-commit falló: ${firstLine(commit.out)}`);
-  process.exit(0);
+  emit(`Auto-commit falló: ${firstLine(commit.out)}`)
+  process.exit(0)
 }
 
 // 5. Push sólo si la rama tiene upstream.
-if (tryGit(["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"]).ok) {
-  const push = tryGit(["push", "--quiet"]);
-  emit(push.ok ? `Guardado y subido (${stamp}).` : `Commit hecho; el push falló: ${firstLine(push.out)}`);
+if (tryGit(['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}']).ok) {
+  const push = tryGit(['push', '--quiet'])
+  emit(
+    push.ok
+      ? `Guardado y subido (${stamp}).`
+      : `Commit hecho; el push falló: ${firstLine(push.out)}`,
+  )
 } else {
-  emit(`Guardado en local (${stamp}). Aún sin remoto configurado.`);
+  emit(`Guardado en local (${stamp}). Aún sin remoto configurado.`)
 }
 
-process.exit(0);
+process.exit(0)

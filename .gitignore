@@ -5,7 +5,9 @@
 
 # === Builds ===
 /dist
+/dist-ssr
 /build
+*.local
 
 # === Tests / cobertura ===
 /coverage
