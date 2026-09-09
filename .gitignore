@@ -1,0 +1,42 @@
+# === Dependencias ===
+/node_modules
+.pnp
+.pnp.*
+
+# === Builds ===
+/dist
+/build
+
+# === Tests / cobertura ===
+/coverage
+
+# === Caché de herramientas ===
+.eslintcache
+*.tsbuildinfo
+.vite/
+/node_modules/.vite
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Secretos / entorno ===
+.env
+.env.*
+!.env.example
+
+# === Sistema operativo / editor ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.pem
+
+# === Config local de Claude Code (personal, no compartida) ===
+/.claude/settings.local.json
+
+# === Notas personales que no forman parte del proyecto ===
+/Empezar con Claude Code.md
