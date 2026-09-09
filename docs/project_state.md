@@ -45,7 +45,12 @@ Después, en orden sugerido:
 
 ## Bloqueos / dependencias
 
-- **Sin remoto en GitHub.** El hook confirma en local pero no sube nada hasta crear el
-  repo y añadir `origin`. `gh` CLI no está instalado. Ver `docs/todos.md`.
 - El mockup `mordheim-battle-mockup.html` que menciona `handoff.md` §9 **no está** en el
   repo. Pedirlo al usuario antes de la capa visual de Battle.
+
+## Resuelto
+
+- **Remoto en GitHub** (2026-09-09): `origin` =
+  https://github.com/Cheshnark/mordheim-turner.git, `main` rastrea `origin/main`. El hook
+  `Stop` confirma y hace push. `gh` CLI no se pudo instalar (winget/choco sin permisos de
+  administrador); el repo se creó por web.

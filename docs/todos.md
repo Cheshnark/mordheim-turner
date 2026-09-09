@@ -3,8 +3,9 @@
 ## Prioridad alta
 
 - [ ] **Andamiaje Vite + React + TS** (sesión nueva). Ver `docs/project_state.md` → "Siguiente paso".
-- [ ] **Crear el repo en GitHub y añadir `origin`** para que el hook de copia de seguridad
-      empiece a hacer push. Requiere instalar `gh` CLI o crear el repo por web.
+- [x] ~~Crear el repo en GitHub y añadir `origin`~~ — hecho 2026-09-09.
+      `origin` = https://github.com/Cheshnark/mordheim-turner.git, `main` rastrea `origin/main`.
+      El hook `Stop` ya hace commit **y** push.
 
 ## Prioridad media
 
