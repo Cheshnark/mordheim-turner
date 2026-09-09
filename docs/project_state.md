@@ -31,6 +31,21 @@ _Actualizado: 2026-09-09_
   - `src/lib/battle/fases.ts` + `fases.test.ts` — `ORDEN_FASES`, `faseSiguiente`, `cierraRonda`
 - **Verificado:** `npm run lint`, `typecheck`, `test` (6/6), `format:check`, `build` — todo pasa.
 
+### Datos de checklists (sesión 3 — esta)
+
+`src/data/` desde `handoff.md` §5–7 (aún sin consumir por ninguna pantalla):
+
+- `prebattle.ts` → `CHECKLIST_PREBATTLE: ChecklistItem[]`
+- `postgame.ts` → `CHECKLIST_POSTGAME` + `NOTAS_POSTGAME` (nota fija, sin checkbox)
+- `battle.ts` → `CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase>`; cada fase con
+  `numero`, `titulo`, `linkFase` (página de reglas) y, en Combate, `notasFijas`
+- `checklists.test.ts` → ids únicos, textos no vacíos, links `https://mordheimer.net/`,
+  4 fases numeradas 1..4, notas fijas presentes. **test total: 21/21.**
+
+Nota de contenido: los `texto_corto` / `texto_explicado` son reformulación operativa de
+las viñetas del handoff, sin añadir reglas que no estén ahí. La transición de fin de
+ronda (§5, "al completar Combate → ronda += 1") es lógica del store, no va en datos.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -40,15 +55,14 @@ Los `.md` se mantienen a mano.
 
 Contenido y lógica, en este orden (cada bloque = sesión nueva):
 
-1. **`src/data/`** — checklists de Prebattle, Battle (4 fases) y Postgame desde `handoff.md`
-   §5–7 como `ChecklistItem[]`, con `texto_explicado` y `link_regla`. Más las notas fijas
-   (Fase de Combate §5, cierre de Postgame §7).
-2. **Store zustand + `persist`** — `EstadoApp` en una clave única de `localStorage`;
-   acción de avance de fase que usa `faseSiguiente` / `cierraRonda` y limpia el checklist
-   al cerrar ronda. Tests de rehidratación.
-3. **Pantallas reales** — Battle (selección de modo + bucle ronda/fase con toggle
-   tutorial/rápido) → Prebattle → Postgame. Reemplazan los stubs.
-4. **Capa visual** — aplicar tokens y estética grimdark a checklists y fase activa
+1. **Store zustand + `persist`** — `EstadoApp` en una clave única de `localStorage`;
+   acción de avance de fase que usa `faseSiguiente` / `cierraRonda` y limpia
+   `checklistFaseActual` al cerrar ronda. Tests de rehidratación.
+2. **Pantallas reales** — Battle (selección de modo + bucle ronda/fase con toggle
+   tutorial/rápido, consumiendo `CONTENIDO_BATTLE`) → Prebattle (`CHECKLIST_PREBATTLE`) →
+   Postgame (`CHECKLIST_POSTGAME` + `NOTAS_POSTGAME`). Reemplazan los stubs.
+3. **Componente(s) de checklist** reutilizable(s) en `src/components/` (patrón carpeta).
+4. **Capa visual** — tokens y estética grimdark en checklists y fase activa
    (rojo sangre + filo wyrdstone) sobre el mockup de referencia.
 5. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
 

@@ -40,10 +40,11 @@ src/
   store/
     [x] tipos.ts             tipos de dominio (handoff §3)
     [ ] estadoApp.ts         store zustand + persist (clave única de localStorage)
-  data/                      (vacío)
-    [ ] prebattle.ts         ChecklistItem[]
-    [ ] postgame.ts          ChecklistItem[]
-    [ ] battle.ts            por fase: ChecklistItem[] + notas fijas
+  data/
+    [x] prebattle.ts         CHECKLIST_PREBATTLE: ChecklistItem[]
+    [x] postgame.ts          CHECKLIST_POSTGAME + NOTAS_POSTGAME
+    [x] battle.ts            CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> (items + linkFase + notasFijas)
+    [x] checklists.test.ts   invariantes de los datos (ids, links, cobertura de fases)
   lib/
     [x] battle/fases.ts      ORDEN_FASES, faseSiguiente, cierraRonda (lógica pura)
     [x] battle/fases.test.ts

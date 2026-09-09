@@ -4,9 +4,9 @@
 
 - [x] ~~Crear el repo en GitHub y añadir `origin`~~ — hecho 2026-09-09.
 - [x] ~~Andamiaje Vite + React + TS~~ — hecho 2026-09-09. Base verde (lint/typecheck/test/build).
-- [ ] **`src/data/`** con las checklists de Prebattle, Battle (4 fases) y Postgame a partir de
-      `handoff.md` §5–7, incluidos `texto_explicado` y `link_regla` de cada item, más las
-      notas fijas (Fase de Combate §5, cierre de Postgame §7).
+- [x] ~~`src/data/` con las checklists~~ — hecho 2026-09-09. `prebattle.ts`, `postgame.ts`
+      (+ `NOTAS_POSTGAME`), `battle.ts` (`CONTENIDO_BATTLE` por fase, con `linkFase` y
+      `notasFijas`), `checklists.test.ts` (21 asserts). Nada las consume aún.
 - [ ] **Store zustand + `persist`** (clave única de `localStorage`) + test de rehidratación.
       La acción de avance de fase usa `faseSiguiente` / `cierraRonda` (ya en `src/lib/battle/`)
       y limpia `checklistFaseActual` al cerrar ronda (`ronda += 1`, `fase = 'recuperacion'`).
