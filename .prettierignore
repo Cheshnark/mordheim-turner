@@ -5,3 +5,6 @@ src/fonts
 
 # Markdown a mano: docs, handoff, CLAUDE.md, README. Prettier estropea las tablas de prosa.
 *.md
+
+# Boceto de referencia: se conserva tal cual
+docs/mordheim-battle-mockup.html

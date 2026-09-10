@@ -166,6 +166,32 @@ en uso real molesta marcar pasos inaplicables (p. ej. Estupidez sin guerreros es
 
 ---
 
+## 2026-09-10 — Reconciliación con `mordheim-battle-mockup.html`
+
+El boceto entró en el repo (`docs/`, fuera de Prettier). Es referencia de interacción y
+layout, **no** código final (lo dice el propio `handoff.md` §9). Cómo se usa:
+
+**Se adopta:** frame de una columna estrecha; estado "marcado" del item (borde
+`--completado`, lavado verde muy sutil, caja con check en vez de raya sola);
+`phase-track` de 4 puntos (done / activa / pendiente); toggle de modo discreto tipo
+pill; en Home, Battle como acceso destacado y el enlace externo con borde discontinuo;
+botón "Siguiente fase" a ancho completo, `disabled` hasta completar.
+
+**Se rechaza:** la pill **"Mi turno"**. Contradice `handoff.md` §3 ("no existe turno
+mío / del rival en el estado"). El boceto es anterior al cierre de esa decisión.
+
+**Diverge a propósito** (ya decidido antes, se mantiene):
+
+| Tema | Boceto | Proyecto |
+|---|---|---|
+| Titulares | Iowan Old Style / Georgia | Grenze Gotisch self-hosted (entrada 2026-09-09) |
+| Textura | ninguna | viñeta + hollín `feTurbulence` estáticos |
+| 2.º acento | ninguno | `--color-wyrdstone` como filo de la fase activa |
+| Casilla | `<div>` con clase | `<input type="checkbox">` nativo (a11y) |
+| Toggle modo | 1 botón que cicla | 2 botones con `aria-pressed` (a11y), con estilo pill |
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mordheim Companion — boceto Battle</title>
+<style>
+  :root{
+    --bg:#1A1614;
+    --surface:#241F1C;
+    --surface-2:#2E2723;
+    --line:#3A322C;
+    --accent:#8B3A3A;
+    --accent-soft:#5C2A2A;
+    --text:#EDE6DC;
+    --text-muted:#9C9086;
+    --done:#5B7553;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter','Segoe UI',system-ui,sans-serif;
+    display:flex;
+    justify-content:center;
+    min-height:100vh;
+  }
+  .phone{
+    width:100%;
+    max-width:380px;
+    min-height:100vh;
+    background:var(--bg);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+  }
+  .display{
+    font-family:'Iowan Old Style','Georgia',serif;
+  }
+  header.topbar{
+    padding:18px 20px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .back-btn{
+    background:none;
+    border:none;
+    color:var(--text-muted);
+    font-size:20px;
+    cursor:pointer;
+    padding:4px 8px 4px 0;
+    visibility:hidden;
+  }
+  .back-btn.show{visibility:visible;}
+  .topbar-title{
+    font-size:13px;
+    letter-spacing:0.03em;
+    color:var(--text-muted);
+  }
+  .screen{
+    flex:1;
+    display:none;
+    flex-direction:column;
+    padding:24px 20px 32px;
+  }
+  .screen.active{display:flex;}
+
+  /* HOME */
+  #home .display{
+    font-size:28px;
+    margin:6px 0 4px;
+  }
+  #home .sub{
+    color:var(--text-muted);
+    font-size:14px;
+    margin:0 0 28px;
+  }
+  .home-btn{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    width:100%;
+    text-align:left;
+    background:var(--surface);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:18px 18px;
+    margin-bottom:12px;
+    font-size:17px;
+    font-family:inherit;
+    cursor:pointer;
+    border-radius:4px;
+  }
+  .home-btn .lbl{font-weight:600;}
+  .home-btn .desc{font-size:13px;color:var(--text-muted);}
+  .home-btn.primary{
+    border-color:var(--accent);
+    background:linear-gradient(180deg, var(--accent-soft), var(--surface));
+  }
+  .home-btn.link{
+    border-style:dashed;
+    color:var(--text-muted);
+  }
+
+  /* MODE SELECT */
+  #modeselect .display{font-size:24px;margin:4px 0 6px;}
+  #modeselect .sub{color:var(--text-muted);font-size:14px;margin:0 0 24px;}
+  .mode-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:20px;
+    margin-bottom:14px;
+    cursor:pointer;
+  }
+  .mode-card h3{
+    margin:0 0 6px;
+    font-family:'Iowan Old Style','Georgia',serif;
+    font-size:19px;
+    font-weight:600;
+  }
+  .mode-card p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.5;
+  }
+  .mode-card:hover{border-color:var(--accent);}
+
+  /* BATTLE LOOP */
+  .loop-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:4px;
+  }
+  .round-label{
+    font-size:13px;
+    color:var(--text-muted);
+    letter-spacing:0.02em;
+  }
+  .turn-pill{
+    font-size:11px;
+    background:var(--accent-soft);
+    color:var(--text);
+    padding:3px 9px;
+    border-radius:20px;
+  }
+  .phase-track{
+    display:flex;
+    gap:6px;
+    margin:14px 0 22px;
+  }
+  .phase-dot{
+    flex:1;
+    height:4px;
+    background:var(--line);
+    border-radius:2px;
+  }
+  .phase-dot.done{background:var(--done);}
+  .phase-dot.active{background:var(--accent);}
+  .phase-title{
+    font-size:26px;
+    margin:0 0 4px;
+  }
+  .phase-count{
+    font-size:13px;
+    color:var(--text-muted);
+    margin:0 0 20px;
+  }
+  .checklist{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .check-item{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:14px 14px;
+    cursor:pointer;
+  }
+  .check-item.checked{
+    border-color:var(--done);
+    background:linear-gradient(180deg, rgba(91,117,83,0.12), var(--surface));
+  }
+  .box{
+    width:20px;height:20px;
+    border:1.5px solid var(--text-muted);
+    border-radius:3px;
+    flex-shrink:0;
+    margin-top:2px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;
+  }
+  .check-item.checked .box{
+    border-color:var(--done);
+    background:var(--done);
+    color:var(--bg);
+  }
+  .check-text{font-size:14.5px;line-height:1.4;}
+  .check-item.checked .check-text{color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--line);}
+  .explain{
+    font-size:12.5px;
+    color:var(--text-muted);
+    margin-top:6px;
+    line-height:1.5;
+    display:none;
+  }
+  .tutorial .explain{display:block;}
+  .rule-link{
+    color:#C98A6A;
+    font-size:12px;
+    display:none;
+    margin-top:6px;
+  }
+  .tutorial .rule-link{display:inline-block;}
+
+  .spacer{flex:1;}
+  .next-btn{
+    width:100%;
+    background:var(--accent);
+    color:var(--text);
+    border:none;
+    padding:16px;
+    font-size:15px;
+    font-weight:600;
+    border-radius:4px;
+    cursor:pointer;
+    font-family:inherit;
+    margin-top:16px;
+  }
+  .next-btn:disabled{
+    background:var(--surface-2);
+    color:var(--text-muted);
+    cursor:not-allowed;
+  }
+  .mode-toggle{
+    align-self:flex-start;
+    font-size:11px;
+    color:var(--text-muted);
+    background:none;
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:20px;
+    margin-bottom:18px;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <header class="topbar">
+    <button class="back-btn" id="backBtn">←</button>
+    <span class="topbar-title" id="topbarTitle">MORDHEIM COMPANION</span>
+  </header>
+
+  <!-- HOME -->
+  <section class="screen active" id="home">
+    <h1 class="display">Mordheim Companion</h1>
+    <p class="sub">Elige qué necesitas ahora mismo.</p>
+
+    <button class="home-btn" onclick="go('pregame')">
+      <span class="lbl">Prebattle</span>
+      <span class="desc">Escenario, despliegue, objetivo</span>
+    </button>
+
+    <button class="home-btn primary" onclick="go('modeselect')">
+      <span class="lbl">Battle</span>
+      <span class="desc">Guía de turno en curso</span>
+    </button>
+
+    <button class="home-btn" onclick="go('postgame')">
+      <span class="lbl">Postgame</span>
+      <span class="desc">Heridas, exploración, experiencia</span>
+    </button>
+
+    <button class="home-btn link" onclick="window.open('https://mordheimer.net','_blank')">
+      <span class="lbl">Reglas — Mordheimer.net ↗</span>
+      <span class="desc">Consulta externa completa</span>
+    </button>
+  </section>
+
+  <!-- MODE SELECT -->
+  <section class="screen" id="modeselect">
+    <h2 class="display">Battle</h2>
+    <p class="sub">¿Cómo quieres jugar esta partida?</p>
+
+    <div class="mode-card" onclick="startBattle('tutorial')">
+      <h3>Modo tutorial</h3>
+      <p>Cada paso explicado, con enlace a la regla exacta. Ideal si aún te la estás aprendiendo.</p>
+    </div>
+
+    <div class="mode-card" onclick="startBattle('rapido')">
+      <h3>Modo rápido</h3>
+      <p>Solo el checklist, sin explicaciones. Para cuando ya te sabes las fases de memoria.</p>
+    </div>
+  </section>
+
+  <!-- BATTLE LOOP -->
+  <section class="screen" id="battle">
+    <div class="loop-header">
+      <span class="round-label">RONDA 1</span>
+      <span class="turn-pill">Mi turno</span>
+    </div>
+
+    <div class="phase-track">
+      <div class="phase-dot active"></div>
+      <div class="phase-dot"></div>
+      <div class="phase-dot"></div>
+      <div class="phase-dot"></div>
+    </div>
+
+    <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">Modo: tutorial</button>
+
+    <h1 class="phase-title display">Recuperación</h1>
+    <p class="phase-count">Fase 1 de 4</p>
+
+    <div class="checklist" id="battleChecklist">
+
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="box"></div>
+        <div>
+          <div class="check-text">¿25% o más de tu warband fuera de combate?</div>
+          <div class="explain">Si es así, tira un test de Desbandada contra el Liderazgo de tu líder antes de continuar.</div>
+          <a class="rule-link" href="#">Ver regla: Rout test →</a>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="box"></div>
+        <div>
+          <div class="check-text">Comprobar guerreros Estúpidos</div>
+          <div class="explain">Si no están a 3" de un héroe aliado no estúpido, hacen test de Estupidez.</div>
+          <a class="rule-link" href="#">Ver regla: Psicología →</a>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="box"></div>
+        <div>
+          <div class="check-text">Levantar derribados / aturdidos</div>
+          <div class="explain">Los derribados se levantan (no podrán correr ni cargar este turno). Los aturdidos pasan a derribados.</div>
+          <a class="rule-link" href="#">Ver regla: Recovery →</a>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="box"></div>
+        <div>
+          <div class="check-text">Intentar Rally con guerreros en fuga</div>
+          <div class="explain">2D6 ≤ Liderazgo para recuperar el control. No se puede si el enemigo más cercano está más cerca que cualquier aliado.</div>
+          <a class="rule-link" href="#">Ver regla: Rally test →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="spacer"></div>
+    <button class="next-btn" id="nextBtn" disabled onclick="alert('→ pasaría a Fase 2: Movimiento')">Siguiente fase →</button>
+  </section>
+
+</div>
+
+<script>
+  const screens = ['home','pregame','modeselect','battle','postgame'];
+  function go(id){
+    screens.forEach(s => document.getElementById(s) && document.getElementById(s).classList.remove('active'));
+    if(id==='pregame'||id==='postgame'){ alert('(pantalla ' + id + ' — checklist plano, aún sin bocetar)'); return; }
+    document.getElementById(id).classList.add('active');
+    document.getElementById('backBtn').classList.toggle('show', id!=='home');
+    document.getElementById('topbarTitle').textContent = id==='home' ? 'MORDHEIM COMPANION' : id.toUpperCase();
+  }
+  document.getElementById('backBtn').onclick = () => go('home');
+
+  function startBattle(mode){
+    go('battle');
+    document.getElementById('battleChecklist').className = 'checklist ' + (mode==='tutorial' ? 'tutorial' : '');
+    document.getElementById('modeToggle').textContent = 'Modo: ' + (mode==='tutorial' ? 'tutorial' : 'rápido');
+  }
+
+  function toggleMode(){
+    const cl = document.getElementById('battleChecklist');
+    const isTutorial = cl.classList.contains('tutorial');
+    cl.classList.toggle('tutorial');
+    document.getElementById('modeToggle').textContent = 'Modo: ' + (isTutorial ? 'rápido' : 'tutorial');
+  }
+
+  function toggleCheck(el){
+    el.classList.toggle('checked');
+    const total = document.querySelectorAll('.check-item').length;
+    const done = document.querySelectorAll('.check-item.checked').length;
+    document.getElementById('nextBtn').disabled = done < total;
+  }
+</script>
+</body>
+</html>

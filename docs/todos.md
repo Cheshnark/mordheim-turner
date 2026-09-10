@@ -22,7 +22,11 @@
       con test cada uno).
 - [ ] **Capa visual grimdark** sobre checklists y fase activa (rojo sangre + filo
       wyrdstone). Las pantallas tienen hoy CSS estructural mínimo (tap targets, legible),
-      no la estética final. Bloqueado por el mockup (ver "Pedir al usuario").
+      no la estética final. Referencia: `docs/mordheim-battle-mockup.html` (ya en el repo).
+      Del boceto se toma: estado "marcado" (borde `--completado` + lavado verde + caja con
+      check), phase-track de 4 puntos, toggle de modo discreto tipo pill, Home con Battle
+      destacado y enlace externo en trazo discontinuo. **No** se copia la pill "Mi turno"
+      (contradice handoff §3).
 - [ ] Self-hostear **Grenze Gotisch** (woff2, subconjunto latino) en `src/fonts/` + `@font-face`.
 - [ ] Ajustar `--color-wyrdstone` al implementar la fase activa (que no choque con `--color-completado`).
 
@@ -37,8 +41,7 @@
 
 ## Pedir al usuario
 
-- [ ] El mockup `mordheim-battle-mockup.html` (referencia visual de Battle, `handoff.md` §9)
-      no está en el repo.
+- [x] ~~El mockup `mordheim-battle-mockup.html`~~ — recibido y añadido a `docs/` (2026-09-10).
 
 ## Bugs
 

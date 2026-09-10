@@ -91,8 +91,10 @@ Los `.md` se mantienen a mano.
 Contenido y lógica, en este orden (cada bloque = sesión nueva):
 
 1. **Capa visual** — tokens y estética grimdark en checklists y fase activa
-   (rojo sangre + filo wyrdstone) sobre el mockup de referencia. **Bloqueado**: falta
-   el mockup en el repo (ver abajo).
+   (rojo sangre + filo wyrdstone) sobre `docs/mordheim-battle-mockup.html` (ya en el repo).
+   No copiar del boceto: la pill "Mi turno" (contradice handoff §3, no hay turno en el
+   estado). Divergencias ya decididas en `decisions.md` que se mantienen: Grenze Gotisch
+   (el boceto usa Iowan/Georgia), viñeta + hollín + filo wyrdstone (el boceto no los tiene).
 2. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
 
 Suelto, sin bloqueo: revisar en uso si "Siguiente fase" debería permitir avanzar sin
@@ -100,6 +102,6 @@ marcar los pasos que no aplican (decisión registrada, reconsiderable).
 
 ## Bloqueos / pendientes de terceros
 
-- El mockup `mordheim-battle-mockup.html` (`handoff.md` §9) **no está** en el repo.
-  Pedirlo al usuario antes de la capa visual de Battle.
+- ~~El mockup no está en el repo~~ — resuelto 2026-09-10: `docs/mordheim-battle-mockup.html`
+  (excluido de Prettier en `.prettierignore`). La capa visual ya no está bloqueada.
 - `gh` CLI no instalado (winget/choco sin permisos de admin). No bloquea nada ahora.
