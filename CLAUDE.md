@@ -21,10 +21,11 @@ Antes de programar, lee en este orden:
 
 ## Qué es
 
-Guía de apoyo, 100 % en cliente, para jugar partidas de Mordheim en mesa: checklists de
-**Prebattle / Battle / Postgame** para no saltarse pasos de cada fase, con enlaces a la
-regla exacta en mordheimer.net. Uso individual, pensada para móvil y tablet, sin backend,
-sin cuentas, sin campañas ni estadísticas. Detalle completo en `docs/handoff.md`.
+**Turnheim** — compañero de turno para Mordheim. Guía de apoyo, 100 % en cliente, para
+jugar partidas en mesa: checklists de **Prebattle / Battle / Postgame** para no saltarse
+pasos de cada fase, con enlaces a la regla exacta en mordheimer.net. Uso individual,
+pensada para móvil y tablet, sin backend, sin cuentas, sin campañas ni estadísticas.
+Detalle completo en `docs/handoff.md`. (El repo/paquete sigue siendo `mordheim-turner`.)
 
 Fuera de alcance: gestor de warbands, tracker de partidas, sincronización con el rival,
 reproducir el texto de las reglas (sólo se **enlaza** a mordheimer.net, `target="_blank"`).
@@ -87,6 +88,10 @@ src/
   `checklistFaseActual`. Sin pantalla intermedia ni resumen.
 - El toggle tutorial/rápido **sólo existe en Battle**. Prebattle y Postgame son checklists
   planas con explicación breve fija.
+- **Modo tutorial**: casillas + explicación por paso + enlace de fase; "Siguiente fase"
+  bloqueado hasta marcar todo. **Modo rápido**: solo referencia — lista de pasos sin
+  casillas + enlace de fase; se avanza cuando el jugador quiera (decisión 2026-09-10;
+  diverge del mockup, que lo mostraba con casillas).
 - Todo `EstadoApp` se serializa a una única clave de `localStorage` en cada cambio y se lee
   al abrir. Sin botón de "nueva partida" / reset.
 

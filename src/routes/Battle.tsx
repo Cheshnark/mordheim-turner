@@ -67,6 +67,8 @@ export function Battle() {
   const todoMarcado = fase.items.every(
     (item) => battle.checklistFaseActual[item.id],
   )
+  // En rápido la lista es solo referencia: se avanza cuando el jugador quiera.
+  const puedeAvanzar = tutorial ? todoMarcado : true
   const cierra = cierraRonda(battle.fase)
 
   return (
@@ -123,16 +125,14 @@ export function Battle() {
         </button>
       </div>
 
-      {tutorial && (
-        <a
-          className={styles.linkFase}
-          href={fase.linkFase}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Reglas de la fase en mordheimer.net
-        </a>
-      )}
+      <a
+        className={styles.linkFase}
+        href={fase.linkFase}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Reglas de la fase en mordheimer.net
+      </a>
 
       {fase.notasFijas?.map((nota) => (
         <p key={nota} className={styles.nota}>
@@ -145,12 +145,13 @@ export function Battle() {
         marcadas={battle.checklistFaseActual}
         onAlternar={alternarItemFase}
         mostrarDetalle={tutorial}
+        interactivo={tutorial}
       />
 
       <button
         type="button"
         className={styles.siguiente}
-        disabled={!todoMarcado}
+        disabled={!puedeAvanzar}
         onClick={avanzarFase}
       >
         {cierra ? 'Cerrar ronda' : 'Siguiente fase'} →

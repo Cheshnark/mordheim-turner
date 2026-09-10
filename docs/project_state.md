@@ -146,6 +146,18 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Motivo completo en `decisions.md` (2026-09-10, supersede la paleta del 09-09).
 - **test 52/52**, `lint`/`typecheck`/`format`/`build` verdes.
 
+### Modo rápido como referencia + nombre "Turnheim" (sesión 10 — esta)
+
+- **Battle rápido**: sin casillas (`ItemChecklist interactivo={false}`, viñeta), botón de
+  avance siempre activo, `linkFase` visible también aquí. Tutorial no cambia. El marcado
+  sigue en el store. Motivo en `decisions.md`.
+- **Nombre**: la app pasa a llamarse **Turnheim** ("Compañero de turno para Mordheim").
+  Cambia Home, `<title>`, `meta description`, README, CLAUDE.md. Repo/paquete siguen como
+  `mordheim-turner`.
+- Wordmark de Home ya con "Turnheim" (versal roja en la "T").
+- Tests de Battle reescritos para el nuevo rápido; nuevo test de `ItemChecklist` no
+  interactivo. **test 55/55**, `lint`/`typecheck`/`format`/`build` verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -153,14 +165,14 @@ Los `.md` se mantienen a mano.
 
 ## Siguiente paso
 
-La fase de contenido/lógica/UI del plan está **cerrada**. Lo que queda es prioridad
-baja (`todos.md`):
+La fase de contenido/lógica/UI del plan está **cerrada**. En curso: empujar la identidad
+visual (wordmark hecho, glifos macizos hechos; queda textura de superficies y, opcional,
+marca de agua del glifo en la cabecera de fase). Prioridad baja pendiente:
 
 1. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
-2. Icono / favicon con la estética de la app.
 
-Suelto, sin bloqueo: revisar en uso si "Siguiente fase" debería permitir avanzar sin
-marcar los pasos que no aplican (decisión registrada, reconsiderable).
+Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
+tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).
 
 ## Bloqueos / pendientes de terceros
 

@@ -7,9 +7,9 @@ export function Home() {
     <main className={styles.home}>
       <header className={styles.header}>
         <EstrellaFugaz size={30} className={styles.marca} />
-        <h1 className={styles.title}>Mordheim</h1>
+        <h1 className={styles.title}>Turnheim</h1>
         <div className={styles.filete} aria-hidden="true" />
-        <p className={styles.subtitle}>Compañero de turno</p>
+        <p className={styles.subtitle}>Compañero de turno para Mordheim</p>
       </header>
 
       <nav className={styles.accesos}>

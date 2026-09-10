@@ -331,6 +331,41 @@ glifos de fase propios (`GlifoFase`).
 
 ---
 
+## 2026-09-10 — El modo rápido de Battle es solo referencia (sin casillas)
+
+**Decisión:** en modo rápido, la lista de pasos de la fase se renderiza **sin casillas**
+(`ItemChecklist interactivo={false}`, viñeta en vez de checkbox) y el botón "Siguiente
+fase" / "Cerrar ronda" está **siempre activo**. Se añade el enlace a la regla de la fase
+(`linkFase`) también en rápido, no solo en tutorial.
+
+**Motivo (usuario):** quien juega en rápido ya se sabe las fases; obligar a marcar todo
+para avanzar es fricción sin valor. Rápido = hoja de referencia de los pasos + acceso a
+la regla si hay dudas. El estado marcado sigue viviendo en el store (al volver a tutorial
+se conserva), simplemente no se muestra en rápido.
+
+**Diverge de:** `handoff.md` §9 / el mockup, que mostraban rápido con casillas y el botón
+bloqueado igual que tutorial.
+
+**Pendiente si se quiere:** los datos de `src/data/battle.ts` solo tienen `linkFase` (un
+enlace por fase), no `link_regla` por paso. Para enlaces por paso habría que añadirlos.
+
+---
+
+## 2026-09-10 — Nombre del producto: "Turnheim"
+
+**Decisión:** la app se llama **Turnheim** ("turn" + sufijo locativo "-heim"), subtítulo
+"Compañero de turno para Mordheim". Cambia el `<h1>` de Home, el `<title>`, la
+`meta description` y el README.
+
+**Motivo:** no construir la identidad del producto sobre la marca de GW. "Turnheim" es un
+nombre propio y acuñado (dice qué hace la app); "para Mordheim" en el subtítulo es uso
+nominativo. Coherente con la decisión de 2026-09-10 sobre assets de GW.
+
+**No cambia:** el nombre del paquete/repo (`mordheim-turner`) ni el remoto de git — son
+internos. Renombrables aparte si hace falta.
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

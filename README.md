@@ -1,8 +1,11 @@
-# Mordheim Turn Companion
+# Turnheim
 
-Guía de apoyo, 100 % en cliente, para jugar partidas de **Mordheim** en mesa: checklists
-de Prebattle / Battle / Postgame para no saltarse pasos, con enlaces a la regla exacta en
-mordheimer.net. Pensada para móvil y tablet. Sin backend, sin cuentas, sin campañas.
+Compañero de turno para **Mordheim**: guía de apoyo, 100 % en cliente, para jugar
+partidas en mesa. Checklists de Prebattle / Battle / Postgame para no saltarse pasos, con
+enlaces a la regla exacta en mordheimer.net. Pensada para móvil y tablet. Sin backend, sin
+cuentas, sin campañas.
+
+_El nombre del paquete/repo sigue siendo `mordheim-turner` (interno)._
 
 ## Requisitos
 

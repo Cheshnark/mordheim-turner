@@ -42,10 +42,13 @@
 }
 
 .subtitle {
+  max-width: 24rem;
   color: var(--color-texto-2);
   font-size: var(--texto-xs);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .accesos {

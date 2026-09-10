@@ -18,7 +18,7 @@ const montar = () =>
     </MemoryRouter>,
   )
 
-/** Marca todas las casillas visibles. */
+/** Marca todas las casillas visibles (solo existen en modo tutorial). */
 async function marcarTodo(user: ReturnType<typeof userEvent.setup>) {
   for (const casilla of screen.getAllByRole('checkbox')) {
     await user.click(casilla)
@@ -36,7 +36,7 @@ describe('Battle — selección de modo', () => {
     expect(screen.getByRole('button', { name: /rápido/i })).toBeInTheDocument()
   })
 
-  it('elegir Rápido entra al bucle y fija el modo en el store', async () => {
+  it('elegir Rápido entra al bucle: referencia sin casillas, con enlace de fase', async () => {
     const user = userEvent.setup()
     montar()
     await user.click(screen.getByRole('button', { name: /rápido/i }))
@@ -45,11 +45,15 @@ describe('Battle — selección de modo', () => {
     expect(
       screen.getByRole('heading', { name: /Fase 1 · Recuperación/i }),
     ).toBeInTheDocument()
-    // En rápido no hay explicación ni enlace de fase.
+    // Sin casillas ni explicaciones: es solo referencia.
+    expect(screen.queryAllByRole('checkbox')).toHaveLength(0)
     expect(screen.queryByText(/Rout test/i)).toBeNull()
+    // El texto corto de cada paso sí está.
+    expect(screen.getByText(/Test de Desbandada si el 25/i)).toBeInTheDocument()
+    // Y el enlace a la regla de la fase, por si hay dudas.
     expect(
-      screen.queryByRole('link', { name: /reglas de la fase/i }),
-    ).toBeNull()
+      screen.getByRole('link', { name: /reglas de la fase/i }),
+    ).toHaveAttribute('href', CONTENIDO_BATTLE.recuperacion.linkFase)
   })
 
   it('en Tutorial se ve la explicación de cada paso y el enlace de la fase', async () => {
@@ -65,7 +69,7 @@ describe('Battle — selección de modo', () => {
 })
 
 describe('Battle — bucle', () => {
-  it('"Siguiente fase" se habilita al marcar todo y avanza la fase', async () => {
+  it('tutorial: "Siguiente fase" se habilita al marcar todo y avanza la fase', async () => {
     const user = userEvent.setup()
     montar()
     await user.click(screen.getByRole('button', { name: /tutorial/i }))
@@ -84,19 +88,30 @@ describe('Battle — bucle', () => {
     ).toBeInTheDocument()
   })
 
+  it('rápido: se puede avanzar sin marcar nada', async () => {
+    const user = userEvent.setup()
+    montar()
+    await user.click(screen.getByRole('button', { name: /rápido/i }))
+
+    const siguiente = screen.getByRole('button', { name: /siguiente fase/i })
+    expect(siguiente).toBeEnabled()
+
+    await user.click(siguiente)
+    expect(useEstadoApp.getState().battle.fase).toBe('movimiento')
+  })
+
   it('desde Combate el botón cierra la ronda: ronda += 1 y vuelve a Recuperación', async () => {
     useEstadoApp.setState((s) => ({
       battle: { ...s.battle, fase: 'combate', ronda: 2 },
     }))
     const user = userEvent.setup()
     montar()
-    await user.click(screen.getByRole('button', { name: /rápido/i }))
+    await user.click(screen.getByRole('button', { name: /tutorial/i }))
 
     expect(screen.getByText(/se resuelve sí o sí/i)).toBeInTheDocument()
 
-    const cerrar = screen.getByRole('button', { name: /cerrar ronda/i })
     await marcarTodo(user)
-    await user.click(cerrar)
+    await user.click(screen.getByRole('button', { name: /cerrar ronda/i }))
 
     const { ronda, fase, checklistFaseActual } = useEstadoApp.getState().battle
     expect(ronda).toBe(3)
@@ -104,18 +119,22 @@ describe('Battle — bucle', () => {
     expect(checklistFaseActual).toEqual({})
   })
 
-  it('el toggle cambia el modo en vivo sin perder el marcado', async () => {
+  it('el toggle cambia el modo en vivo y el store conserva el marcado', async () => {
     const user = userEvent.setup()
     montar()
     await user.click(screen.getByRole('button', { name: /tutorial/i }))
 
-    const [primera] = screen.getAllByRole('checkbox')
-    await user.click(primera)
+    await user.click(screen.getAllByRole('checkbox')[0])
     expect(useEstadoApp.getState().battle.checklistFaseActual).not.toEqual({})
 
+    // A rápido: desaparecen las casillas, sigue el texto de referencia.
     await user.click(screen.getByRole('button', { name: /^rápido$/i }))
     expect(useEstadoApp.getState().battle.modo).toBe('rapido')
+    expect(screen.queryAllByRole('checkbox')).toHaveLength(0)
+    expect(screen.getByText(/Test de Desbandada si el 25/i)).toBeInTheDocument()
+
+    // De vuelta a tutorial: el marcado seguía en el store.
+    await user.click(screen.getByRole('button', { name: /^tutorial$/i }))
     expect(screen.getAllByRole('checkbox')[0]).toBeChecked()
-    expect(screen.queryByText(/Rout test/i)).toBeNull()
   })
 })

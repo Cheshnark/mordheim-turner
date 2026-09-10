@@ -66,6 +66,29 @@
   cursor: pointer;
 }
 
+/* Fila de solo lectura (referencia rápida): sin cursor de acción. */
+.item[data-inerte] .fila {
+  cursor: default;
+  min-height: 0;
+}
+
+/* Viñeta: ocupa la huella de la casilla para que el texto quede alineado. */
+.vinneta {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-content: center;
+}
+
+.vinneta::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background-color: var(--color-texto-2);
+  transform: rotate(45deg);
+}
+
 /* Casilla nativa reestilada como sello: caja vacía → aspa de tinta al marcar. */
 .check {
   flex-shrink: 0;

@@ -88,4 +88,18 @@ describe('ItemChecklist', () => {
     )
     expect(screen.queryByRole('link')).toBeNull()
   })
+
+  it('en modo no interactivo no hay casilla, solo el texto', () => {
+    render(
+      <ItemChecklist
+        item={ITEM}
+        marcado={false}
+        onAlternar={() => {}}
+        mostrarDetalle={false}
+        interactivo={false}
+      />,
+    )
+    expect(screen.queryByRole('checkbox')).toBeNull()
+    expect(screen.getByText(ITEM.texto_corto)).toBeInTheDocument()
+  })
 })
