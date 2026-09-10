@@ -8,10 +8,11 @@
   --color-linea: #3a322c;
   --color-acento: #8b3a3a; /* rojo sangre seca: acción principal / fase activa */
   --color-acento-suave: #5c2a2a;
-  --color-wyrdstone: #6f8f3e; /* segundo acento: filo del paso activo (ajustable) */
+  --color-wyrdstone: #9fbe3b; /* 2.º acento: filo iluminado del paso activo, solo ahí */
   --color-texto: #ede6dc; /* hueso */
   --color-texto-2: #9c9086;
   --color-completado: #5b7553;
+  --lavado-completado: rgb(91 117 83 / 0.12); /* fondo tenue del item marcado */
   --color-enlace-externo: #c98a6a; /* ámbar de antorcha */
 
   /* --- Tipografía --- */
@@ -43,6 +44,13 @@
   /* --- Geometría: bloques planos, casi sin radio --- */
   --radio: 2px;
   --borde: 1px solid var(--color-linea);
+  /* Huella de imprenta: los bloques están hundidos, no elevados. */
+  --huella: inset 0 1px 0 rgb(0 0 0 / 0.4);
+  /* Filo iluminado del paso activo: barra wyrdstone + resplandor contenido en el
+     borde izquierdo, sin halo. Solo en Battle. */
+  --filo-activo:
+    inset 3px 0 0 0 var(--color-wyrdstone),
+    inset 12px 0 18px -12px var(--color-wyrdstone);
 
   /* Objetivo táctil mínimo (uso en mesa, luz mala). */
   --toque-min: 52px;

@@ -52,7 +52,7 @@ src/
     [x] battle/fases.ts      ORDEN_FASES, faseSiguiente, cierraRonda (lógica pura)
     [x] battle/fases.test.ts
   styles/
-    [x] tokens.css           custom properties (color, espaciado, tipografía)
+    [x] tokens.css           custom properties: color, espaciado, tipografía, --huella / --filo-activo
     [x] global.css           reset + viñeta + textura de hollín SVG + .stack / .row + reduced-motion
   test/
     [x] setup.ts             jest-dom + cleanup por test
@@ -114,10 +114,16 @@ usuario desmarca a mano si quiere reiniciar.
   aunque ronda/fase sigan donde los dejó `localStorage` (motivo en `decisions.md`).
   - Selección de modo: dos botones que hacen `establecerModo` + `setEnBucle(true)`;
     muestra "Vas por la Ronda N · Fase X".
-  - Bucle: cabecera ronda/fase, toggle tutorial/rápido en vivo (`establecerModo`),
-    `linkFase` y detalle de items solo en tutorial, `notasFijas` de la fase,
-    `<ListaChecklist>` sobre `CONTENIDO_BATTLE[fase].items`, y botón "Siguiente fase" /
-    "Cerrar ronda" (`disabled` hasta marcar todo) que llama a `avanzarFase`.
+  - Bucle: cabecera ronda/fase (bloque de fase activa: filo `--filo-activo` + regla
+    roja), `pista` de 4 tramos (`ORDEN_FASES`, `aria-hidden`), toggle tutorial/rápido
+    en vivo (`establecerModo`), `linkFase` y detalle de items solo en tutorial,
+    `notasFijas` de la fase, `<ListaChecklist>` sobre `CONTENIDO_BATTLE[fase].items`, y
+    botón "Siguiente fase" / "Cerrar ronda" (`disabled` hasta marcar todo) → `avanzarFase`.
+
+## Preview local
+
+`.claude/launch.json` define el server `dev` (Vite, puerto 5173) para previsualizar en
+navegador. No afecta al build ni al CI.
 
 ## Estrategia de tests
 

@@ -192,6 +192,30 @@ mío / del rival en el estado"). El boceto es anterior al cierre de esa decisió
 
 ---
 
+## 2026-09-10 — Cómo se materializa el "momento audaz" de la fase activa
+
+**Decisión:** en Battle, la cabecera de la fase (ronda + `pista` + título) es el único
+bloque con acento fuerte: barra `--color-wyrdstone` + resplandor **contenido** en el
+borde izquierdo (`--filo-activo`, box-shadow `inset`), lavado rojo tenue y regla
+`--color-acento` de 2 px bajo el `<h1>`. El título **no** va en rojo (contraste
+insuficiente sobre `--color-superficie`).
+
+**Motivo:** `decisions.md` (2026-09-09) pide "rojo sangre + filo verde" solo ahí. El
+primer intento con box-shadow no-inset creaba un halo alrededor de todo el bloque; el
+inset lo mantiene como filo. El resto de la pantalla queda "callado".
+
+**Descartado:** `<h1>` en `--color-acento` (falla WCAG AA); halo exterior wyrdstone
+(demasiado ruido para uso en mesa).
+
+- `--color-wyrdstone`: `#6f8f3e` → `#9fbe3b` (más luminoso y claramente distinto de
+  `--color-completado` `#5b7553`).
+- `pista` de fase: `<ol>` de 4 `<li>` con `aria-hidden` — el `<h1>` "Fase N · …" ya
+  comunica la fase a lectores de pantalla; la pista es refuerzo visual.
+- Toggle tutorial/rápido: se mantienen 2 botones con `aria-pressed` (a11y) pero con
+  aspecto de pill discreta, como el botón único del boceto.
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

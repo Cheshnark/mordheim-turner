@@ -4,8 +4,9 @@ _Actualizado: 2026-09-10_
 
 ## Dónde estamos
 
-**App funcional, sin capa visual final.** Store + datos + las tres pantallas reales
-conectadas. Falta la estética grimdark (bloqueada por el mockup) y la fuente.
+**App funcional con estética grimdark aplicada.** Store + datos + las tres pantallas
+reales + capa visual sobre el boceto. Único pendiente de la fase de UI: la fuente
+Grenze Gotisch self-hosted (hoy cae al fallback `Georgia`).
 
 ### Cimientos (sesión 1)
 
@@ -81,6 +82,25 @@ Reemplazan los stubs de `src/routes/`; consumen `useEstadoApp` + `src/data/`.
   (2), `Battle` (6). **test total: 48/48.** `lint`, `typecheck`, `format:check`, `build`
   verdes.
 
+### Capa visual grimdark (sesión 6 — esta)
+
+Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
+
+- `tokens.css`: `--color-wyrdstone` ajustado a `#9fbe3b` (verde tóxico, distinto de
+  `--color-completado`); nuevos `--huella`, `--lavado-completado`, `--filo-activo`
+  (barra + resplandor **contenido** en el borde izquierdo, sin halo).
+- `ItemChecklist`: `:has(.check:checked)` → borde `--color-completado` + lavado verde;
+  casilla nativa 1.4 rem con `accent-color`; texto tachado. Transición solo al marcar.
+- `Battle`: cabecera = "momento audaz" (filo wyrdstone + lavado rojo + regla roja bajo
+  el título); `pista` de 4 tramos (hecha/activa/pendiente) desde `ORDEN_FASES`
+  (`aria-hidden`, el `<h1>` ya da la fase); toggle de modo discreto tipo pill.
+- `Home`: Battle como acceso destacado (borde rojo + degradado sangre); enlace externo
+  con borde discontinuo.
+- `.claude/launch.json` añadido (config `dev`, Vite en 5173) para previsualizar.
+- Verificado en navegador (móvil 375): Home, selección de modo, bucle tutorial/rápido,
+  avance de fase con `pista` actualizada, Prebattle, Postgame. **test total: 48/48.**
+  `lint`, `typecheck`, `format:check`, `build` verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -88,14 +108,12 @@ Los `.md` se mantienen a mano.
 
 ## Siguiente paso
 
-Contenido y lógica, en este orden (cada bloque = sesión nueva):
+1. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` (woff2, 1 peso, subconjunto
+   latino) + `@font-face` en `global.css`. `--fuente-titular` ya la referencia; hoy cae
+   al fallback `Georgia`.
 
-1. **Capa visual** — tokens y estética grimdark en checklists y fase activa
-   (rojo sangre + filo wyrdstone) sobre `docs/mordheim-battle-mockup.html` (ya en el repo).
-   No copiar del boceto: la pill "Mi turno" (contradice handoff §3, no hay turno en el
-   estado). Divergencias ya decididas en `decisions.md` que se mantienen: Grenze Gotisch
-   (el boceto usa Iowan/Georgia), viñeta + hollín + filo wyrdstone (el boceto no los tiene).
-2. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
+Con esto la app queda funcional y con la identidad completa. Después, ya "prioridad
+baja": despliegue estático y favicon (ver `todos.md`).
 
 Suelto, sin bloqueo: revisar en uso si "Siguiente fase" debería permitir avanzar sin
 marcar los pasos que no aplican (decisión registrada, reconsiderable).

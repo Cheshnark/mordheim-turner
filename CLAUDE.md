@@ -4,11 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estado del proyecto
 
-**App funcional, sin capa visual final** (2026-09-10). Base verde: `lint`, `typecheck`,
-`test` (48/48), `build`. Store (`src/store/estadoApp.ts`, zustand + persist), `src/data/`
-y las tres pantallas reales (`Prebattle`/`Battle`/`Postgame`) conectadas vía `useEstadoApp`,
-con `src/components/{ItemChecklist,ListaChecklist}`. Pendiente: estética grimdark (bloqueada
-por el mockup, ver `docs/project_state.md`) y la fuente Grenze Gotisch.
+**App funcional con estética grimdark** (2026-09-10). Base verde: `lint`, `typecheck`,
+`test` (48/48), `build`. Store (`src/store/estadoApp.ts`, zustand + persist), `src/data/`,
+las tres pantallas reales (`Prebattle`/`Battle`/`Postgame`) vía `useEstadoApp`,
+`src/components/{ItemChecklist,ListaChecklist}` y la capa visual sobre el boceto
+(`docs/mordheim-battle-mockup.html`). Único pendiente de UI: la fuente Grenze Gotisch
+self-hosted (hoy cae a `Georgia`). Preview: `.claude/launch.json` (server `dev`, 5173).
 
 Antes de programar, lee en este orden:
 

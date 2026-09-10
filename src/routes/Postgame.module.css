@@ -3,11 +3,12 @@
   font-size: var(--texto-s);
 }
 
-/* Nota fija, sin casilla (handoff §7). */
+/* Nota fija, sin casilla (handoff §7). Anotación al margen, no un paso. */
 .nota {
   padding: var(--espacio-3) var(--espacio-4);
   background-color: var(--color-superficie-2);
   border: var(--borde);
+  border-left: 3px solid var(--color-linea);
   border-radius: var(--radio);
   font-size: var(--texto-s);
   color: var(--color-texto-2);

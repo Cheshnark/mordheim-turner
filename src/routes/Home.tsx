@@ -14,7 +14,7 @@ export function Home() {
           <span className={styles.nombre}>Prebattle</span>
           <span className={styles.nota}>Antes de desplegar</span>
         </Link>
-        <Link className={styles.acceso} to="/battle">
+        <Link className={`${styles.acceso} ${styles.destacado}`} to="/battle">
           <span className={styles.nombre}>Battle</span>
           <span className={styles.nota}>Bucle de ronda y fase</span>
         </Link>

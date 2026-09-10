@@ -31,18 +31,36 @@
   flex-direction: column;
   gap: var(--espacio-1);
   min-height: var(--toque-min);
-  padding: var(--espacio-3) var(--espacio-4);
+  padding: var(--espacio-4);
   background-color: var(--color-superficie);
   border: var(--borde);
   border-radius: var(--radio);
   text-decoration: none;
-  /* Huella de imprenta: el bloque está hundido, no elevado. */
-  box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.4);
+  box-shadow: var(--huella);
 }
 
 .acceso:hover {
   background-color: var(--color-superficie-2);
   border-color: var(--color-acento-suave);
+}
+
+/* Battle: acceso principal, con filo rojo y lavado de sangre. */
+.destacado {
+  border-color: var(--color-acento);
+  background-image: linear-gradient(
+    180deg,
+    var(--color-acento-suave),
+    var(--color-superficie)
+  );
+}
+
+.destacado:hover {
+  border-color: var(--color-acento);
+}
+
+/* Enlace externo: trazo discontinuo, "sale de la app". */
+.externo {
+  border-style: dashed;
 }
 
 .nombre {

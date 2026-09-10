@@ -20,15 +20,13 @@
 - [x] ~~Componente(s) de checklist reutilizable(s)~~ — hecho 2026-09-10.
       `src/components/ItemChecklist/` y `src/components/ListaChecklist/` (patrón carpeta,
       con test cada uno).
-- [ ] **Capa visual grimdark** sobre checklists y fase activa (rojo sangre + filo
-      wyrdstone). Las pantallas tienen hoy CSS estructural mínimo (tap targets, legible),
-      no la estética final. Referencia: `docs/mordheim-battle-mockup.html` (ya en el repo).
-      Del boceto se toma: estado "marcado" (borde `--completado` + lavado verde + caja con
-      check), phase-track de 4 puntos, toggle de modo discreto tipo pill, Home con Battle
-      destacado y enlace externo en trazo discontinuo. **No** se copia la pill "Mi turno"
-      (contradice handoff §3).
+- [x] ~~**Capa visual grimdark**~~ — hecho 2026-09-10. Estado "marcado" (borde
+      `--completado` + lavado + tachado), `pista` de 4 tramos en Battle, cabecera de
+      fase activa con filo wyrdstone contenido + regla roja, toggle pill, Home con
+      Battle destacado y enlace externo discontinuo. Verificado en navegador. La pill
+      "Mi turno" del boceto **no** se implementó (contradice handoff §3).
 - [ ] Self-hostear **Grenze Gotisch** (woff2, subconjunto latino) en `src/fonts/` + `@font-face`.
-- [ ] Ajustar `--color-wyrdstone` al implementar la fase activa (que no choque con `--color-completado`).
+- [x] ~~Ajustar `--color-wyrdstone`~~ — hecho 2026-09-10: `#6f8f3e` → `#9fbe3b`.
 
 ## Prioridad baja / abierto
 

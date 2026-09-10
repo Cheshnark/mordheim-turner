@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ListaChecklist } from '@/components/ListaChecklist/ListaChecklist'
 import { CONTENIDO_BATTLE } from '@/data/battle'
-import { cierraRonda } from '@/lib/battle/fases'
+import { ORDEN_FASES, cierraRonda } from '@/lib/battle/fases'
 import { useEstadoApp } from '@/store/estadoApp'
 import styles from './Battle.module.css'
 
@@ -80,6 +80,21 @@ export function Battle() {
 
       <header className={styles.cabecera}>
         <p className={styles.ronda}>Ronda {battle.ronda}</p>
+        <ol className={styles.pista} aria-hidden="true">
+          {ORDEN_FASES.map((f, i) => (
+            <li
+              key={f}
+              className={styles.tramo}
+              data-estado={
+                i + 1 < fase.numero
+                  ? 'hecha'
+                  : i + 1 === fase.numero
+                    ? 'activa'
+                    : 'pendiente'
+              }
+            />
+          ))}
+        </ol>
         <h1 className={styles.tituloFase}>
           Fase {fase.numero} · {fase.titulo}
         </h1>
