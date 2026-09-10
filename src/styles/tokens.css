@@ -52,8 +52,8 @@
     inset 3px 0 0 0 var(--color-wyrdstone),
     inset 12px 0 18px -12px var(--color-wyrdstone);
 
-  /* Objetivo táctil mínimo (uso en mesa, luz mala). */
-  --toque-min: 52px;
+  /* Objetivo táctil mínimo (uso en mesa, luz mala). Handoff §8: ~50-56 px. */
+  --toque-min: 56px;
 
   /* Ancho de lectura cómodo (< 80 caracteres). */
   --ancho-columna: 33rem;

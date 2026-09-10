@@ -32,12 +32,15 @@ body {
   font-size: var(--texto-m);
   line-height: var(--interlineado-texto);
   -webkit-font-smoothing: antialiased;
-  /* Viñeta: las sombras se cierran en los bordes de la pantalla. */
-  background-image: radial-gradient(
-    120% 90% at 50% 0%,
-    transparent 38%,
-    rgb(0 0 0 / 0.55) 100%
-  );
+  /* Dos capas estáticas: un resplandor cálido de antorcha arriba y la viñeta que
+     cierra los bordes en negro. Motivo en decisions.md. */
+  background-image:
+    radial-gradient(
+      90% 55% at 50% -8%,
+      rgb(201 138 106 / 0.07),
+      transparent 70%
+    ),
+    radial-gradient(120% 90% at 50% 0%, transparent 38%, rgb(0 0 0 / 0.55) 100%);
   background-attachment: fixed;
 }
 
@@ -54,6 +57,8 @@ body::before {
 }
 
 #root {
+  display: flex;
+  flex-direction: column;
   max-width: var(--ancho-columna);
   min-height: 100dvh;
   margin-inline: auto;
@@ -67,6 +72,15 @@ h3 {
   font-family: var(--fuente-titular);
   font-weight: var(--peso-normal);
   line-height: var(--interlineado-titular);
+}
+
+/* Inicial iluminada en los títulos de pantalla (no en el título de fase de
+   Battle, que lleva clase). Como una versal de manuscrito. */
+main h1:not([class])::first-letter {
+  font-size: 1.55em;
+  line-height: 0.9;
+  color: var(--color-acento);
+  padding-right: 0.04em;
 }
 
 a {

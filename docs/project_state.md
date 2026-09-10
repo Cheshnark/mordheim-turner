@@ -112,6 +112,14 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   nombres de acceso, "Fase N · …") en la gótica; el resto sigue en sans del sistema.
 - Motivo del subset único en `decisions.md`. **test total: 48/48**, resto verde.
 
+### Ajustes de UI móvil (sesión 8 — esta)
+
+- Home y selección de modo de Battle: botones a pantalla completa (`#root` flex column
+  + `<main>` con `flex: 1`, sin `max-height`). `--toque-min` 52 → 56 px.
+- Atmósfera: inicial iluminada en `::first-letter` de los `<h1>` de pantalla; resplandor
+  cálido de antorcha sobre la viñeta. Motivo en `decisions.md`.
+- Verificado en navegador (móvil 375). **test 48/48**, resto verde.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

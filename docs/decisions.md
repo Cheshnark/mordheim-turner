@@ -233,6 +233,31 @@ cargar los tres subsets; `@import` desde Google Fonts en runtime (rompe uso offl
 
 ---
 
+## 2026-09-10 — Lanzadores a pantalla completa; retoques de atmósfera
+
+**Decisión:** Home y la selección de modo de Battle son lanzadores (4 y 2 accesos, nada
+más), así que sus botones reparten **todo** el alto disponible: `#root` pasa a
+`display: flex; flex-direction: column` y cada `<main>` de lanzador lleva `flex: 1`,
+con `min-height` de suelo (4.5–5 rem) y **sin** `max-height`. `--toque-min` 52 → 56 px.
+Las tres pantallas de checklist siguen siendo listas con scroll: solo suben el alto de
+fila vía el token.
+
+**Motivo:** uso en mesa, luz mala, un toque por pantalla (handoff §8). En un lanzador,
+el espacio muerto no aporta; en una lista, estirar filas sí estorbaría.
+
+**Descartado:** `max-height` en los botones (probado: con 2 accesos dejaba medio
+viewport vacío); tope global en `.stack` (está sobrecargado en varios sitios).
+
+**Atmósfera añadida (estática):**
+
+- Inicial iluminada: `::first-letter` de los `<h1>` de pantalla en `--color-acento`
+  (grande en Prebattle/Postgame/Battle-modo; solo color en el título de Home). No en
+  el título de fase de Battle.
+- Resplandor cálido de antorcha: 2.ª capa `radial-gradient` ámbar al 7 % arriba del
+  `body`, sobre la viñeta.
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

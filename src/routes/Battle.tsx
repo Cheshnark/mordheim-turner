@@ -35,7 +35,7 @@ export function Battle() {
       setEnBucle(true)
     }
     return (
-      <main className="stack">
+      <main className={styles.seleccion}>
         {volver}
         <h1>Battle</h1>
         <p className={styles.retomar}>
@@ -43,7 +43,7 @@ export function Battle() {
           {fase.titulo}
         </p>
         <p className={styles.intro}>Elige cómo quieres el checklist:</p>
-        <div className="stack">
+        <div className={styles.modos}>
           <button
             type="button"
             className={styles.modo}
