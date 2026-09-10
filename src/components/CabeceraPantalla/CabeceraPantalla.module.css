@@ -1,0 +1,72 @@
+.cabecera {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+/* "Running head": volver a la izquierda, nombre de pantalla centrado. */
+.corrida {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.volver {
+  justify-self: start;
+  font-size: var(--texto-s);
+  color: var(--color-texto-2);
+}
+
+.runningHead {
+  font-size: var(--texto-xs);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-texto-2);
+}
+
+.titulo {
+  padding-top: 0.08em;
+  font-size: var(--texto-xxl);
+}
+
+/* Inicial iluminada, como una versal de manuscrito. */
+.titulo::first-letter {
+  color: var(--color-acento);
+  font-size: 1.5em;
+}
+
+/* Filete ornamental: rombo central con dos líneas que se desvanecen. */
+.filete {
+  position: relative;
+  align-self: center;
+  width: 7px;
+  height: 7px;
+  margin-block: var(--espacio-2);
+  background-color: var(--color-texto-2);
+  opacity: 0.6;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.filete::before,
+.filete::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 84px;
+  height: 1px;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgb(156 144 134 / 0.7) 55%,
+    rgb(156 144 134 / 0.7)
+  );
+}
+
+.filete::before {
+  right: 11px;
+}
+
+.filete::after {
+  left: 11px;
+  transform: scaleX(-1);
+}

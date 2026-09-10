@@ -1,6 +1,11 @@
 /* La fase activa es el único "momento audaz": filo wyrdstone a la izquierda de la
    cabecera + regla roja bajo el título. Todo lo demás, callado (docs/decisions.md). */
 
+.volver {
+  font-size: var(--texto-s);
+  color: var(--color-texto-2);
+}
+
 .intro,
 .retomar {
   font-size: var(--texto-s);
@@ -36,6 +41,11 @@
   padding: var(--espacio-4);
   text-align: left;
   background-color: var(--color-superficie);
+  background-image: linear-gradient(
+    180deg,
+    rgb(201 138 106 / 0.045),
+    transparent 42%
+  );
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--huella);
@@ -99,8 +109,18 @@
   background-color: var(--color-acento);
 }
 
+.faseLinea {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.glifo {
+  flex-shrink: 0;
+  color: var(--color-texto-2);
+}
+
 .tituloFase {
-  display: inline-block;
   padding-bottom: var(--espacio-1);
   border-bottom: 2px solid var(--color-acento);
   font-size: var(--texto-xl);

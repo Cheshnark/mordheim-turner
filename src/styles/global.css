@@ -44,16 +44,26 @@ body {
   background-attachment: fixed;
 }
 
-/* Hollín / grano estático sobre toda la superficie. Sin animación:
-   compatible con prefers-reduced-motion por definición. Motivo en decisions.md. */
-body::before {
+/* Dos capas de textura estática. Sin animación: compatibles con
+   prefers-reduced-motion por definición. Motivo en decisions.md.
+   ::before = hollín fino; ::after = manchas amplias (humedad, envejecido). */
+body::before,
+body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+}
+
+body::before {
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body::after {
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='2' seed='7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
 }
 
 #root {
@@ -72,15 +82,6 @@ h3 {
   font-family: var(--fuente-titular);
   font-weight: var(--peso-normal);
   line-height: var(--interlineado-titular);
-}
-
-/* Inicial iluminada en los títulos de pantalla (no en el título de fase de
-   Battle, que lleva clase). Como una versal de manuscrito. */
-main h1:not([class])::first-letter {
-  font-size: 1.55em;
-  line-height: 0.9;
-  color: var(--color-acento);
-  padding-right: 0.04em;
 }
 
 a {

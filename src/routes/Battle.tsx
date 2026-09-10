@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CabeceraPantalla } from '@/components/CabeceraPantalla/CabeceraPantalla'
+import { GlifoFase } from '@/components/GlifoFase/GlifoFase'
 import { ListaChecklist } from '@/components/ListaChecklist/ListaChecklist'
 import { CONTENIDO_BATTLE } from '@/data/battle'
 import { ORDEN_FASES, cierraRonda } from '@/lib/battle/fases'
@@ -23,12 +25,6 @@ export function Battle() {
   const fase = CONTENIDO_BATTLE[battle.fase]
   const tutorial = battle.modo === 'tutorial'
 
-  const volver = (
-    <p>
-      <Link to="/">← Volver a Home</Link>
-    </p>
-  )
-
   if (!enBucle) {
     const elegir = (modo: 'tutorial' | 'rapido') => () => {
       establecerModo(modo)
@@ -36,8 +32,7 @@ export function Battle() {
     }
     return (
       <main className={styles.seleccion}>
-        {volver}
-        <h1>Battle</h1>
+        <CabeceraPantalla titulo="Battle" />
         <p className={styles.retomar}>
           Vas por la <strong>Ronda {battle.ronda}</strong> · Fase {fase.numero}:{' '}
           {fase.titulo}
@@ -76,7 +71,9 @@ export function Battle() {
 
   return (
     <main className="stack">
-      {volver}
+      <p className={styles.volver}>
+        <Link to="/">← Volver</Link>
+      </p>
 
       <header className={styles.cabecera}>
         <p className={styles.ronda}>Ronda {battle.ronda}</p>
@@ -95,9 +92,12 @@ export function Battle() {
             />
           ))}
         </ol>
-        <h1 className={styles.tituloFase}>
-          Fase {fase.numero} · {fase.titulo}
-        </h1>
+        <div className={styles.faseLinea}>
+          <GlifoFase fase={battle.fase} className={styles.glifo} />
+          <h1 className={styles.tituloFase}>
+            Fase {fase.numero} · {fase.titulo}
+          </h1>
+        </div>
       </header>
 
       <div

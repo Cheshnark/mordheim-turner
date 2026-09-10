@@ -1,15 +1,49 @@
-/* Bloque plano con huella de imprenta; al marcarlo, sellado en verde apagado
-   (borde + lavado), texto tachado. Estética del boceto (docs/decisions.md). */
+/* Bloque plano con huella de imprenta y esquinas marcadas (clave de mapa). Al
+   marcarlo: sellado en verde apagado (borde + esquinas + lavado), casilla como
+   sello de tinta y texto tachado (docs/decisions.md). */
 
 .item {
+  position: relative;
   list-style: none;
   background-color: var(--color-superficie);
+  /* Borde superior con tinte cálido: papel envejecido. */
+  background-image: linear-gradient(
+    180deg,
+    rgb(201 138 106 / 0.045),
+    transparent 42%
+  );
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--huella);
   transition:
     border-color 0.12s ease,
     background-color 0.12s ease;
+}
+
+/* Corchetes en dos esquinas opuestas. */
+.item::before,
+.item::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 0 solid var(--color-texto-2);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.item::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+
+.item::after {
+  right: -1px;
+  bottom: -1px;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
 }
 
 .item:has(.check:checked) {
@@ -21,6 +55,12 @@
   );
 }
 
+.item:has(.check:checked)::before,
+.item:has(.check:checked)::after {
+  border-color: var(--color-completado);
+  opacity: 0.85;
+}
+
 .fila {
   display: flex;
   align-items: flex-start;
@@ -30,13 +70,49 @@
   cursor: pointer;
 }
 
+/* Casilla nativa reestilada como sello: caja vacía → aspa de tinta al marcar. */
 .check {
   flex-shrink: 0;
   width: 1.4rem;
   height: 1.4rem;
   margin-top: 0.1rem;
-  accent-color: var(--color-completado);
+  display: grid;
+  place-content: center;
+  appearance: none;
+  border: 1.5px solid var(--color-texto-2);
+  border-radius: var(--radio);
+  background-color: transparent;
   cursor: pointer;
+  transition:
+    border-color 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.check:checked {
+  border-color: var(--color-completado);
+  background-color: var(--lavado-completado);
+  transform: rotate(-2deg);
+}
+
+.check:checked::before {
+  content: '';
+  width: 0.9rem;
+  height: 0.9rem;
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 43%,
+      var(--color-completado) 43%,
+      var(--color-completado) 57%,
+      transparent 57%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 43%,
+      var(--color-completado) 43%,
+      var(--color-completado) 57%,
+      transparent 57%
+    );
 }
 
 .texto {

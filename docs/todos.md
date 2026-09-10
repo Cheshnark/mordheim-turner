@@ -29,8 +29,17 @@
       (1 peso, latino) + `OFL.txt` en `src/fonts/`; `@font-face` (`display: swap`) en
       `global.css`. Verificado en navegador.
 - [x] ~~Ajustar `--color-wyrdstone`~~ — hecho 2026-09-10: `#6f8f3e` → `#9fbe3b`.
+- [x] ~~Botones a pantalla completa en móvil~~ — hecho 2026-09-10. Home y selección de
+      modo estiran los botones (`#root` flex column); `--toque-min` 56 px.
+- [x] ~~2ª pasada "más Mordheim"~~ — hecho 2026-09-10. Running head + filete + inicial
+      iluminada (`CabeceraPantalla`), casilla-sello, esquinas marcadas, textura de
+      nube + tinte de borde, glifos de fase (`GlifoFase`). Descartado: rondas en
+      romano. Detalle en `decisions.md`.
 
 ## Prioridad baja / abierto
+
+- [ ] Si se quiere más presencia: tintar los glifos de fase en wyrdstone, o subir su
+      tamaño; llevar las esquinas marcadas también a Home/selección de modo.
 
 - [ ] Decidir despliegue (GitHub Pages / Netlify / Vercel estático) y documentarlo.
 - [ ] Icono / favicon con la estética de la app (ahora no hay favicon).

@@ -258,6 +258,34 @@ viewport vacío); tope global en `.stack` (está sobrecargado en varios sitios).
 
 ---
 
+## 2026-09-10 — Segunda pasada de estética "más Mordheim"
+
+Añadidos, todos estáticos, con el rojo/wyrdstone aún **exclusivo** de la fase activa:
+
+- **Running head + filete + inicial iluminada** → `CabeceraPantalla` (Prebattle,
+  Postgame, selección de modo de Battle). El bucle de Battle **no** lo usa: su
+  cabecera es el "momento audaz" y no debe competir.
+- **Casilla como sello de tinta**: `<input>` nativo con `appearance: none`; sin marcar
+  = caja vacía, marcada = aspa de tinta en `--color-completado`, ligeramente girada.
+  Sigue siendo `type="checkbox"` (rol, foco y `checked` intactos → tests sin cambios).
+- **Esquinas marcadas** en los items de checklist (clave de mapa). Se mantiene el
+  hairline completo; al marcar, borde + esquinas pasan a verde (la señal no depende
+  solo de las esquinas).
+- **Textura**: 2.ª capa `body::after` de "nube" gruesa al 2,2 % sobre el hollín fino;
+  tinte cálido en el borde superior de las tarjetas. Nada de grano nuevo tras el
+  texto de los párrafos.
+- **Glifos de fase** (`GlifoFase`): trazo tipo xilografía, motivos **genéricos**
+  (alzarse, senda, flecha, espadas cruzadas). Sin la cometa de Mordheim ni runas de
+  facción (iconografía de GW). Color `--color-texto-2`, decorativo (`aria-hidden`).
+
+**Descartado a petición del usuario:** números de ronda en romano (peor escaneo).
+
+**Contradicciones resueltas:** cometa GW → motivos genéricos; "solo la fase activa
+es audaz" → adornos monocromos y tenues; esquinas vs. señal de marcado → hairline
+completo + esquinas; textura vs. "sin fondo tras el texto" → tinte de borde, no grano.
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

@@ -37,8 +37,10 @@ src/
     [x] Battle.tsx / .module.css / .test.tsx      selección de modo + bucle ronda/fase
     [x] Postgame.tsx / .module.css / .test.tsx    checklist plana + NOTAS_POSTGAME
   components/                patrón: <Nombre>/<Nombre>.{tsx,module.css,test.tsx}
-    [x] ItemChecklist/       fila: casilla + texto corto (+ explicación/enlace si mostrarDetalle)
+    [x] ItemChecklist/       fila: casilla-sello + texto corto (+ explicación/enlace si mostrarDetalle)
     [x] ListaChecklist/      <ul> de ItemChecklist; sin estado, todo por props
+    [x] CabeceraPantalla/    running head + título con inicial iluminada + filete (Prebattle/Postgame/Battle-modo)
+    [x] GlifoFase/           svg decorativo tipo xilografía por FaseTurno (Battle, bucle)
   store/
     [x] tipos.ts             tipos de dominio (handoff §3)
     [x] estadoApp.ts         store zustand + persist (clave única `mordheim-turner`) + acciones

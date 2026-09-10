@@ -43,6 +43,12 @@
   gap: var(--espacio-1);
   padding: var(--espacio-4);
   background-color: var(--color-superficie);
+  /* Borde superior con tinte cálido: papel envejecido. */
+  background-image: linear-gradient(
+    180deg,
+    rgb(201 138 106 / 0.045),
+    transparent 42%
+  );
   border: var(--borde);
   border-radius: var(--radio);
   text-decoration: none;

@@ -67,7 +67,7 @@ Convenciones alineadas con el proyecto hermano `../mortgage-calculator` (mismo a
 src/
   main.tsx, App.tsx        [x] router con 4 rutas
   routes/                  [x] Home · Prebattle · Battle · Postgame (reales, CSS estructural)
-  components/              [x] ItemChecklist/ · ListaChecklist/ (carpeta por componente)
+  components/              [x] ItemChecklist/ · ListaChecklist/ · CabeceraPantalla/ · GlifoFase/
   store/                   [x] tipos.ts · [x] estadoApp.ts (zustand + persist, 5 acciones)
   data/                    [x] prebattle · postgame · battle (checklists como DATOS, no JSX)
   lib/battle/fases.ts      [x] ORDEN_FASES, faseSiguiente, cierraRonda (+ test)

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { CabeceraPantalla } from '@/components/CabeceraPantalla/CabeceraPantalla'
 import { ListaChecklist } from '@/components/ListaChecklist/ListaChecklist'
 import { CHECKLIST_POSTGAME, NOTAS_POSTGAME } from '@/data/postgame'
 import { useEstadoApp } from '@/store/estadoApp'
@@ -11,10 +11,7 @@ export function Postgame() {
 
   return (
     <main className="stack">
-      <p>
-        <Link to="/">← Volver a Home</Link>
-      </p>
-      <h1>Postgame</h1>
+      <CabeceraPantalla titulo="Postgame" />
       <p className={styles.intro}>
         Después de la partida. El estado se guarda solo.
       </p>

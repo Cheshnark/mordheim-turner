@@ -120,6 +120,19 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   cálido de antorcha sobre la viñeta. Motivo en `decisions.md`.
 - Verificado en navegador (móvil 375). **test 48/48**, resto verde.
 
+### 2ª pasada de estética (sesión 8 — esta, cont.)
+
+- Nuevos componentes: `CabeceraPantalla` (running head + inicial iluminada + filete) y
+  `GlifoFase` (svg xilográfico por fase, `aria-hidden`). Prebattle/Postgame/Battle-modo
+  usan `CabeceraPantalla`; el bucle de Battle conserva su cabecera-momento-audaz + el
+  glifo de la fase.
+- `ItemChecklist`: casilla nativa reestilada como sello de tinta (`appearance: none`,
+  aspa al marcar); esquinas marcadas en dos vértices.
+- Textura: `body::after` de nube gruesa (2,2 %) + tinte cálido en el borde superior de
+  las tarjetas.
+- Motivo y contradicciones resueltas en `decisions.md`. Descartado: rondas en romano.
+- **test 52/52** (nuevos: `CabeceraPantalla` 2, `GlifoFase` 2). Resto verde.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
