@@ -39,7 +39,8 @@ src/
   components/                (vacío) patrón: <Nombre>/<Nombre>.{tsx,module.css,test.tsx}
   store/
     [x] tipos.ts             tipos de dominio (handoff §3)
-    [ ] estadoApp.ts         store zustand + persist (clave única de localStorage)
+    [x] estadoApp.ts         store zustand + persist (clave única `mordheim-turner`) + acciones
+    [x] estadoApp.test.ts    acciones, partialize y rehidratación (9 asserts)
   data/
     [x] prebattle.ts         CHECKLIST_PREBATTLE: ChecklistItem[]
     [x] postgame.ts          CHECKLIST_POSTGAME + NOTAS_POSTGAME
@@ -88,6 +89,19 @@ type EstadoApp = {
 Un único `localStorage` con **todo** `EstadoApp` serializado (clave única), reescrito en
 cada cambio de estado y leído al arrancar. Sin lógica por pantalla. Sin reset dedicado: el
 usuario desmarca a mano si quiere reiniciar.
+
+**Implementado** en `src/store/estadoApp.ts` con `zustand` + middleware `persist`:
+
+- Clave `mordheim-turner` (`CLAVE_PERSISTENCIA`), `version: 1`, `storage` explícito sobre
+  `localStorage`.
+- `partialize` guarda solo los datos (`battle`, `checklistPrebattle`, `checklistPostgame`);
+  las acciones no viajan al almacenamiento.
+- Acciones: `establecerModo`, `alternarItemFase`, `avanzarFase`, `alternarItemPrebattle`,
+  `alternarItemPostgame`. Ninguna muta estado en sitio.
+- `avanzarFase` usa `faseSiguiente` / `cierraRonda` de `src/lib/battle/fases.ts`. Limpia
+  `checklistFaseActual` en **todo** avance de fase (los marcados son de la fase que se deja);
+  si la fase era Combate, además `ronda += 1`. Sin pantalla intermedia.
+- `ESTADO_INICIAL` exportado: ronda 1, fase `recuperacion`, modo `tutorial`.
 
 ## Estrategia de tests
 

@@ -7,9 +7,9 @@
 - [x] ~~`src/data/` con las checklists~~ — hecho 2026-09-09. `prebattle.ts`, `postgame.ts`
       (+ `NOTAS_POSTGAME`), `battle.ts` (`CONTENIDO_BATTLE` por fase, con `linkFase` y
       `notasFijas`), `checklists.test.ts` (21 asserts). Nada las consume aún.
-- [ ] **Store zustand + `persist`** (clave única de `localStorage`) + test de rehidratación.
-      La acción de avance de fase usa `faseSiguiente` / `cierraRonda` (ya en `src/lib/battle/`)
-      y limpia `checklistFaseActual` al cerrar ronda (`ronda += 1`, `fase = 'recuperacion'`).
+- [x] ~~**Store zustand + `persist`**~~ — hecho 2026-09-10. `src/store/estadoApp.ts`
+      (clave única `mordheim-turner`, `partialize`, 5 acciones) + `estadoApp.test.ts`
+      (acciones, partialize, rehidratación; 9 asserts). Test total: 30/30.
 
 ## Prioridad media
 

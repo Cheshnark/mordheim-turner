@@ -106,6 +106,35 @@ táctiles grandes (handoff §8).
 
 ---
 
+## 2026-09-10 — `avanzarFase` limpia el checklist en cada fase, no solo en Combate
+
+**Decisión:** `avanzarFase` pone `checklistFaseActual = {}` en **todo** avance de fase. El
+`ronda += 1` sí es exclusivo de salir de Combate (`cierraRonda`).
+
+**Motivo:** `checklistFaseActual` es, por nombre y por modelo (handoff §3), el marcado de la
+fase **actual**. Al pasar de Movimiento a Disparo, los ticks de Movimiento ya no significan
+nada y la nueva fase debe entrar en blanco. El handoff solo menciona la limpieza al cerrar
+Combate porque es el punto donde además cambia la ronda, no porque las fases 1→2→3 deban
+conservar el marcado.
+
+**Descartado:** un mapa de marcado por fase (`Record<FaseTurno, Record<string, boolean>>`).
+No aporta nada: no hay "volver a la fase anterior" en el flujo y el estado se mantiene
+mínimo.
+
+---
+
+## 2026-09-10 — Modo por defecto `tutorial`; sin acción de reset
+
+**Decisión:** `ESTADO_INICIAL.battle.modo = 'tutorial'`. El store no expone ninguna acción
+de reinicio.
+
+**Motivo:** hay pantalla de selección de modo antes del bucle (handoff §2), así que el
+valor inicial solo cuenta hasta que el usuario elige; `tutorial` es el que no oculta
+información. El reset dedicado está descartado en el handoff §4 (el usuario desmarca a
+mano); no se añade una acción que la UI no debe ofrecer.
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

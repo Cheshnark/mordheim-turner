@@ -4,8 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estado del proyecto
 
-**Andamiaje Vite montado** (2026-09-09). Base verde: `lint`, `typecheck`, `test`, `build`
-pasan. Pantallas Prebattle/Battle/Postgame son **stubs**; no hay store ni `src/data/` aún.
+**Andamiaje + datos + store** (2026-09-10). Base verde: `lint`, `typecheck`, `test` (30/30),
+`build` pasan. `src/data/` con las checklists y `src/store/estadoApp.ts` (zustand + persist)
+ya escritos. Pantallas Prebattle/Battle/Postgame siguen siendo **stubs**: nada consume el
+store todavía.
 
 Antes de programar, lee en este orden:
 
@@ -63,7 +65,7 @@ src/
   main.tsx, App.tsx        [x] router con 4 rutas
   routes/                  [x] Home (con estilo) · Prebattle/Battle/Postgame (STUBS)
   components/              ( ) carpeta por componente: Nombre.{tsx,module.css,test.tsx}
-  store/                   [x] tipos.ts · ( ) estadoApp.ts (zustand + persist)
+  store/                   [x] tipos.ts · [x] estadoApp.ts (zustand + persist, 5 acciones)
   data/                    ( ) checklists como DATOS, no JSX
   lib/battle/fases.ts      [x] ORDEN_FASES, faseSiguiente, cierraRonda (+ test)
   styles/                  [x] tokens.css · global.css (viñeta, hollín, .stack/.row)
