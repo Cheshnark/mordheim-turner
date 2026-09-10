@@ -133,6 +133,19 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Motivo y contradicciones resueltas en `decisions.md`. Descartado: rondas en romano.
 - **test 52/52** (nuevos: `CabeceraPantalla` 2, `GlifoFase` 2). Resto verde.
 
+### Giro a dos colores + identidad propia (sesión 9 — esta)
+
+- **Dos colores**: fuera `--color-wyrdstone` y `--color-completado`. Neutros + rojo único.
+  Item marcado = fila hundida a `--color-fondo` + casilla-sello en tinta apagada, sin
+  color. Pista: `hecha` neutra, `activa` roja. `--filo-activo` pasa a rojo.
+- **Fuera el subrayado** bajo el título de fase; el filo rojo lleva la señal.
+- **Botón "volver"**: clase global `.volver` — versalitas espaciadas + chevrón, sin
+  subrayado. Reutilizada por `CabeceraPantalla` y el bucle.
+- **Assets de GW: descartados** (uso privado no exime de copyright). Ornamento propio de
+  "estrella fugaz" en `CabeceraPantalla` y `public/favicon.svg` (primer favicon).
+- Motivo completo en `decisions.md` (2026-09-10, supersede la paleta del 09-09).
+- **test 52/52**, `lint`/`typecheck`/`format`/`build` verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

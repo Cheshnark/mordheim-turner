@@ -86,9 +86,9 @@ Base = tokens del handoff (§8). Añadidos para empujar la "vibe" sin romper el 
 | `--acento-suave` | `#5C2A2A` | fondo de bloque destacado |
 | `--texto` | `#EDE6DC` | texto principal (hueso) |
 | `--texto-2` | `#9C9086` | texto secundario |
-| `--completado` | `#5B7553` | item marcado (verde apagado) |
+| ~~`--completado`~~ | — | **eliminado 2026-09-10** (dos colores). Item marcado = fila hundida + tinta apagada, sin color |
 | `--enlace-externo` | `#C98A6A` | enlaces a mordheimer.net (ámbar de antorcha) |
-| `--wyrdstone` | `#6F8F3E` *(ajustar al implementar; distinto de `--completado`)* | **segundo acento**: filo iluminado del paso activo, sólo ahí |
+| ~~`--wyrdstone`~~ | — | **eliminado 2026-09-10** (dos colores). El filo del paso activo pasa a rojo |
 
 **Atmósfera (todo estático, sin animación):**
 
@@ -283,6 +283,51 @@ Añadidos, todos estáticos, con el rojo/wyrdstone aún **exclusivo** de la fase
 **Contradicciones resueltas:** cometa GW → motivos genéricos; "solo la fase activa
 es audaz" → adornos monocromos y tenues; esquinas vs. señal de marcado → hairline
 completo + esquinas; textura vs. "sin fondo tras el texto" → tinte de borde, no grano.
+
+---
+
+## 2026-09-10 — Dos colores (fuera el verde) + sin assets de Games Workshop
+
+**Supersede** la parte de paleta de "2026-09-09 — Paleta y atmósfera" y toda decisión
+posterior sobre `--color-wyrdstone` / `--color-completado`.
+
+**Decisión de color:** la identidad es de **dos colores**: neutros grimdark (negros y
+marrones del handoff §8, más el hueso del texto) **+ un único acento rojo**
+(`--color-acento`). Se eliminan `--color-wyrdstone`, `--color-completado` y
+`--lavado-completado`.
+
+- **Fase activa** (`--filo-activo`): filo + resplandor **rojo** a la izquierda de la
+  cabecera, sin regla/subrayado bajo el título (no gustaba).
+- **Item marcado:** sin color. La fila se hunde al nivel de `--color-fondo`, la casilla
+  se sella en tinta apagada (`--color-texto-2`) con aspa a hueco, texto tachado. El
+  rojo se reserva para lo activo/CTA/versal, no para "hecho".
+- **Pista de fase:** `hecha` = `--color-texto-2`; `activa` = `--color-acento`;
+  `pendiente` = `--color-linea`.
+- `--color-enlace-externo` (ámbar) se mantiene: es un marrón desaturado de la familia
+  neutra y marca "sale de la app". Reconsiderable.
+
+**Motivo:** decisión del usuario. El segundo acento verde se había añadido el 09-09
+para huir del "tema oscuro genérico"; el usuario prefiere explícitamente el par
+negro/marrón + rojo y lo asume.
+
+**Decisión de assets — no se usan recursos de Games Workshop.** El usuario propuso
+incrustar el logotipo de Mordheim, la cometa de dos colas e iconos/arte de GW
+argumentando "uso privado". Se descarta:
+
+- Uso privado no elimina copyright ni marca; solo baja la probabilidad de que se
+  persiga. GW es especialmente activa defendiendo su IP.
+- `handoff.md` §1 y `CLAUDE.md` ya fijan "solo enlaces, nunca assets incrustados".
+- `todos.md` contempla despliegue: en cuanto salga del equipo, los assets de GW pasan
+  a ser un pasivo.
+
+**En su lugar:** nombrar "Mordheim" como texto (uso nominativo legítimo); tipografía
+Grenze Gotisch (OFL) para los titulares; ornamento propio de "estrella fugaz" (una
+cola, no la cometa bicola de GW) en `CabeceraPantalla` y en `public/favicon.svg`;
+glifos de fase propios (`GlifoFase`).
+
+**Control "volver":** deja de ser un `<a>` subrayado; es una etiqueta de navegación
+(versalitas espaciadas, chevrón, sin subrayado, `hover` que aclara). Clase global
+`.volver` en `global.css`, reutilizada por `CabeceraPantalla` y el bucle de Battle.
 
 ---
 

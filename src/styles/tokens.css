@@ -1,19 +1,17 @@
 /* Design tokens — Mordheim Turn Companion.
    Paleta, tipografía y motivo en docs/decisions.md (entrada 2026-09-09). */
 :root {
-  /* --- Color: base grimdark cálida (handoff §8) --- */
+  /* --- Color: dos colores. Neutros grimdark (negros/marrones, handoff §8) + un
+     único acento rojo. Sin segundo acento (ver docs/decisions.md). --- */
   --color-fondo: #1a1614;
   --color-superficie: #241f1c;
   --color-superficie-2: #2e2723;
   --color-linea: #3a322c;
-  --color-acento: #8b3a3a; /* rojo sangre seca: acción principal / fase activa */
+  --color-acento: #8b3a3a; /* rojo sangre seca: el ÚNICO acento. Fase activa, CTA, versal */
   --color-acento-suave: #5c2a2a;
-  --color-wyrdstone: #9fbe3b; /* 2.º acento: filo iluminado del paso activo, solo ahí */
   --color-texto: #ede6dc; /* hueso */
-  --color-texto-2: #9c9086;
-  --color-completado: #5b7553;
-  --lavado-completado: rgb(91 117 83 / 0.12); /* fondo tenue del item marcado */
-  --color-enlace-externo: #c98a6a; /* ámbar de antorcha */
+  --color-texto-2: #9c9086; /* bone apagado: texto secundario y todo lo "hecho/inactivo" */
+  --color-enlace-externo: #c98a6a; /* ámbar de antorcha: enlaces que salen de la app (familia marrón) */
 
   /* --- Tipografía --- */
   --fuente-titular: 'Grenze Gotisch', Georgia, 'Times New Roman', serif;
@@ -46,11 +44,11 @@
   --borde: 1px solid var(--color-linea);
   /* Huella de imprenta: los bloques están hundidos, no elevados. */
   --huella: inset 0 1px 0 rgb(0 0 0 / 0.4);
-  /* Filo iluminado del paso activo: barra wyrdstone + resplandor contenido en el
-     borde izquierdo, sin halo. Solo en Battle. */
+  /* Filo del paso activo: barra roja + resplandor contenido en el borde
+     izquierdo, sin halo. Solo en Battle. */
   --filo-activo:
-    inset 3px 0 0 0 var(--color-wyrdstone),
-    inset 12px 0 18px -12px var(--color-wyrdstone);
+    inset 3px 0 0 0 var(--color-acento),
+    inset 14px 0 20px -12px var(--color-acento);
 
   /* Objetivo táctil mínimo (uso en mesa, luz mala). Handoff §8: ~50-56 px. */
   --toque-min: 56px;

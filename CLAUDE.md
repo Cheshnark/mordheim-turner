@@ -95,15 +95,17 @@ src/
 Grimdark de Mordheim — "fuimos una gran ciudad y ahora decaemos". Paleta y tokens exactos
 en `docs/decisions.md`. Reglas:
 
-- Paleta oscura y cálida del handoff (§8) **+ un segundo acento** verde wyrdstone, usado
-  sólo como filo iluminado en el paso activo. Viñeta en los bordes y textura de hollín
-  **estática** (SVG `feTurbulence`, 2–3 %). Sin imágenes de fondo tras el texto, sin
-  animación decorativa: uso en mesa → contraste y toque grande por encima de todo.
+- **Dos colores** (decisión 2026-09-10): neutros grimdark del handoff (§8) + hueso de
+  texto **+ un único acento rojo** (`--color-acento`). Sin verde/segundo acento. Viñeta
+  en los bordes y textura estática (SVG `feTurbulence`). Sin imágenes de fondo tras el
+  texto, sin animación decorativa: uso en mesa → contraste y toque grande por encima de todo.
+- **Sin assets de Games Workshop** (logo, cometa bicola, arte/iconos). Solo el nombre
+  "Mordheim" como texto y ornamentos propios. Ver `docs/decisions.md` (2026-09-10).
 - Tipografía: **Grenze Gotisch** self-hosted (1 peso) para titulares; stack **sans del
   sistema** para todo lo operativo (checklists, botones, labels). Máximo dos familias.
 - Layout: una columna, botones apilados ≥ 50–56 px, bloques planos con borde fino, estilo
   hoja de referencia física. Nada de cards redondeadas con sombra gris genérica.
-- El único "momento audaz": la **fase activa** (rojo sangre + filo verde). Todo lo demás, callado.
+- El único "momento audaz": la **fase activa** (filo + lavado rojo, sin subrayado). Todo lo demás, callado.
 
 ## Reglas de trabajo
 

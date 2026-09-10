@@ -38,11 +38,13 @@
 
 ## Prioridad baja / abierto
 
-- [ ] Si se quiere más presencia: tintar los glifos de fase en wyrdstone, o subir su
-      tamaño; llevar las esquinas marcadas también a Home/selección de modo.
+- [ ] Empujar la identidad "chulísima" (petición del usuario): tratamiento tipográfico
+      del wordmark en Home, glifos de fase más labrados (xilografía/heráldica), uso del
+      ornamento de estrella fugaz en más sitios. Todo original, sin assets de GW.
 
 - [ ] Decidir despliegue (GitHub Pages / Netlify / Vercel estático) y documentarlo.
-- [ ] Icono / favicon con la estética de la app (ahora no hay favicon).
+- [x] ~~Icono / favicon~~ — hecho 2026-09-10. `public/favicon.svg`: estrella fugaz propia
+      (hueso + cola roja sobre fondo oscuro). No usa marcas de GW.
 - [ ] Revisar si el texto de tutorial necesita una segunda familia tipográfica (serif del
       sistema) o basta con tamaño/color.
 - [ ] `.env.example` si acaba habiendo alguna variable (hoy no hay backend → probablemente no).

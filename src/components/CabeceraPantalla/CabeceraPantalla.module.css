@@ -11,10 +11,8 @@
   align-items: center;
 }
 
-.volver {
+.corrida > :first-child {
   justify-self: start;
-  font-size: var(--texto-s);
-  color: var(--color-texto-2);
 }
 
 .runningHead {
@@ -35,38 +33,25 @@
   font-size: 1.5em;
 }
 
-/* Filete ornamental: rombo central con dos líneas que se desvanecen. */
+/* Filete ornamental: estrella fugaz (motivo propio) entre dos hairlines. */
 .filete {
-  position: relative;
   align-self: center;
-  width: 7px;
-  height: 7px;
-  margin-block: var(--espacio-2);
-  background-color: var(--color-texto-2);
-  opacity: 0.6;
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-block: var(--espacio-1);
 }
 
-.filete::before,
-.filete::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 84px;
+.fileteLinea {
+  width: 68px;
   height: 1px;
-  background-image: linear-gradient(
-    90deg,
-    transparent,
-    rgb(156 144 134 / 0.7) 55%,
-    rgb(156 144 134 / 0.7)
-  );
+  background-image: linear-gradient(90deg, transparent, rgb(156 144 134 / 0.7));
 }
 
-.filete::before {
-  right: 11px;
-}
-
-.filete::after {
-  left: 11px;
+.fileteLinea:last-child {
   transform: scaleX(-1);
+}
+
+.estrella {
+  color: var(--color-texto-2);
 }

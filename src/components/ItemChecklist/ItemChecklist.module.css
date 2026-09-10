@@ -1,6 +1,7 @@
 /* Bloque plano con huella de imprenta y esquinas marcadas (clave de mapa). Al
-   marcarlo: sellado en verde apagado (borde + esquinas + lavado), casilla como
-   sello de tinta y texto tachado (docs/decisions.md). */
+   marcarlo se "tacha del registro": la fila se hunde al nivel del fondo, la
+   casilla queda sellada en tinta apagada y el texto va tachado. Sin color: el
+   rojo se reserva para lo activo (docs/decisions.md). */
 
 .item {
   position: relative;
@@ -47,18 +48,13 @@
 }
 
 .item:has(.check:checked) {
-  border-color: var(--color-completado);
-  background-image: linear-gradient(
-    180deg,
-    var(--lavado-completado),
-    var(--color-superficie)
-  );
+  background-color: var(--color-fondo);
+  background-image: none;
 }
 
 .item:has(.check:checked)::before,
 .item:has(.check:checked)::after {
-  border-color: var(--color-completado);
-  opacity: 0.85;
+  opacity: 0.25;
 }
 
 .fila {
@@ -89,11 +85,12 @@
 }
 
 .check:checked {
-  border-color: var(--color-completado);
-  background-color: var(--lavado-completado);
+  border-color: var(--color-texto-2);
+  background-color: var(--color-texto-2);
   transform: rotate(-2deg);
 }
 
+/* Aspa de tinta: hueco oscuro sobre la caja sellada. */
 .check:checked::before {
   content: '';
   width: 0.9rem;
@@ -101,17 +98,17 @@
   background-image:
     linear-gradient(
       45deg,
-      transparent 43%,
-      var(--color-completado) 43%,
-      var(--color-completado) 57%,
-      transparent 57%
+      transparent 42%,
+      var(--color-fondo) 42%,
+      var(--color-fondo) 58%,
+      transparent 58%
     ),
     linear-gradient(
       -45deg,
-      transparent 43%,
-      var(--color-completado) 43%,
-      var(--color-completado) 57%,
-      transparent 57%
+      transparent 42%,
+      var(--color-fondo) 42%,
+      var(--color-fondo) 58%,
+      transparent 58%
     );
 }
 

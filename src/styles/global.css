@@ -99,8 +99,31 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-wyrdstone);
+  outline: 2px solid var(--color-acento);
   outline-offset: 2px;
+}
+
+/* Control de "volver": etiqueta de navegación, no un hipervínculo subrayado. */
+.volver {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
+  font-size: var(--texto-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-texto-2);
+}
+
+.volver::before {
+  content: '‹';
+  font-size: 1.25em;
+  line-height: 0;
+}
+
+.volver:hover {
+  color: var(--color-texto);
 }
 
 /* Helpers de layout: la ergonomía de "una utilidad para el flex" sin dependencia. */

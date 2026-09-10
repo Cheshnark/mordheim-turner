@@ -71,9 +71,9 @@ export function Battle() {
 
   return (
     <main className="stack">
-      <p className={styles.volver}>
-        <Link to="/">← Volver</Link>
-      </p>
+      <Link className="volver" to="/">
+        Volver
+      </Link>
 
       <header className={styles.cabecera}>
         <p className={styles.ronda}>Ronda {battle.ronda}</p>
