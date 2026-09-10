@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { EstrellaFugaz } from '@/components/EstrellaFugaz/EstrellaFugaz'
 import styles from './CabeceraPantalla.module.css'
 
 type Props = {
@@ -28,29 +29,12 @@ export function CabeceraPantalla({ titulo, volverA = '/' }: Props) {
   )
 }
 
-/** Filete ornamental: estrella fugaz (motivo propio) entre dos hairlines. */
+/** Filete ornamental: estrella fugaz entre dos hairlines. */
 function Filete() {
   return (
     <div className={styles.filete} aria-hidden="true">
       <span className={styles.fileteLinea} />
-      <svg
-        className={styles.estrella}
-        viewBox="0 0 24 24"
-        width="16"
-        height="16"
-        fill="none"
-      >
-        <path
-          d="M12 2.5l1.7 6.4 6.3 1.6-6.3 1.6L12 18.5l-1.7-6.4L4 10.5l6.3-1.6z"
-          fill="currentColor"
-        />
-        <path
-          d="M8.5 13.5L3.5 20"
-          stroke="currentColor"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-        />
-      </svg>
+      <EstrellaFugaz size={16} className={styles.estrella} />
       <span className={styles.fileteLinea} />
     </div>
   )

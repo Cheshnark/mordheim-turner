@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
+import { EstrellaFugaz } from '@/components/EstrellaFugaz/EstrellaFugaz'
 import styles from './Home.module.css'
 
 export function Home() {
   return (
     <main className={styles.home}>
       <header className={styles.header}>
+        <EstrellaFugaz size={30} className={styles.marca} />
         <h1 className={styles.title}>Mordheim</h1>
+        <div className={styles.filete} aria-hidden="true" />
         <p className={styles.subtitle}>Compañero de turno</p>
       </header>
 
