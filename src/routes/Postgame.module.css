@@ -1,0 +1,14 @@
+.intro {
+  color: var(--color-texto-2);
+  font-size: var(--texto-s);
+}
+
+/* Nota fija, sin casilla (handoff §7). */
+.nota {
+  padding: var(--espacio-3) var(--espacio-4);
+  background-color: var(--color-superficie-2);
+  border: var(--borde);
+  border-radius: var(--radio);
+  font-size: var(--texto-s);
+  color: var(--color-texto-2);
+}

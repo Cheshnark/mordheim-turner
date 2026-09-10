@@ -4,10 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estado del proyecto
 
-**Andamiaje + datos + store** (2026-09-10). Base verde: `lint`, `typecheck`, `test` (30/30),
-`build` pasan. `src/data/` con las checklists y `src/store/estadoApp.ts` (zustand + persist)
-ya escritos. Pantallas Prebattle/Battle/Postgame siguen siendo **stubs**: nada consume el
-store todavía.
+**App funcional, sin capa visual final** (2026-09-10). Base verde: `lint`, `typecheck`,
+`test` (48/48), `build`. Store (`src/store/estadoApp.ts`, zustand + persist), `src/data/`
+y las tres pantallas reales (`Prebattle`/`Battle`/`Postgame`) conectadas vía `useEstadoApp`,
+con `src/components/{ItemChecklist,ListaChecklist}`. Pendiente: estética grimdark (bloqueada
+por el mockup, ver `docs/project_state.md`) y la fuente Grenze Gotisch.
 
 Antes de programar, lee en este orden:
 
@@ -63,10 +64,10 @@ Convenciones alineadas con el proyecto hermano `../mortgage-calculator` (mismo a
 ```
 src/
   main.tsx, App.tsx        [x] router con 4 rutas
-  routes/                  [x] Home (con estilo) · Prebattle/Battle/Postgame (STUBS)
-  components/              ( ) carpeta por componente: Nombre.{tsx,module.css,test.tsx}
+  routes/                  [x] Home · Prebattle · Battle · Postgame (reales, CSS estructural)
+  components/              [x] ItemChecklist/ · ListaChecklist/ (carpeta por componente)
   store/                   [x] tipos.ts · [x] estadoApp.ts (zustand + persist, 5 acciones)
-  data/                    ( ) checklists como DATOS, no JSX
+  data/                    [x] prebattle · postgame · battle (checklists como DATOS, no JSX)
   lib/battle/fases.ts      [x] ORDEN_FASES, faseSiguiente, cierraRonda (+ test)
   styles/                  [x] tokens.css · global.css (viñeta, hollín, .stack/.row)
   test/setup.ts            [x] jest-dom + cleanup

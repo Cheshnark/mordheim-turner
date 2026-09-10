@@ -1,16 +1,145 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ListaChecklist } from '@/components/ListaChecklist/ListaChecklist'
+import { CONTENIDO_BATTLE } from '@/data/battle'
+import { cierraRonda } from '@/lib/battle/fases'
+import { useEstadoApp } from '@/store/estadoApp'
+import styles from './Battle.module.css'
 
+/**
+ * Battle = selección de modo → bucle ronda/fase (handoff §2, §5).
+ *
+ * "Estar en el bucle" es estado local: al entrar en la pantalla se vuelve a
+ * elegir modo, aunque ronda/fase sigan donde los dejó `localStorage`. Motivo en
+ * docs/decisions.md.
+ */
 export function Battle() {
+  const [enBucle, setEnBucle] = useState(false)
+  const battle = useEstadoApp((s) => s.battle)
+  const establecerModo = useEstadoApp((s) => s.establecerModo)
+  const alternarItemFase = useEstadoApp((s) => s.alternarItemFase)
+  const avanzarFase = useEstadoApp((s) => s.avanzarFase)
+
+  const fase = CONTENIDO_BATTLE[battle.fase]
+  const tutorial = battle.modo === 'tutorial'
+
+  const volver = (
+    <p>
+      <Link to="/">← Volver a Home</Link>
+    </p>
+  )
+
+  if (!enBucle) {
+    const elegir = (modo: 'tutorial' | 'rapido') => () => {
+      establecerModo(modo)
+      setEnBucle(true)
+    }
+    return (
+      <main className="stack">
+        {volver}
+        <h1>Battle</h1>
+        <p className={styles.retomar}>
+          Vas por la <strong>Ronda {battle.ronda}</strong> · Fase {fase.numero}:{' '}
+          {fase.titulo}
+        </p>
+        <p className={styles.intro}>Elige cómo quieres el checklist:</p>
+        <div className="stack">
+          <button
+            type="button"
+            className={styles.modo}
+            onClick={elegir('tutorial')}
+          >
+            <span className={styles.modoNombre}>Tutorial</span>
+            <span className={styles.modoNota}>
+              Cada paso con explicación y enlace a la regla
+            </span>
+          </button>
+          <button
+            type="button"
+            className={styles.modo}
+            onClick={elegir('rapido')}
+          >
+            <span className={styles.modoNombre}>Rápido</span>
+            <span className={styles.modoNota}>
+              Solo el texto corto de cada paso
+            </span>
+          </button>
+        </div>
+      </main>
+    )
+  }
+
+  const todoMarcado = fase.items.every(
+    (item) => battle.checklistFaseActual[item.id],
+  )
+  const cierra = cierraRonda(battle.fase)
+
   return (
     <main className="stack">
-      <p>
-        <Link to="/">Volver a Home</Link>
-      </p>
-      <h1>Battle</h1>
-      <p>
-        Selección de modo y bucle de ronda/fase pendientes de implementar (ver
-        docs/handoff.md §5).
-      </p>
+      {volver}
+
+      <header className={styles.cabecera}>
+        <p className={styles.ronda}>Ronda {battle.ronda}</p>
+        <h1 className={styles.tituloFase}>
+          Fase {fase.numero} · {fase.titulo}
+        </h1>
+      </header>
+
+      <div
+        className={styles.toggle}
+        role="group"
+        aria-label="Modo del checklist"
+      >
+        <button
+          type="button"
+          className={styles.toggleBoton}
+          aria-pressed={tutorial}
+          onClick={() => establecerModo('tutorial')}
+        >
+          Tutorial
+        </button>
+        <button
+          type="button"
+          className={styles.toggleBoton}
+          aria-pressed={!tutorial}
+          onClick={() => establecerModo('rapido')}
+        >
+          Rápido
+        </button>
+      </div>
+
+      {tutorial && (
+        <a
+          className={styles.linkFase}
+          href={fase.linkFase}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Reglas de la fase en mordheimer.net
+        </a>
+      )}
+
+      {fase.notasFijas?.map((nota) => (
+        <p key={nota} className={styles.nota}>
+          {nota}
+        </p>
+      ))}
+
+      <ListaChecklist
+        items={fase.items}
+        marcadas={battle.checklistFaseActual}
+        onAlternar={alternarItemFase}
+        mostrarDetalle={tutorial}
+      />
+
+      <button
+        type="button"
+        className={styles.siguiente}
+        disabled={!todoMarcado}
+        onClick={avanzarFase}
+      >
+        {cierra ? 'Cerrar ronda' : 'Siguiente fase'} →
+      </button>
     </main>
   )
 }

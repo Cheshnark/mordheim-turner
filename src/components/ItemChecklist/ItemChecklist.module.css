@@ -1,0 +1,56 @@
+/* Estructura funcional. La capa visual grimdark (item sellado/tachado, filo
+   wyrdstone en el paso activo) llegará con el mockup — ver docs/todos.md. */
+
+.item {
+  list-style: none;
+  background-color: var(--color-superficie);
+  border: var(--borde);
+  border-radius: var(--radio);
+  box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.4);
+}
+
+.fila {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  min-height: var(--toque-min);
+  padding: var(--espacio-3) var(--espacio-4);
+  cursor: pointer;
+}
+
+.check {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.15rem;
+  accent-color: var(--color-completado);
+}
+
+.texto {
+  font-size: var(--texto-m);
+}
+
+.texto[data-marcado] {
+  color: var(--color-texto-2);
+  text-decoration: line-through;
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  /* Alineado con el texto, no con la casilla. */
+  padding: 0 var(--espacio-4) var(--espacio-3)
+    calc(var(--espacio-4) + 1.35rem + var(--espacio-3));
+}
+
+.explicado {
+  font-size: var(--texto-s);
+  color: var(--color-texto-2);
+}
+
+.regla {
+  align-self: flex-start;
+  font-size: var(--texto-s);
+  color: var(--color-enlace-externo);
+}

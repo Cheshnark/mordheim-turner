@@ -4,7 +4,8 @@ _Actualizado: 2026-09-10_
 
 ## Dónde estamos
 
-**Andamiaje Vite montado y verde.** Cimientos + proyecto base funcionando.
+**App funcional, sin capa visual final.** Store + datos + las tres pantallas reales
+conectadas. Falta la estética grimdark (bloqueada por el mockup) y la fuente.
 
 ### Cimientos (sesión 1)
 
@@ -60,6 +61,26 @@ ronda (§5, "al completar Combate → ronda += 1") es lógica del store, no va e
   escritura en `localStorage` sin funciones, y rehidratación vía `persist.rehydrate()`.
 - **test total: 30/30.** `lint`, `typecheck`, `format:check`, `build` verdes.
 
+### Pantallas reales + componentes de checklist (sesión 5 — esta)
+
+Reemplazan los stubs de `src/routes/`; consumen `useEstadoApp` + `src/data/`.
+
+- `src/components/ItemChecklist/` — fila: casilla + `texto_corto`; con `mostrarDetalle`,
+  además `texto_explicado` y enlace externo a la regla (`target="_blank"`, `rel` noopener).
+- `src/components/ListaChecklist/` — `<ul>` de `ItemChecklist`, sin estado propio.
+- `Prebattle` / `Postgame` — checklist plana, `mostrarDetalle` siempre. Postgame pinta
+  `NOTAS_POSTGAME` como bloques sin casilla.
+- `Battle` — `enBucle` (`useState` local): al entrar se re-elige modo aunque ronda/fase
+  sigan en `localStorage` (decisión registrada). Bucle: cabecera ronda/fase, toggle
+  tutorial/rápido en vivo, `linkFase` + detalle solo en tutorial, `notasFijas` de la
+  fase, y botón "Siguiente fase" / "Cerrar ronda" (`disabled` hasta marcar todo) →
+  `avanzarFase`.
+- CSS por pantalla/componente: **solo estructura** (tap targets ≥ 52 px, legible). La
+  estética grimdark y el "momento audaz" de la fase activa van con el mockup.
+- Tests nuevos: `ItemChecklist` (5), `ListaChecklist` (2), `Prebattle` (3), `Postgame`
+  (2), `Battle` (6). **test total: 48/48.** `lint`, `typecheck`, `format:check`, `build`
+  verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -69,14 +90,13 @@ Los `.md` se mantienen a mano.
 
 Contenido y lógica, en este orden (cada bloque = sesión nueva):
 
-1. **Pantallas reales** — Battle (selección de modo + bucle ronda/fase con toggle
-   tutorial/rápido, consumiendo `CONTENIDO_BATTLE`) → Prebattle (`CHECKLIST_PREBATTLE`) →
-   Postgame (`CHECKLIST_POSTGAME` + `NOTAS_POSTGAME`). Reemplazan los stubs. Consumen
-   `useEstadoApp` de `src/store/estadoApp.ts`.
-2. **Componente(s) de checklist** reutilizable(s) en `src/components/` (patrón carpeta).
-3. **Capa visual** — tokens y estética grimdark en checklists y fase activa
-   (rojo sangre + filo wyrdstone) sobre el mockup de referencia.
-4. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
+1. **Capa visual** — tokens y estética grimdark en checklists y fase activa
+   (rojo sangre + filo wyrdstone) sobre el mockup de referencia. **Bloqueado**: falta
+   el mockup en el repo (ver abajo).
+2. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` + `@font-face`.
+
+Suelto, sin bloqueo: revisar en uso si "Siguiente fase" debería permitir avanzar sin
+marcar los pasos que no aplican (decisión registrada, reconsiderable).
 
 ## Bloqueos / pendientes de terceros
 

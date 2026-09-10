@@ -135,6 +135,37 @@ mano); no se añade una acción que la UI no debe ofrecer.
 
 ---
 
+## 2026-09-10 — "Estar en el bucle" de Battle es estado local, no del store
+
+**Decisión:** `Battle.tsx` guarda `enBucle` con `useState`. Al entrar en `/battle`
+siempre se ve primero la selección de modo, aunque `ronda`, `fase` y el marcado sigan
+en `localStorage`.
+
+**Motivo:** el handoff (§2, §9) describe el flujo como "elegir modo → bucle" cada vez
+que entras a Battle. Volver a tocar Tutorial/Rápido es un gesto y además confirma el
+contexto al retomar ("Vas por la Ronda 3 · Disparo"). Meter un flag en `EstadoApp`
+obligaría a decidir si se persiste (y a limpiarlo), ensuciando un modelo que el handoff
+quiere mínimo y sin reset.
+
+**Descartado:** flag persistido `enPartida`; entrar directo al bucle saltándose el
+selector si la partida no está "fresca" (heurística no pedida).
+
+---
+
+## 2026-09-10 — "Siguiente fase" bloqueado hasta marcar todo
+
+**Decisión:** el botón de avance de fase está `disabled` hasta que todos los items de
+la fase están marcados (mockup §9). Un paso que no aplica se marca igual.
+
+**Motivo:** es el comportamiento del mockup de referencia y encaja con la naturaleza
+de una checklist: "revisado y no aplica" también es un tick. Evita avances por
+descuido saltándose pasos.
+
+**Descartado:** permitir avanzar siempre; botón sin bloqueo con aviso. Reconsiderar si
+en uso real molesta marcar pasos inaplicables (p. ej. Estupidez sin guerreros estúpidos).
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde

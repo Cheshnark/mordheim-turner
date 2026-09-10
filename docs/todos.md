@@ -13,11 +13,16 @@
 
 ## Prioridad media
 
-- [ ] Pantallas reales que reemplacen los stubs: Battle (selección de modo + bucle con
-      toggle tutorial/rápido), Prebattle, Postgame.
-- [ ] Componente(s) de checklist reutilizable(s) en `src/components/` (patrón carpeta:
-      `Nombre.tsx` + `Nombre.module.css` + `Nombre.test.tsx`).
-- [ ] Capa visual grimdark sobre checklists y fase activa (rojo sangre + filo wyrdstone).
+- [x] ~~Pantallas reales que reemplacen los stubs~~ — hecho 2026-09-10. Battle
+      (selección de modo + bucle con toggle tutorial/rápido, "Siguiente fase" /
+      "Cerrar ronda"), Prebattle y Postgame consumen `useEstadoApp` + `src/data/`.
+      Tests por pantalla. Test total: 48/48.
+- [x] ~~Componente(s) de checklist reutilizable(s)~~ — hecho 2026-09-10.
+      `src/components/ItemChecklist/` y `src/components/ListaChecklist/` (patrón carpeta,
+      con test cada uno).
+- [ ] **Capa visual grimdark** sobre checklists y fase activa (rojo sangre + filo
+      wyrdstone). Las pantallas tienen hoy CSS estructural mínimo (tap targets, legible),
+      no la estética final. Bloqueado por el mockup (ver "Pedir al usuario").
 - [ ] Self-hostear **Grenze Gotisch** (woff2, subconjunto latino) en `src/fonts/` + `@font-face`.
 - [ ] Ajustar `--color-wyrdstone` al implementar la fase activa (que no choque con `--color-completado`).
 

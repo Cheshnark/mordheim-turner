@@ -33,10 +33,12 @@ src/
   [x] App.tsx               <Routes> con las 4 rutas
   routes/
     [x] Home.tsx / .module.css / .test.tsx   4 accesos al mismo nivel, con estilo
-    [x] Prebattle.tsx        STUB (título + volver a Home)
-    [x] Battle.tsx           STUB
-    [x] Postgame.tsx         STUB
-  components/                (vacío) patrón: <Nombre>/<Nombre>.{tsx,module.css,test.tsx}
+    [x] Prebattle.tsx / .module.css / .test.tsx   checklist plana (CHECKLIST_PREBATTLE)
+    [x] Battle.tsx / .module.css / .test.tsx      selección de modo + bucle ronda/fase
+    [x] Postgame.tsx / .module.css / .test.tsx    checklist plana + NOTAS_POSTGAME
+  components/                patrón: <Nombre>/<Nombre>.{tsx,module.css,test.tsx}
+    [x] ItemChecklist/       fila: casilla + texto corto (+ explicación/enlace si mostrarDetalle)
+    [x] ListaChecklist/      <ul> de ItemChecklist; sin estado, todo por props
   store/
     [x] tipos.ts             tipos de dominio (handoff §3)
     [x] estadoApp.ts         store zustand + persist (clave única `mordheim-turner`) + acciones
@@ -102,6 +104,20 @@ usuario desmarca a mano si quiere reiniciar.
   `checklistFaseActual` en **todo** avance de fase (los marcados son de la fase que se deja);
   si la fase era Combate, además `ronda += 1`. Sin pantalla intermedia.
 - `ESTADO_INICIAL` exportado: ronda 1, fase `recuperacion`, modo `tutorial`.
+
+## Pantallas (consumen store + datos)
+
+- **Prebattle / Postgame**: checklist plana. `useEstadoApp` para el mapa de marcado y
+  su acción `alternar*`; `<ListaChecklist mostrarDetalle>` siempre. Postgame añade
+  `NOTAS_POSTGAME` como bloques sin casilla.
+- **Battle**: `enBucle` es `useState` local — al entrar en la ruta se re-elige modo
+  aunque ronda/fase sigan donde los dejó `localStorage` (motivo en `decisions.md`).
+  - Selección de modo: dos botones que hacen `establecerModo` + `setEnBucle(true)`;
+    muestra "Vas por la Ronda N · Fase X".
+  - Bucle: cabecera ronda/fase, toggle tutorial/rápido en vivo (`establecerModo`),
+    `linkFase` y detalle de items solo en tutorial, `notasFijas` de la fase,
+    `<ListaChecklist>` sobre `CONTENIDO_BATTLE[fase].items`, y botón "Siguiente fase" /
+    "Cerrar ronda" (`disabled` hasta marcar todo) que llama a `avanzarFase`.
 
 ## Estrategia de tests
 
