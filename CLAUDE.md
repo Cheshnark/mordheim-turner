@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estado del proyecto
 
-**App funcional con estética grimdark** (2026-09-10). Base verde: `lint`, `typecheck`,
-`test` (48/48), `build`. Store (`src/store/estadoApp.ts`, zustand + persist), `src/data/`,
-las tres pantallas reales (`Prebattle`/`Battle`/`Postgame`) vía `useEstadoApp`,
-`src/components/{ItemChecklist,ListaChecklist}` y la capa visual sobre el boceto
-(`docs/mordheim-battle-mockup.html`). Único pendiente de UI: la fuente Grenze Gotisch
-self-hosted (hoy cae a `Georgia`). Preview: `.claude/launch.json` (server `dev`, 5173).
+**App completa a nivel de contenido, lógica y UI** (2026-09-10). Base verde: `lint`,
+`typecheck`, `test` (48/48), `build`. Store (`src/store/estadoApp.ts`, zustand + persist),
+`src/data/`, las tres pantallas reales (`Prebattle`/`Battle`/`Postgame`) vía `useEstadoApp`,
+`src/components/{ItemChecklist,ListaChecklist}`, capa visual grimdark sobre el boceto
+(`docs/mordheim-battle-mockup.html`) y Grenze Gotisch self-hosted (`src/fonts/`). Resto:
+solo prioridad baja (despliegue, favicon — ver `docs/todos.md`). Preview: `.claude/launch.json`
+(server `dev`, 5173).
 
 Antes de programar, lee en este orden:
 
@@ -72,7 +73,7 @@ src/
   lib/battle/fases.ts      [x] ORDEN_FASES, faseSiguiente, cierraRonda (+ test)
   styles/                  [x] tokens.css · global.css (viñeta, hollín, .stack/.row)
   test/setup.ts            [x] jest-dom + cleanup
-  fonts/                   ( ) grenze-gotisch-*.woff2
+  fonts/                   [x] grenze-gotisch-latin-400.woff2 + OFL.txt
 ```
 
 ## Modelo de estado (del handoff, §3)

@@ -4,9 +4,9 @@ _Actualizado: 2026-09-10_
 
 ## Dónde estamos
 
-**App funcional con estética grimdark aplicada.** Store + datos + las tres pantallas
-reales + capa visual sobre el boceto. Único pendiente de la fase de UI: la fuente
-Grenze Gotisch self-hosted (hoy cae al fallback `Georgia`).
+**App funcional con la identidad visual completa.** Store + datos + las tres pantallas
+reales + capa visual grimdark + Grenze Gotisch self-hosted en titulares. La fase de UI
+del plan queda cerrada; lo que resta es "prioridad baja" (despliegue, favicon).
 
 ### Cimientos (sesión 1)
 
@@ -101,6 +101,17 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   avance de fase con `pista` actualizada, Prebattle, Postgame. **test total: 48/48.**
   `lint`, `typecheck`, `format:check`, `build` verdes.
 
+### Fuente Grenze Gotisch (sesión 7 — esta)
+
+- `src/fonts/grenze-gotisch-latin-400.woff2` (Google Fonts v20, subset `latin`, 16 kB)
+  + `src/fonts/OFL.txt`. `src/fonts/` ya estaba en `.prettierignore`.
+- `@font-face` (`font-weight: 400`, `font-display: swap`, `unicode-range` del subset
+  latino) al inicio de `global.css`, con `url('../fonts/…')` → Vite la empaqueta y
+  hashea (`dist/assets/grenze-gotisch-latin-400-*.woff2`).
+- Verificado en navegador: `document.fonts.check(...)` = `true`; titulares (Home,
+  nombres de acceso, "Fase N · …") en la gótica; el resto sigue en sans del sistema.
+- Motivo del subset único en `decisions.md`. **test total: 48/48**, resto verde.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -108,12 +119,11 @@ Los `.md` se mantienen a mano.
 
 ## Siguiente paso
 
-1. **Fuente Grenze Gotisch** self-hosted en `src/fonts/` (woff2, 1 peso, subconjunto
-   latino) + `@font-face` en `global.css`. `--fuente-titular` ya la referencia; hoy cae
-   al fallback `Georgia`.
+La fase de contenido/lógica/UI del plan está **cerrada**. Lo que queda es prioridad
+baja (`todos.md`):
 
-Con esto la app queda funcional y con la identidad completa. Después, ya "prioridad
-baja": despliegue estático y favicon (ver `todos.md`).
+1. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
+2. Icono / favicon con la estética de la app.
 
 Suelto, sin bloqueo: revisar en uso si "Siguiente fase" debería permitir avanzar sin
 marcar los pasos que no aplican (decisión registrada, reconsiderable).

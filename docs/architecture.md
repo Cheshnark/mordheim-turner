@@ -56,8 +56,9 @@ src/
     [x] global.css           reset + viñeta + textura de hollín SVG + .stack / .row + reduced-motion
   test/
     [x] setup.ts             jest-dom + cleanup por test
-  fonts/                     (vacío)
-    [ ] grenze-gotisch-*.woff2
+  fonts/
+    [x] grenze-gotisch-latin-400.woff2   1 peso, subconjunto latino (Google Fonts v20)
+    [x] OFL.txt                          licencia SIL OFL 1.1
 ```
 
 ## Tipos de dominio (del handoff)
@@ -139,5 +140,7 @@ La lógica pura de `src/lib/` corre igual sin coste real; se evita el boilerplat
 ## Dependencias externas
 
 - **mordheimer.net**: sólo enlaces `target="_blank" rel="noopener"`. Sin fetch, sin embed.
-- **Fuente Grenze Gotisch**: self-hosted en `src/fonts/` (OFL). No se carga desde Google
-  Fonts en runtime (uso potencial sin conexión en mesa).
+- **Fuente Grenze Gotisch**: self-hosted en `src/fonts/grenze-gotisch-latin-400.woff2`
+  (OFL, 1 peso, subconjunto latino). `@font-face` con `font-display: swap` en
+  `global.css`, referenciada con `url('../fonts/…')` para que Vite la empaquete y hashee.
+  No se carga desde Google Fonts en runtime (uso potencial sin conexión en mesa).

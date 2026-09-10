@@ -25,7 +25,9 @@
       fase activa con filo wyrdstone contenido + regla roja, toggle pill, Home con
       Battle destacado y enlace externo discontinuo. Verificado en navegador. La pill
       "Mi turno" del boceto **no** se implementó (contradice handoff §3).
-- [ ] Self-hostear **Grenze Gotisch** (woff2, subconjunto latino) en `src/fonts/` + `@font-face`.
+- [x] ~~Self-hostear **Grenze Gotisch**~~ — hecho 2026-09-10. `grenze-gotisch-latin-400.woff2`
+      (1 peso, latino) + `OFL.txt` en `src/fonts/`; `@font-face` (`display: swap`) en
+      `global.css`. Verificado en navegador.
 - [x] ~~Ajustar `--color-wyrdstone`~~ — hecho 2026-09-10: `#6f8f3e` → `#9fbe3b`.
 
 ## Prioridad baja / abierto

@@ -216,6 +216,23 @@ inset lo mantiene como filo. El resto de la pantalla queda "callado".
 
 ---
 
+## 2026-09-10 — Grenze Gotisch: solo subconjunto latino, vía asset de Vite
+
+**Decisión:** un único archivo `grenze-gotisch-latin-400.woff2` (subset `latin` de
+Google Fonts, `unicode-range` U+0000–00FF + puntuación), en `src/fonts/`, referenciado
+desde `global.css` con `url('../fonts/…')`. `font-display: swap`.
+
+**Motivo:** el contenido es 100 % español; `latin` cubre acentos, `ñ`, `¿¡` y las
+flechas `→ ↑ ↓` de la UI. Traer `latin-ext` y `vietnamese` (los otros dos subsets que
+sirve Google) sería peso muerto. Referenciar como asset relativo deja que Vite lo
+hashee y lo incluya en el build (16 kB); `public/` no lo versionaría igual de limpio.
+`swap` porque el titular puede tardar y el fallback `Georgia` es aceptable un instante.
+
+**Descartado:** fuente variable (Grenze Gotisch en Google no lo es en este eje);
+cargar los tres subsets; `@import` desde Google Fonts en runtime (rompe uso offline).
+
+---
+
 ## 2026-09-09 — Copia de seguridad automática (hook `Stop`)
 
 **Decisión:** `.claude/hooks/auto-commit.mjs`, disparado por el evento `Stop` desde
