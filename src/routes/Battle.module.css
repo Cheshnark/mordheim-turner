@@ -36,11 +36,7 @@
   padding: var(--espacio-4);
   text-align: left;
   background-color: var(--color-superficie);
-  background-image: linear-gradient(
-    180deg,
-    rgb(201 138 106 / 0.045),
-    transparent 42%
-  );
+  background-image: var(--tinte-superficie);
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--huella);
@@ -64,6 +60,8 @@
 
 /* --- Bucle: cabecera de la fase activa --- */
 .cabecera {
+  position: relative;
+  overflow: hidden;
   padding: var(--espacio-3) 0 var(--espacio-4) var(--espacio-4);
   background-image: linear-gradient(
     90deg,
@@ -71,6 +69,20 @@
     transparent 62%
   );
   box-shadow: var(--filo-activo);
+}
+
+/* Marca de agua: el glifo de la fase, muy grande y tenue, recortado al borde
+   derecho. Puramente decorativo (docs/decisions.md: adornos monocromos). */
+.marcaAgua {
+  position: absolute;
+  top: 50%;
+  right: calc(-1 * var(--espacio-5));
+  width: 6.5rem;
+  height: 6.5rem;
+  color: var(--color-texto-2);
+  opacity: 0.06;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .ronda {
@@ -156,6 +168,7 @@
 .nota {
   padding: var(--espacio-3) var(--espacio-4);
   background-color: var(--color-superficie-2);
+  background-image: var(--tinte-superficie);
   border: var(--borde);
   border-left: 3px solid var(--color-acento);
   border-radius: var(--radio);

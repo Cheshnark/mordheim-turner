@@ -38,9 +38,13 @@
 
 ## Prioridad baja / abierto
 
-- [ ] Empujar la identidad "chulísima" (petición del usuario): tratamiento tipográfico
-      del wordmark en Home, glifos de fase más labrados (xilografía/heráldica), uso del
-      ornamento de estrella fugaz en más sitios. Todo original, sin assets de GW.
+- [x] ~~Empujar la identidad "chulísima"~~ — hecho por partes: wordmark (2026-09-10),
+      glifos de fase macizos (2026-09-10), textura de superficies + marca de agua del
+      glifo en la cabecera de Battle (2026-09-11, ver `decisions.md`).
+- [ ] Confirmar visualmente en el navegador los cambios de 2026-09-11 (textura +
+      marca de agua): el preview no arrancó esta sesión porque el spawner de
+      `.claude/launch.json` no resuelve `npm` en su `PATH` (no es un problema del
+      código). Reintentar cuando el entorno lo permita.
 
 - [ ] Decidir despliegue (GitHub Pages / Netlify / Vercel estático) y documentarlo.
 - [x] ~~Icono / favicon~~ — hecho 2026-09-10. `public/favicon.svg`: estrella fugaz propia

@@ -7,12 +7,7 @@
   position: relative;
   list-style: none;
   background-color: var(--color-superficie);
-  /* Borde superior con tinte cálido: papel envejecido. */
-  background-image: linear-gradient(
-    180deg,
-    rgb(201 138 106 / 0.045),
-    transparent 42%
-  );
+  background-image: var(--tinte-superficie);
   border: var(--borde);
   border-radius: var(--radio);
   box-shadow: var(--huella);

@@ -44,6 +44,14 @@
   --borde: 1px solid var(--color-linea);
   /* Huella de imprenta: los bloques están hundidos, no elevados. */
   --huella: inset 0 1px 0 rgb(0 0 0 / 0.4);
+  /* Tinte cálido en el borde superior: papel envejecido. Un único valor para
+     que toda superficie plana (tarjetas, botones, notas) comparta la misma
+     textura en vez de repetir el degradado por componente. */
+  --tinte-superficie: linear-gradient(
+    180deg,
+    rgb(201 138 106 / 0.045),
+    transparent 42%
+  );
   /* Filo del paso activo: barra roja + resplandor contenido en el borde
      izquierdo, sin halo. Solo en Battle. */
   --filo-activo:

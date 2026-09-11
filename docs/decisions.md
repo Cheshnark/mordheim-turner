@@ -378,3 +378,32 @@ tiene upstream. Mientras no haya remoto, sólo confirma en local.
 
 **Pendiente:** crear el repo en GitHub y añadir `origin` para que el push empiece a
 funcionar (ver `docs/todos.md`).
+
+---
+
+## 2026-09-11 — Tinte de superficie compartido + marca de agua del glifo de fase
+
+**Decisión:** el degradado de "papel envejecido" (`rgb(201 138 106 / 0.045)` → transparente)
+que ya llevaban `ItemChecklist` y el botón de modo de Battle pasa a un único token,
+`--tinte-superficie` (`tokens.css`), y se aplica también a las notas fijas de Battle y
+Postgame (`.nota`), que antes eran las únicas superficies planas sin esa textura.
+
+**Motivo:** era la parte de "textura de superficies" que quedaba abierta en
+`docs/project_state.md` desde la 2ª pasada de estética (09-10): el tinte existía pero solo
+en dos de los cuatro tipos de bloque plano de la app. Centralizarlo en un token evita que
+un quinto bloque futuro se quede fuera por copiar-pegar el valor a medias.
+
+**Marca de agua del glifo de fase (la parte "opcional" del pendiente):** en la cabecera del
+bucle de Battle (`.cabecera`), se añade una segunda instancia de `GlifoFase` —la misma fase
+activa, a 6.5rem, `opacity: 0.06`, `color: var(--color-texto-2)`— recortada al borde derecho
+de la cabecera (`overflow: hidden` + posición absoluta). Decorativa (`aria-hidden` heredado
+del componente), monocroma: no compite con el rojo de la fase activa ni con la ya existente
+inicial iluminada de `CabeceraPantalla` (que Battle-bucle no usa).
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55)/`build` verdes. No se pudo
+verificar en el preview del navegador esta sesión: el spawner de `.claude/launch.json` no
+resuelve `npm` en su entorno (falta Node en su `PATH`, distinto del `PATH` de la shell del
+proyecto). No es un problema del código ni de `launch.json` en sí —se probó `npm.cmd` y una
+ruta absoluta a la instalación de nvm, y solo la segunda funcionaba, pero es específica de
+esta máquina/versión de Node, así que no se ha dejado en el archivo versionado. Pendiente
+confirmar visualmente en cuanto el preview funcione.

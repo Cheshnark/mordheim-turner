@@ -7,6 +7,7 @@
 .nota {
   padding: var(--espacio-3) var(--espacio-4);
   background-color: var(--color-superficie-2);
+  background-image: var(--tinte-superficie);
   border: var(--borde);
   border-left: 3px solid var(--color-linea);
   border-radius: var(--radio);

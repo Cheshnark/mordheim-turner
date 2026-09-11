@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-_Actualizado: 2026-09-10_
+_Actualizado: 2026-09-11_
 
 ## Dónde estamos
 
@@ -158,6 +158,21 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Tests de Battle reescritos para el nuevo rápido; nuevo test de `ItemChecklist` no
   interactivo. **test 55/55**, `lint`/`typecheck`/`format`/`build` verdes.
 
+### Textura de superficies + marca de agua del glifo (sesión 11 — esta)
+
+- `--tinte-superficie` (nuevo token) reemplaza el degradado repetido en
+  `ItemChecklist` y el botón de modo de Battle, y se aplica también a las notas
+  fijas de Battle y Postgame (antes sin tinte). Cierra el pendiente de
+  "textura de superficies".
+- Marca de agua: `GlifoFase` de la fase activa, grande (6.5rem) y muy tenue
+  (opacity 0.06), recortada al borde derecho de la cabecera del bucle de
+  Battle. Motivo y detalle en `decisions.md`.
+- **No verificado en el preview del navegador esta sesión**: el spawner de
+  `.claude/launch.json` no encuentra `npm` en su entorno (falta Node en su
+  `PATH`). No se ha tocado `launch.json` con una ruta específica de esta
+  máquina — pendiente confirmar visualmente. Sí verificado: `lint`,
+  `typecheck`, `format:check`, `test` (55/55), `build`.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -165,11 +180,13 @@ Los `.md` se mantienen a mano.
 
 ## Siguiente paso
 
-La fase de contenido/lógica/UI del plan está **cerrada**. En curso: empujar la identidad
-visual (wordmark hecho, glifos macizos hechos; queda textura de superficies y, opcional,
-marca de agua del glifo en la cabecera de fase). Prioridad baja pendiente:
+La fase de contenido/lógica/UI del plan está **cerrada**. El empuje de identidad visual
+(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. Prioridad
+baja pendiente:
 
-1. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
+1. Confirmar visualmente en el navegador la textura de superficies y la marca de agua
+   del glifo (sesión 11) en cuanto el preview funcione en esta máquina.
+2. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
 
 Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
 tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).

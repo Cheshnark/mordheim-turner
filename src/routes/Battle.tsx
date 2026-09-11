@@ -78,6 +78,7 @@ export function Battle() {
       </Link>
 
       <header className={styles.cabecera}>
+        <GlifoFase fase={battle.fase} className={styles.marcaAgua} />
         <p className={styles.ronda}>Ronda {battle.ronda}</p>
         <ol className={styles.pista} aria-hidden="true">
           {ORDEN_FASES.map((f, i) => (
