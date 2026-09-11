@@ -84,5 +84,5 @@ Actions del repo, o en Settings → Pages (enlace a la última publicación).
   `Failed to create deployment ... Ensure GitHub Pages has been enabled` — exactamente el
   paso manual de Settings → Pages de más arriba, que todavía no se había hecho. `verify`
   había pasado bien; el build en sí nunca fue el problema.
-- Hecho el paso manual (Source → GitHub Actions), pendiente confirmar que un nuevo push
-  publica sin error y que `https://cheshnark.github.io/mordheim-turner/` responde.
+- Hecho el paso manual (Source → GitHub Actions). Push siguiente (`8e7429b`): `deploy`
+  en verde, `https://cheshnark.github.io/mordheim-turner/` responde 200. **Publicado.**

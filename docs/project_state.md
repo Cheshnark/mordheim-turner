@@ -193,10 +193,10 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Detalle completo (por qué Pages y no servidor propio/Netlify/Vercel, cómo
   funciona la subruta y el 404) en el nuevo `docs/deploy.md`.
 - Verificado en local (build + `vite preview` bajo `/mordheim-turner/`,
-  deep-link a `/battle` sin caer a Home). **No verificado aún: la
-  publicación real** — falta el paso manual único en GitHub (Settings →
-  Pages → Source → GitHub Actions, no se puede hacer sin `gh`/token) y el
-  primer push a `main` con este workflow.
+  deep-link a `/battle` sin caer a Home). **Publicado**: primer intento
+  (`61505c2`) falló por el paso manual de Settings → Pages sin hacer aún;
+  hecho el paso a mano, el siguiente push (`8e7429b`) publicó bien —
+  `https://cheshnark.github.io/mordheim-turner/` responde 200.
 - Incidente: un `taskkill` para liberar un puerto mató también el `npm run
   dev` que el usuario tenía corriendo aparte. Anotado en `decisions.md` para
   no repetirlo.
@@ -209,11 +209,12 @@ Los `.md` se mantienen a mano.
 ## Siguiente paso
 
 La fase de contenido/lógica/UI del plan está **cerrada**. El empuje de identidad visual
-(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. Pendiente:
-
-1. En GitHub: Settings → Pages → Source → **GitHub Actions** (paso manual, una vez).
-2. Hacer push a `main` (o mergear) y comprobar en Actions que `deploy` publica bien; visitar
-   `https://cheshnark.github.io/mordheim-turner/` desde el móvil.
+(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. El despliegue
+también: **Turnheim está publicado en https://cheshnark.github.io/mordheim-turner/**. No
+queda ningún pendiente de prioridad alta/media/baja abierto salvo los "reconsiderables"
+menores de `todos.md` (segunda familia tipográfica en tutorial, `.env.example` si hiciera
+falta, vigilar el tamaño del bundle). Confirmar en el móvil real que se ve y navega bien
+(pendiente del usuario, no bloqueante).
 
 Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
 tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).

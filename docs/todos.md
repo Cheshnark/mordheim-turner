@@ -56,9 +56,8 @@
 
 ## Pendiente de terceros
 
-- [ ] Settings → Pages → Source → **GitHub Actions**, una vez, a mano en la web de GitHub
-      (no se puede por API sin `gh`/token). Sin esto el job `deploy` sube el artefacto pero
-      no hay sitio que lo sirva.
+- [x] ~~Settings → Pages → Source → GitHub Actions~~ — hecho 2026-09-11 por el usuario.
+      Publicado en `https://cheshnark.github.io/mordheim-turner/` (200 OK).
 
 ## Pedir al usuario
 
