@@ -80,5 +80,9 @@ Actions del repo, o en Settings → Pages (enlace a la última publicación).
   `/mordheim-turner/`, los `<Link>` internos ya llevan el prefijo, y un deep-link directo a
   `/mordheim-turner/battle` renderiza Battle (no cae a Home) — mismo mecanismo que usará
   `404.html` en Pages.
-- No verificado todavía: la publicación real en `github.io` (pendiente el paso manual de
-  Settings → Pages de más arriba, y el primer push a `main` con este workflow).
+- Primer intento de publicación real (push `61505c2`): el job `deploy` falló con
+  `Failed to create deployment ... Ensure GitHub Pages has been enabled` — exactamente el
+  paso manual de Settings → Pages de más arriba, que todavía no se había hecho. `verify`
+  había pasado bien; el build en sí nunca fue el problema.
+- Hecho el paso manual (Source → GitHub Actions), pendiente confirmar que un nuevo push
+  publica sin error y que `https://cheshnark.github.io/mordheim-turner/` responde.
