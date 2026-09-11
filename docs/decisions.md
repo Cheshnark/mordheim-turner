@@ -428,3 +428,49 @@ modo rápido) que ya arrancó esta sesión sin el problema de `PATH` de la entra
 (22 px, icono junto al título) se clonó el `<svg>` a 220 px por JS en la consola para
 comprobar que planta y dedos quedan separados y no se funden en un solo bulto.
 `lint`/`typecheck`/`format:check`/`test` (55/55) verdes tras el cambio.
+
+---
+
+## 2026-09-11 — Despliegue: GitHub Pages vía GitHub Actions
+
+**Decisión:** GitHub Pages, publicado por `.github/workflows/ci.yml` (job `deploy`, tras
+`verify`, solo en push a `main`), no Netlify/Vercel/servidor propio. Detalle técnico completo
+en `docs/deploy.md`.
+
+**Motivo (usuario):** quería probarlo en el móvil cuanto antes; GitHub Pages no pide cuenta
+nueva (el repo ya vive ahí) y es gratis para repos públicos —se confirmó que
+`Cheshnark/mordheim-turner` lo es—. Se consideraron las otras tres opciones de `todos.md`:
+
+- **Servidor propio (rsync + Caddy)**, como `../mortgage-calculator`: descartado por no
+  tener ya un servidor para este proyecto; montar uno solo para esto es más trabajo que
+  Pages sin ganar nada (no hay redirect de idioma ni nada server-side que Pages no cubra).
+- **Netlify/Vercel**: descartados por no aportar sobre Pages aquí —sin funciones de
+  servidor ni preview deploys que se vayan a usar—, y por evitar una cuenta más.
+
+**Cómo se resolvió el hueco de subruta (`usuario.github.io/repo/`, no la raíz):**
+`vite.config.ts` condiciona `base` por `mode` (no por `command`: `vite preview` comparte
+`command: 'serve'` con `vite dev`, así que condicionar por `command` dejaba `vite preview`
+sirviendo con `base: '/'` un HTML que ya pedía todo bajo `/mordheim-turner/` → 404 en cada
+asset al probarlo en local). `main.tsx` pasa la misma base a
+`<BrowserRouter basename={import.meta.env.BASE_URL}>`.
+
+**Cómo se resolvió el 404 de rutas SPA:** GitHub Pages sirve `404.html` para cualquier ruta
+que no exista como archivo. El paso `verify` genera `dist/404.html` como copia de
+`dist/index.html` tras el build (`cp`, no un archivo estático en `public/`, porque los
+nombres de los assets llevan hash y cambian en cada build). Al recargar o enlazar directo a
+`/mordheim-turner/battle`, Pages sirve ese calco, la SPA arranca en esa URL, y React Router
+(con el `basename` correcto) resuelve la ruta real sin que la barra de direcciones cambie.
+
+**Verificación:** build de producción local (`mode=production`) con las rutas correctas en
+`dist/index.html`; `vite preview` sirviendo ese `dist/` confirma que Home carga bajo
+`/mordheim-turner/`, los `<Link>` internos ya llevan el prefijo, y un deep-link directo a
+`/mordheim-turner/battle` renderiza Battle sin caer a Home (mismo mecanismo que usará
+`404.html` en Pages real). `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
+**Pendiente:** el paso manual único en GitHub (Settings → Pages → Source → GitHub Actions,
+no se puede hacer sin token/`gh`) y la primera publicación real tras el push a `main`.
+
+**Incidente de sesión (nota para el registro, no una decisión):** al depurar `vite preview`
+localmente se lanzó un `taskkill //F //IM node.exe` para "liberar el puerto 5173", que mató
+también el `npm run dev` que el usuario tenía corriendo aparte para el preview del
+navegador. No volver a matar procesos node a ciegas: parar solo el proceso concreto (por
+PID) que se acaba de lanzar.

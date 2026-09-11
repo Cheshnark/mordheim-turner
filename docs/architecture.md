@@ -16,7 +16,7 @@
 | Lint / formato | **ESLint 10 flat + Prettier 3** | Prettier manda en formato. Prettier **ignora `*.md`** (destroza tablas de prosa) |
 | Alias | `@/` → `src/` | `resolve.tsconfigPaths: true` nativo de Vite 8 (sin plugin) + `paths` en `tsconfig.app.json` |
 | Runtime | **Node 22** (`.nvmrc`) | Única fuente de verdad para local y CI |
-| CI | **GitHub Actions** (`.github/workflows/ci.yml`) | lint + typecheck + test + build en push/PR a `main` |
+| CI / CD | **GitHub Actions** (`.github/workflows/ci.yml`) | lint + typecheck + test + build en push/PR a `main`; en push a `main` además publica en GitHub Pages. Detalle en `docs/deploy.md` |
 
 Proyecto de referencia para convenciones: `../mortgage-calculator` (mismo autor) — scripts
 de npm, filosofía de config, patrón de carpetas por componente. **No** se copia Next ni

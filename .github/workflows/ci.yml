@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 
-# Solo lectura del repo; el job no publica nada.
+# A nivel de workflow, solo lectura; el job de despliegue eleva lo suyo aparte.
 permissions:
   contents: read
 
@@ -42,3 +42,40 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # SPA en GitHub Pages: sin esto, entrar directo a /prebattle, /battle o
+      # /postgame (o recargar ahí) da 404 en vez de servir la app. GitHub
+      # Pages sirve 404.html para cualquier ruta que no exista como archivo;
+      # al ser un calco de index.html, arranca la SPA y react-router
+      # (basename correcto, ver main.tsx) resuelve la ruta real. Se genera
+      # también en PRs: barato y así el build de verificación es idéntico al
+      # que se publica.
+      - name: Duplicar index.html como 404.html (fallback de rutas SPA)
+        run: cp dist/index.html dist/404.html
+
+      - name: Subir artefacto de Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    # Solo en push a main, nunca en PRs de forks (no tienen permisos de Pages).
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Grupo propio (recomendado por GitHub): una publicación no cancela otra
+    # a medias, solo espera su turno.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

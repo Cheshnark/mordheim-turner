@@ -180,6 +180,27 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   a 220 px por consola para comprobar que dedos y planta no se funden.
   `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
 
+### Despliegue: GitHub Pages (sesión 11 — esta, cont.)
+
+- `.github/workflows/ci.yml`: nuevo job `deploy` (tras `verify`, solo push a
+  `main`) con `actions/upload-pages-artifact` + `actions/deploy-pages`.
+  `verify` genera `dist/404.html` (calco de `dist/index.html`, fallback SPA)
+  en cada build, PRs incluidos.
+- `vite.config.ts`: `base` condicionado por `mode` (no `command` — `vite
+  preview` comparte `command: 'serve'` con `vite dev`) a
+  `/mordheim-turner/` en producción. `main.tsx`: `BrowserRouter
+  basename={import.meta.env.BASE_URL}`.
+- Detalle completo (por qué Pages y no servidor propio/Netlify/Vercel, cómo
+  funciona la subruta y el 404) en el nuevo `docs/deploy.md`.
+- Verificado en local (build + `vite preview` bajo `/mordheim-turner/`,
+  deep-link a `/battle` sin caer a Home). **No verificado aún: la
+  publicación real** — falta el paso manual único en GitHub (Settings →
+  Pages → Source → GitHub Actions, no se puede hacer sin `gh`/token) y el
+  primer push a `main` con este workflow.
+- Incidente: un `taskkill` para liberar un puerto mató también el `npm run
+  dev` que el usuario tenía corriendo aparte. Anotado en `decisions.md` para
+  no repetirlo.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -188,10 +209,11 @@ Los `.md` se mantienen a mano.
 ## Siguiente paso
 
 La fase de contenido/lógica/UI del plan está **cerrada**. El empuje de identidad visual
-(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. Prioridad
-baja pendiente:
+(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. Pendiente:
 
-1. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
+1. En GitHub: Settings → Pages → Source → **GitHub Actions** (paso manual, una vez).
+2. Hacer push a `main` (o mergear) y comprobar en Actions que `deploy` publica bien; visitar
+   `https://cheshnark.github.io/mordheim-turner/` desde el móvil.
 
 Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
 tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).

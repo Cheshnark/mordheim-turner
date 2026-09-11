@@ -45,13 +45,20 @@
 - [x] ~~Icono de Movimiento ilegible (bota)~~ — hecho 2026-09-11: huellas en
       diagonal (planta + 3 dedos), motivo "senda". Ver `decisions.md`.
 
-- [ ] Decidir despliegue (GitHub Pages / Netlify / Vercel estático) y documentarlo.
+- [x] ~~Decidir despliegue~~ — hecho 2026-09-11: GitHub Pages vía GitHub Actions
+      (`.github/workflows/ci.yml`, job `deploy`). Detalle en `docs/deploy.md`.
 - [x] ~~Icono / favicon~~ — hecho 2026-09-10. `public/favicon.svg`: estrella fugaz propia
       (hueso + cola roja sobre fondo oscuro). No usa marcas de GW.
 - [ ] Revisar si el texto de tutorial necesita una segunda familia tipográfica (serif del
       sistema) o basta con tamaño/color.
 - [ ] `.env.example` si acaba habiendo alguna variable (hoy no hay backend → probablemente no).
 - [ ] Revisar el tamaño del bundle si crece: el base ya son ~83 kB gzip (React + Router).
+
+## Pendiente de terceros
+
+- [ ] Settings → Pages → Source → **GitHub Actions**, una vez, a mano en la web de GitHub
+      (no se puede por API sin `gh`/token). Sin esto el job `deploy` sube el artefacto pero
+      no hay sitio que lo sirva.
 
 ## Pedir al usuario
 
