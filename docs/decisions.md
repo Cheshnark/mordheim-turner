@@ -405,5 +405,26 @@ verificar en el preview del navegador esta sesión: el spawner de `.claude/launc
 resuelve `npm` en su entorno (falta Node en su `PATH`, distinto del `PATH` de la shell del
 proyecto). No es un problema del código ni de `launch.json` en sí —se probó `npm.cmd` y una
 ruta absoluta a la instalación de nvm, y solo la segunda funcionaba, pero es específica de
-esta máquina/versión de Node, así que no se ha dejado en el archivo versionado. Pendiente
-confirmar visualmente en cuanto el preview funcione.
+esta máquina/versión de Node, así que no se ha dejado en el archivo versionado. Confirmado
+visualmente más tarde, ver entrada siguiente.
+
+---
+
+## 2026-09-11 — Glifo de Movimiento: de bota a huellas
+
+**Decisión:** el glifo de la fase Movimiento (`GlifoFase`) pasa de una bota de perfil a dos
+huellas en diagonal (planta + tres dedos, repetidas y giradas ~42° sobre la senda). Motivos
+del trazo: `path` (planta, elipse vía dos arcos) + tres `circle` (dedos), con hueco visible
+entre ambos para que no se lea como un blob.
+
+**Motivo (usuario):** "el icono de movimiento no se entiende". La bota, con muy poco
+contraste de siluetas a 22 px, no se distinguía del resto. Huellas encaja además con el
+motivo "senda" ya documentado como concepto para Movimiento en la 2ª pasada de estética
+(09-10) —la bota fue una desviación de esa idea original, no una decisión aparte.
+
+**Verificación:** confirmado en el preview del navegador (móvil 375, fase Movimiento en
+modo rápido) que ya arrancó esta sesión sin el problema de `PATH` de la entrada anterior —
+`npm run dev` corría manualmente en la máquina del usuario. Además de mirarlo a tamaño real
+(22 px, icono junto al título) se clonó el `<svg>` a 220 px por JS en la consola para
+comprobar que planta y dedos quedan separados y no se funden en un solo bulto.
+`lint`/`typecheck`/`format:check`/`test` (55/55) verdes tras el cambio.

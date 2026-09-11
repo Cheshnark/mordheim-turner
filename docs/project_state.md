@@ -167,11 +167,18 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Marca de agua: `GlifoFase` de la fase activa, grande (6.5rem) y muy tenue
   (opacity 0.06), recortada al borde derecho de la cabecera del bucle de
   Battle. Motivo y detalle en `decisions.md`.
-- **No verificado en el preview del navegador esta sesión**: el spawner de
-  `.claude/launch.json` no encuentra `npm` en su entorno (falta Node en su
-  `PATH`). No se ha tocado `launch.json` con una ruta específica de esta
-  máquina — pendiente confirmar visualmente. Sí verificado: `lint`,
-  `typecheck`, `format:check`, `test` (55/55), `build`.
+- Verificado más tarde en el navegador (móvil 375) con `npm run dev` corriendo
+  en la máquina del usuario: textura de notas y marca de agua se ven bien.
+
+### Glifo de Movimiento: de bota a huellas (sesión 11 — esta, cont.)
+
+- El usuario reportó que el icono de Movimiento (una bota) no se entendía.
+  Sustituido por dos huellas en diagonal (planta + 3 dedos separados),
+  coherente con el motivo "senda" ya documentado para esta fase. Detalle en
+  `decisions.md`.
+- Verificado en el preview (móvil 375, fase Movimiento) clonando el `<svg>`
+  a 220 px por consola para comprobar que dedos y planta no se funden.
+  `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
 
 ### Nota sobre Prettier y markdown
 
@@ -184,9 +191,7 @@ La fase de contenido/lógica/UI del plan está **cerrada**. El empuje de identid
 (wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. Prioridad
 baja pendiente:
 
-1. Confirmar visualmente en el navegador la textura de superficies y la marca de agua
-   del glifo (sesión 11) en cuanto el preview funcione en esta máquina.
-2. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
+1. Decidir despliegue estático (GitHub Pages / Netlify / Vercel) y documentarlo.
 
 Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
 tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).

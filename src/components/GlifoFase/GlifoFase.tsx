@@ -20,9 +20,24 @@ const TRAZOS: Record<FaseTurno, ReactElement> = {
       d="M12 2C7.6 2 4.5 5.2 4.5 9.6c0 2.3.8 4 2.2 5.4v3c0 .6.4 1 1 1h1v1.5c0 .3.3.6.6.6s.6-.3.6-.6V19h1.3v1.5c0 .3.3.6.6.6s.6-.3.6-.6V19h1.3v1.5c0 .3.3.6.6.6s.6-.3.6-.6V19h1c.6 0 1-.4 1-1v-3c1.4-1.4 2.2-3.1 2.2-5.4C19.5 5.2 16.4 2 12 2ZM9 8.4c-1 0-1.8.9-1.8 2s.8 2 1.8 2 1.8-.9 1.8-2-.8-2-1.8-2Zm6 0c-1 0-1.8.9-1.8 2s.8 2 1.8 2 1.8-.9 1.8-2-.8-2-1.8-2Zm-3 4.1-1.2 2.5h2.4z"
     />
   ),
-  // Movimiento: bota pesada de perfil, puntera a la derecha.
+  // Movimiento: dos huellas en diagonal, rastro de pasos (senda). La bota
+  // anterior no se leía bien a tamaño de icono; pocos elementos, grandes y
+  // separados, para que el hueco entre planta y dedos no se pierda al reducir.
   movimiento: (
-    <path d="M8 3c-.6 0-1 .4-1 1v8.8c0 .7-.3 1.3-.9 1.7l-2 1.4c-.7.5-1.1 1.3-1.1 2.2V20c0 .6.4 1 1 1h14.5c.5 0 .9-.4 1-.9.3-2.6-1.4-5-3.9-5.7l-4-1.1C10 12 9 10.5 9 8.9V4c0-.6-.4-1-1-1H8Z" />
+    <>
+      <g transform="translate(6.5 18.5) rotate(42)">
+        <path d="M-2 1.6A2 3 0 1 0 2 1.6A2 3 0 1 0 -2 1.6Z" />
+        <circle cx="-1.3" cy="-2.7" r="0.9" />
+        <circle cx="0.1" cy="-3.3" r="1" />
+        <circle cx="1.4" cy="-2.6" r="0.85" />
+      </g>
+      <g transform="translate(15.5 7) rotate(42)">
+        <path d="M-2 1.6A2 3 0 1 0 2 1.6A2 3 0 1 0 -2 1.6Z" />
+        <circle cx="-1.3" cy="-2.7" r="0.9" />
+        <circle cx="0.1" cy="-3.3" r="1" />
+        <circle cx="1.4" cy="-2.6" r="0.85" />
+      </g>
+    </>
   ),
   // Disparo: saeta lanzada en diagonal, con emplumado en la cola.
   disparo: (
