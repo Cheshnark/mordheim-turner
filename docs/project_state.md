@@ -201,6 +201,19 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   dev` que el usuario tenía corriendo aparte. Anotado en `decisions.md` para
   no repetirlo.
 
+### Accesos de Home más pequeños y bien repartidos (sesión 11 — esta, cont.)
+
+- `.acceso` (Home): de `flex: 1` (se estiraban a llenar todo el alto) a
+  `flex: 0 0 auto`, altura por contenido (~79.6 px, por encima de
+  `--toque-min`). `.accesos`: `justify-content: space-evenly` en vez de
+  solo `gap`, reparte el sobrante incluido el margen antes del primero y
+  después del último. Padding vertical reducido (`--espacio-4` →
+  `--espacio-3`).
+- De paso, `.acceso` pasa a usar `var(--tinte-superficie)` (se había quedado
+  fuera de esa limpieza por vivir en `routes/` y no en un componente).
+- Verificado en el navegador (móvil 375). `lint`/`typecheck`/`format:check`/
+  `test` (55/55) verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

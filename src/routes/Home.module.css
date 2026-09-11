@@ -51,28 +51,28 @@
   text-wrap: balance;
 }
 
+/* Los 4 accesos ya no se estiran a `flex: 1` cada uno (los hacía enormes en
+   pantallas altas): tamaño por contenido + `space-evenly` reparte el alto
+   sobrante en partes iguales, incluido el margen antes del primero y
+   después del último. */
 .accesos {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-3);
+  justify-content: space-evenly;
+  gap: var(--espacio-2);
 }
 
 .acceso {
-  flex: 1;
-  min-height: 4.5rem;
+  flex: 0 0 auto;
+  min-height: var(--toque-min);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--espacio-1);
-  padding: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
   background-color: var(--color-superficie);
-  /* Borde superior con tinte cálido: papel envejecido. */
-  background-image: linear-gradient(
-    180deg,
-    rgb(201 138 106 / 0.045),
-    transparent 42%
-  );
+  background-image: var(--tinte-superficie);
   border: var(--borde);
   border-radius: var(--radio);
   text-decoration: none;

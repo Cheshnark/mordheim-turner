@@ -474,3 +474,30 @@ localmente se lanzó un `taskkill //F //IM node.exe` para "liberar el puerto 517
 también el `npm run dev` que el usuario tenía corriendo aparte para el preview del
 navegador. No volver a matar procesos node a ciegas: parar solo el proceso concreto (por
 PID) que se acaba de lanzar.
+
+---
+
+## 2026-09-11 — Los 4 accesos de Home ya no se estiran a toda la pantalla
+
+**Decisión:** en `Home.module.css`, `.acceso` pasa de `flex: 1` (se repartían todo el alto
+disponible entre los 4, enormes en pantallas altas) a `flex: 0 0 auto` con altura por
+contenido; `.accesos` pasa de `gap` fijo a `justify-content: space-evenly`, que reparte el
+alto sobrante en partes iguales **incluyendo** el margen antes del primer acceso y después
+del último. Padding vertical de cada acceso: `--espacio-4` → `--espacio-3`.
+
+**Motivo (usuario):** "los cuatro botones un poco más pequeños, pero repartidos bien con un
+poco de margen arriba y abajo" — literal. `flex:1` en cada acceso ya no cuadraba con eso:
+por diseño llenaban todo el alto de `.accesos`, sin margen propio arriba/abajo posible (solo
+el `gap` entre ellos). Resultado medido en el navegador: 79.6 px de alto por acceso (antes
+estirado a lo que quedara de viewport, muy por encima), ~42 px de margen simétrico arriba y
+abajo. Sigue por encima de `--toque-min` (56 px).
+
+**De paso:** `.acceso` llevaba el degradado de tinte cálido duplicado a mano
+(`rgb(201 138 106 / 0.045)…`) en vez de `var(--tinte-superficie)` (el token de la entrada
+"Tinte de superficie compartido" de esta misma fecha) — se había quedado fuera de aquella
+pasada por ser el único bloque plano en `routes/Home.module.css` en vez de en un componente
+compartido. Corregido de paso.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) verdes; confirmado en el
+navegador (móvil 375, `npm run dev` en segundo plano, parado por `task_id` al terminar —no
+con `taskkill` a lo bruto, ver incidente de la entrada anterior).
