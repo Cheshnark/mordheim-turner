@@ -227,6 +227,21 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Verificado en el navegador (móvil 375). `lint`/`typecheck`/`format:check`/
   `test` (55/55) verdes.
 
+### Glifos de fase a game-icons.net (sesión 12 — esta, cont.)
+
+- El usuario reportó que los SVGs propios de `GlifoFase` "no acaban de estar bien
+  del todo". Sustituidos por 4 iconos de game-icons.net (CC BY 3.0): "Death skull"
+  (Recuperación), "Footprint" ×2 en diagonal (Movimiento), "Broadhead arrow"
+  (Disparo), "Crossed swords" (Combate). `viewBox` sube de `0 0 24 24` a
+  `0 0 512 512`; paths inline en el componente (self-hosted, sin fetch externo).
+- Añadido pie de crédito discreto en Home (`.pie`) con enlace a game-icons.net y a
+  la licencia CC BY 3.0 — exigido por la licencia, a diferencia de la fuente (OFL).
+- Motivo completo (por qué game-icons.net y no Lucide/Phosphor/SVG propios
+  refinados) en `decisions.md`.
+- Verificado en el navegador (móvil 375): las 4 fases del bucle de Battle en modo
+  rápido, cada glifo clonado a 220 px por consola para revisar el trazo a tamaño
+  grande. `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

@@ -35,6 +35,26 @@ export function Home() {
           <span className={styles.nota}>Reglas completas. Sale de la app.</span>
         </a>
       </nav>
+
+      <footer className={styles.pie}>
+        Glifos de fase:{' '}
+        <a
+          href="https://game-icons.net"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          game-icons.net
+        </a>{' '}
+        (
+        <a
+          href="http://creativecommons.org/licenses/by/3.0/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CC BY 3.0
+        </a>
+        )
+      </footer>
     </main>
   )
 }

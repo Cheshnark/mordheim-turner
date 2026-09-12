@@ -501,3 +501,60 @@ compartido. Corregido de paso.
 **Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) verdes; confirmado en el
 navegador (móvil 375, `npm run dev` en segundo plano, parado por `task_id` al terminar —no
 con `taskkill` a lo bruto, ver incidente de la entrada anterior).
+
+---
+
+## 2026-09-12 — Vuelta atrás parcial: accesos de Home grandes otra vez
+
+**Decisión:** revertido el `flex: 0 0 auto` de la entrada anterior; `.acceso` vuelve a
+`flex: 1` + `min-height: 4.5rem` + `padding: var(--espacio-4)` (el valor de antes del
+2026-09-11). Lo que sí se conserva de aquella entrada es más separación *entre* accesos:
+`.accesos` cambia `justify-content: space-evenly` + `gap: var(--espacio-2)` por
+`gap: var(--espacio-5)` a secas (ya no hace falta `space-evenly` con `flex:1` por acceso).
+
+**Motivo (usuario):** "los botones ahora son demasiado estrechos, quiero que sean más
+parecidos a como estaban, pero con más espacio entre botones". El intento de la entrada
+anterior de resolver "un poco más pequeños, con margen arriba/abajo" con altura por
+contenido resultó, a ojo del usuario, en botones demasiado finos — aunque medían 79.6 px,
+por encima de `--toque-min`. Prevalece la sensación en mano sobre la medida en píxeles.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) verdes; confirmado en el
+navegador (móvil 375, `npm run dev` en segundo plano).
+
+---
+
+## 2026-09-12 — Glifos de fase: de SVG propios a game-icons.net (CC BY 3.0)
+
+**Decisión:** los 4 trazos a mano de `GlifoFase` (calavera, bota→huellas, saeta, espadas
+cruzadas) se sustituyen por iconos de [game-icons.net](https://game-icons.net), sin tocar
+sus paths salvo composición (transform/escala), self-hosted como código (paths inline en
+el componente, no fetch externo — mismo criterio que la fuente Grenze Gotisch). Elegidos:
+
+- Recuperación: "Death skull" — sbed.
+- Movimiento: "Footprint" — Lorc. Un único pie en el set original; se usan **dos copias**
+  del mismo `<path>` con `transform` (sin tocar el trazo) en diagonal, para seguir leyendo
+  "senda" en vez de un pie suelto — el motivo ya documentado el 2026-09-11.
+- Disparo: "Broadhead arrow" — Lorc.
+- Combate: "Crossed swords" — Lorc.
+
+Los 4 con `viewBox="0 0 512 512"` (se sube desde `0 0 24 24`) y `fill="currentColor"`, igual
+que antes.
+
+**Motivo (usuario):** "los SVGs son míos y no acaban de estar bien del todo" — ya habían
+necesitado un rediseño (bota → huellas, 2026-09-11) por no leerse a tamaño de icono. Antes
+de tocarlos, se preguntó qué librería usar: game-icons.net elegida por ser la más afín al
+estilo "sello de xilografía" ya buscado (siluetas macizas, motivos de fantasía/juegos con
+"skull", "footprint", "crossed-swords" literales) frente a alternativas MIT más lineales
+(Lucide, Phosphor) que habrían cambiado el look a algo más moderno/plano.
+
+**Coste de la licencia:** CC BY 3.0 exige atribución visible, no solo un archivo de
+licencia en el repo (a diferencia de la fuente, que es OFL). Se añade un pie de página
+discreto en Home (`.pie`, fuera del `<nav>` de accesos) con enlace a game-icons.net y a la
+licencia. No rompe el layout de pantalla completa de Home: `flex: 0 0 auto`, una línea de
+`--texto-xs`.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) verdes. En el navegador
+(móvil 375, modo rápido de Battle) se recorrieron las 4 fases; cada glifo, clonado a 220 px
+por consola para inspeccionarlo a tamaño grande (mismo método que la entrada de huellas),
+se lee con claridad — en particular las dos huellas de Movimiento quedan separadas y no se
+funden.

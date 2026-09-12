@@ -116,3 +116,17 @@
 .externo .nombre {
   color: var(--color-enlace-externo);
 }
+
+/* Crédito de licencia (CC BY 3.0, exigido por game-icons.net): discreto,
+   fuera del flujo de accesos. */
+.pie {
+  flex: 0 0 auto;
+  padding-block: var(--espacio-3) var(--espacio-2);
+  color: var(--color-texto-2);
+  font-size: var(--texto-xs);
+  text-align: center;
+}
+
+.pie a {
+  color: inherit;
+}
