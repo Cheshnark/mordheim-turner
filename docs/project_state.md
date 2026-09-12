@@ -252,11 +252,23 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Glifo de Movimiento: de las dos huellas (sesión 11) a "Walking boot" de
   game-icons.net — a diferencia de la bota casera descartada entonces, esta
   tiene contorno grueso y se lee bien a 22 px.
-- Motivo completo de ambos en `decisions.md`. Pendiente: elegir un icono mejor
-  para Recuperación (sigue con "Death skull"; el usuario apuntó que buscaría
-  algo más ligado al concepto de recuperarse, sin decidir aún cuál).
+- Motivo completo de ambos en `decisions.md`.
 - Verificado en el navegador (móvil 375): wordmark de Home y glifo de
   Movimiento (tamaño real y ampliado a 220 px). `lint`/`typecheck`/
+  `format:check`/`test` (55/55) verdes.
+
+### Retoques finales de iconos (sesión 12 — esta, cont.)
+
+- `EstrellaFugaz` (Home, cabeceras, favicon) cambia otra vez, de "Unstable
+  projectile" a **"Burning round shot"** (Lorc) — misma idea de wyrdstone
+  ardiente, silueta de llama más clara a tamaño de wordmark.
+- Glifo de Recuperación: de "Death skull" a **"Rally the troops"** (Lorc,
+  bandera + lanzas) — elegido por el usuario entre los candidatos
+  propuestos; coincide con el término de la regla de Rally de la fase.
+- Con esto, los 4 glifos de fase y el ornamento quedan resueltos: no hay
+  pendientes de iconografía abiertos.
+- Verificado en el navegador (móvil 375): wordmark, favicon (`/favicon.svg`)
+  y fase Recuperación (tamaño real y ampliado a 220 px). `lint`/`typecheck`/
   `format:check`/`test` (55/55) verdes.
 
 ### Nota sobre Prettier y markdown

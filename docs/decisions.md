@@ -595,3 +595,36 @@ grueso y formas grandes que sí aguantan la reducción de tamaño.
 **Verificación:** confirmado en el navegador (móvil 375, fase Movimiento) tanto a tamaño
 real (22 px, junto al título) como clonada a 220 px por consola — silueta de bota clara y
 legible en ambos casos. `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
+
+---
+
+## 2026-09-12 — Ornamento EstrellaFugaz: de "Unstable projectile" a "Burning round shot"
+
+**Decisión:** a las pocas horas de adoptar "Unstable projectile" (entrada anterior), se
+sustituye por otro icono de game-icons.net: "Burning round shot" (Lorc, CC BY 3.0) — una
+bola de roca en llamas. Mismo componente/contrato sin cambios (`size`, `className`,
+`currentColor`, `viewBox 0 0 512 512`), solo cambia el `<path>`.
+
+**Motivo (usuario):** pidió "probar" este icono en concreto por nombre, en vez de seguir con
+el proyectil. Sigue encajando con el lore del wyrdstone caído del cielo sobre Mordheim, con
+una silueta de llama más reconocible a tamaño de wordmark que la cola diagonal del proyectil.
+
+**Verificación:** confirmado en el navegador (móvil 375: wordmark de Home, favicon servido
+en `/favicon.svg`). `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
+
+---
+
+## 2026-09-12 — Glifo de Recuperación: de "Death skull" a "Rally the troops"
+
+**Decisión:** el glifo de Recuperación pasa de una calavera ("Death skull", sbed) a "Rally
+the troops" (Lorc, CC BY 3.0) — una bandera de guerra ondeando sobre lanzas en alto.
+
+**Motivo (usuario):** entre los candidatos discutidos (Kneeling, Rally the troops, Healing),
+eligió este. Aunque su descripción original ("preparing for an assault") apunta más a
+asalto que a recomponerse, el término "Rally" coincide literalmente con una de las reglas
+de la fase ("Test de Rally de los guerreros en fuga") y su silueta —lanzas + bandera— es
+más limpia a tamaño de icono que la de Kneeling (figura humana detallada) descartada.
+
+**Verificación:** confirmado en el navegador (móvil 375, fase Recuperación) a tamaño real y
+clonado a 220 px por consola — bandera y lanzas se distinguen con claridad.
+`lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
