@@ -25,47 +25,76 @@ export function ItemChecklist({
   mostrarDetalle,
   interactivo = true,
 }: Props) {
-  const detalle =
-    mostrarDetalle && (item.texto_explicado != null || item.link_regla != null)
+  const mostrarExplicado = mostrarDetalle && item.texto_explicado != null
+  const mostrarEnlace = mostrarDetalle && item.link_regla != null
 
   return (
     <li className={styles.item} data-inerte={!interactivo || undefined}>
-      {interactivo ? (
-        <label className={styles.fila}>
-          <input
-            type="checkbox"
-            className={styles.check}
-            checked={marcado}
-            onChange={onAlternar}
-          />
-          <span className={styles.texto} data-marcado={marcado || undefined}>
-            {item.texto_corto}
-          </span>
-        </label>
-      ) : (
-        <div className={styles.fila}>
-          <span className={styles.vinneta} aria-hidden="true" />
-          <span className={styles.texto}>{item.texto_corto}</span>
-        </div>
-      )}
+      <div className={styles.filaSuperior}>
+        {interactivo ? (
+          <label className={styles.fila}>
+            <input
+              type="checkbox"
+              className={styles.check}
+              checked={marcado}
+              onChange={onAlternar}
+            />
+            <span className={styles.texto} data-marcado={marcado || undefined}>
+              {item.texto_corto}
+            </span>
+          </label>
+        ) : (
+          <div className={styles.fila}>
+            <span className={styles.vinneta} aria-hidden="true" />
+            <span className={styles.texto}>{item.texto_corto}</span>
+          </div>
+        )}
 
-      {detalle && (
+        {mostrarEnlace && (
+          <a
+            className={styles.iconoRegla}
+            href={item.link_regla}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Ir a esta regla en mordheimer.net: ${item.texto_corto}`}
+            title="Ir a esta regla en mordheimer.net"
+          >
+            <IconoEnlaceExterno />
+          </a>
+        )}
+      </div>
+
+      {mostrarExplicado && (
         <div className={styles.detalle}>
-          {item.texto_explicado != null && (
-            <p className={styles.explicado}>{item.texto_explicado}</p>
-          )}
-          {item.link_regla != null && (
-            <a
-              className={styles.regla}
-              href={item.link_regla}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Regla en mordheimer.net
-            </a>
-          )}
+          <p className={styles.explicado}>{item.texto_explicado}</p>
         </div>
       )}
     </li>
+  )
+}
+
+/** Flecha saliendo de una caja: icono universal de "enlace externo". */
+function IconoEnlaceExterno() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      width="16"
+      height="16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      aria-hidden="true"
+    >
+      <path
+        d="M6.5 3H3v10h10V9.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.5 2H14v5.5M14 2 7 9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 }

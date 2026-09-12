@@ -27,24 +27,32 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
           'Test de Desbandada si el 25 % o más está fuera de combate',
         texto_explicado:
           '¿25 % o más del warband fuera de combate? Test de Desbandada (2D6 ≤ Liderazgo del líder). Si falla, la banda se retira y la partida termina.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/leadership-psychology#the-rout-test',
       },
       {
         id: 'rec-estupidez',
         texto_corto: 'Test de Estupidez de los Guerreros Estúpidos',
         texto_explicado:
           'Cada miniatura estúpida: 2D6 ≤ su Liderazgo. Si falla, no lucha cuerpo a cuerpo ni lanza hechizos hasta la próxima Recuperación.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/leadership-psychology#stupidity',
       },
       {
         id: 'rec-levantar-derribados',
         texto_corto: 'Los derribados se levantan',
         texto_explicado:
           'Ese turno mueven a mitad de velocidad, pueden disparar y lanzar hechizos, pero no cargar ni correr.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/wounds-and-injuries#0--2-knocked-down',
       },
       {
         id: 'rec-aturdidos-a-derribados',
         texto_corto: 'Los aturdidos pasan a derribados',
         texto_explicado:
           'Ya derribados, pueden arrastrarse 2" (si están trabados en combate, solo si su rival lucha con otro), pero no luchan, disparan ni lanzan hechizos.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/wounds-and-injuries#0--2-knocked-down',
       },
       {
         id: 'rec-rally',
@@ -65,11 +73,14 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
         texto_corto: 'Declarar todas las cargas antes de mover a nadie',
         texto_explicado:
           'Se declara sin medir distancia, indicando el objetivo. Es como correr (doble de Movimiento) hasta quedar peana con peana; quien carga golpea primero ese combate.',
+        link_regla: 'https://mordheimer.net/docs/rules/movement#charge',
       },
       {
         id: 'mov-movimientos-obligatorios',
         texto_corto: 'Resolver movimientos obligatorios',
         texto_explicado: 'Huida, etc.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/movement#2-compulsory-moves',
       },
       {
         id: 'mov-mover-resto',
@@ -78,10 +89,12 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
       {
         id: 'mov-no-correr',
         texto_corto: 'Sin correr si hay enemigos a 8" al empezar el turno',
+        link_regla: 'https://mordheimer.net/docs/rules/movement#running',
       },
       {
         id: 'mov-declarar-ocultos',
         texto_corto: 'Declarar qué guerreros quedan ocultos',
+        link_regla: 'https://mordheimer.net/docs/rules/movement#hiding',
       },
       {
         id: 'mov-casos-especiales',
@@ -121,21 +134,29 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
         texto_corto: 'Quien carga o tiene "Strike First" golpea primero',
         texto_explicado:
           'Si varios tienen "Strike First" entre sí, se ordenan por Iniciativa, igual que el resto.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/close-combat#who-strikes-first',
       },
       {
         id: 'com-orden-golpes',
         texto_corto: 'Golpes en orden de Iniciativa, de mayor a menor',
         texto_explicado: 'Empates: se decide con un dado.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/close-combat#who-strikes-first',
       },
       {
         id: 'com-excepcion-levantado',
         texto_corto:
           'Quien se levantó en la Recuperación de este turno golpea el último',
+        link_regla:
+          'https://mordheimer.net/docs/rules/close-combat#who-strikes-first',
       },
       {
         id: 'com-derribado-golpeado-auto',
         texto_corto:
           'Un modelo derribado en combate es golpeado automáticamente',
+        link_regla:
+          'https://mordheimer.net/docs/rules/close-combat#warriors-knocked-down',
       },
       {
         id: 'com-solo-contra-varios',
@@ -143,6 +164,8 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
           'Test de Liderazgo si un guerrero lucha solo contra 2 o más sin aliados a 6"',
         texto_explicado:
           'Se comprueba al final de la fase: test de Liderazgo o huye.',
+        link_regla:
+          'https://mordheimer.net/docs/rules/leadership-psychology#all-alone',
       },
     ],
   },

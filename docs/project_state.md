@@ -284,14 +284,28 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   pertenece al otro ítem, aclarado); breve explicación de cómo funciona una
   carga; nuevo ítem en Combate "Quien carga o tiene Strike First golpea
   primero".
-- **Abierto:** la cláusula "no hace falta el test de Estupidez a 3\" de un
-  héroe aliado no estúpido" no aparece en ninguna página de mordheimer.net
-  consultada — pendiente de que el usuario diga si se retira o se
-  reincorpora citando otra fuente. Ver `todos.md`.
+- La cláusula "no hace falta el test de Estupidez a 3\" de un héroe aliado
+  no estúpido" se retira definitivamente (confirmado por el usuario): no
+  está en mordheimer.net y la app no se basa en el reglamento clásico.
 - `Battle.test.tsx`: dos asserts que buscaban el texto "Rout test" (ya no
   existe en el contenido) se actualizaron a buscar "Liderazgo del líder".
   `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
   Verificado en el navegador (móvil 375, modo tutorial, las 4 fases).
+
+### Icono por ítem a la sección exacta de la regla (sesión 12 — esta, cont.)
+
+- `ItemChecklist`: el campo `link_regla` (ya existía, usado en Prebattle/
+  Postgame) pasa de enlace de texto en el detalle a un icono de "enlace
+  externo" a la derecha de la fila superior, con objetivo táctil propio.
+  Afecta a las tres pantallas que usan el componente.
+- `src/data/battle.ts`: `link_regla` rellenado con anchors verificados
+  (leídos del DOM real de mordheimer.net, no adivinados) en los ítems que
+  tienen una sub-sección propia clara — detalle completo en `decisions.md`.
+  Los que no tienen heading 1:1 se quedan sin icono, cae al enlace de fase
+  general de la cabecera.
+- Verificado en el navegador (móvil 375): Battle (Recuperación, Combate) y
+  Prebattle; un anchor comprobado navegándolo y leyendo `location.hash`.
+  `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
 
 ### Nota sobre Prettier y markdown
 

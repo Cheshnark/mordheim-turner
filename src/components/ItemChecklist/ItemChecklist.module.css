@@ -52,7 +52,15 @@
   opacity: 0.25;
 }
 
+/* Fila superior: la fila clicable (casilla/viñeta + texto) a la izquierda,
+   el icono de enlace a la regla —si lo hay— pegado a la derecha. */
+.filaSuperior {
+  display: flex;
+  align-items: center;
+}
+
 .fila {
+  flex: 1;
   display: flex;
   align-items: flex-start;
   gap: var(--espacio-3);
@@ -65,6 +73,21 @@
 .item[data-inerte] .fila {
   cursor: default;
   min-height: 0;
+}
+
+/* Icono de "ir a la regla exacta": objetivo táctil propio, separado de la
+   casilla para no interferir con el toggle. */
+.iconoRegla {
+  flex-shrink: 0;
+  width: var(--toque-min);
+  height: var(--toque-min);
+  display: grid;
+  place-content: center;
+  color: var(--color-enlace-externo);
+}
+
+.iconoRegla:hover {
+  color: var(--color-texto);
 }
 
 /* Viñeta: ocupa la huella de la casilla para que el texto quede alineado. */
@@ -151,10 +174,4 @@
 .explicado {
   font-size: var(--texto-s);
   color: var(--color-texto-2);
-}
-
-.regla {
-  align-self: flex-start;
-  font-size: var(--texto-s);
-  color: var(--color-enlace-externo);
 }

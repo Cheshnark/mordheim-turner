@@ -675,3 +675,55 @@ pieza, con petición explícita de verificar la cláusula de Estupidez que no en
 buscar "Liderazgo del líder", que sigue cumpliendo el mismo propósito. `lint`/`typecheck`/
 `format:check`/`test` (55/55) y `build` verdes. Confirmado en el navegador (móvil 375):
 las 4 fases en modo tutorial, incluido el nuevo ítem de Strike First en Combate.
+
+---
+
+## 2026-09-12 — Cláusula de Estupidez retirada definitivamente
+
+**Decisión:** confirmado con el usuario: se retira sin más la cláusula "a 3\" de un héroe
+aliado no estúpido, no hace falta el test" del `texto_explicado` de `rec-estupidez`. No se
+reincorpora citando el reglamento clásico de 1999 (la app enlaza y se basa en
+mordheimer.net, no en ese reglamento).
+
+---
+
+## 2026-09-12 — Icono por ítem a la sección exacta de la regla (en vez de solo texto)
+
+**Decisión:** `ItemChecklist` cambia cómo muestra `link_regla` (campo que ya existía en
+`ChecklistItem`, usado hasta ahora en Prebattle/Postgame como un enlace de texto "Regla en
+mordheimer.net" dentro del detalle): pasa a ser un icono de "enlace externo" (flecha
+saliendo de una caja, SVG propio, objetivo táctil `--toque-min`) pegado a la derecha de la
+fila superior del ítem, fuera del `<label>` del checkbox para no interferir con el toggle.
+El cambio afecta a las tres pantallas que usan `ItemChecklist` (Prebattle, Postgame,
+Battle), no solo a Battle.
+
+Se rellena `link_regla` en `src/data/battle.ts` con anchors verificados (navegando
+mordheimer.net y leyendo el `id` real de cada `<h2>/<h3>` — no adivinados) para los ítems
+con una sub-sección propia y clara:
+
+- `rec-rout-test` → `leadership-psychology#the-rout-test`
+- `rec-estupidez` → `leadership-psychology#stupidity`
+- `rec-levantar-derribados`, `rec-aturdidos-a-derribados` → `wounds-and-injuries#0--2-knocked-down`
+- `mov-declarar-cargas` → `movement#charge`
+- `mov-movimientos-obligatorios` → `movement#2-compulsory-moves`
+- `mov-no-correr` → `movement#running`
+- `mov-declarar-ocultos` → `movement#hiding`
+- `com-strike-first`, `com-orden-golpes`, `com-excepcion-levantado` → `close-combat#who-strikes-first`
+- `com-derribado-golpeado-auto` → `close-combat#warriors-knocked-down`
+- `com-solo-contra-varios` → `leadership-psychology#all-alone`
+
+Quedan sin icono (sin heading 1:1 en la fuente, o la página no tiene subsecciones):
+`rec-rally`, `mov-mover-resto`, `mov-casos-especiales`, y toda la fase de Disparo — caen
+al enlace de fase general de la cabecera, ya visible en modo tutorial.
+
+**Motivo (usuario):** propuesta suya ("un icono a la derecha de las tarjetas... que lleve
+a esa sección en concreto de las reglas"), confirmada tras explicarle el alcance (solo
+los ítems con anchor claro) — "impleméntalo en aquellos que tengan un anchor relevante".
+
+**Verificación:** `ItemChecklist.test.tsx` no necesitó cambios (sigue comprobando un
+elemento de rol `link` con `href`/`target`/`rel`, ahora con nombre accesible por
+`aria-label` en vez de texto visible). `lint`/`typecheck`/`format:check`/`test` (55/55) y
+`build` verdes. Confirmado en el navegador (móvil 375): Battle (Recuperación y Combate,
+icono alineado a la derecha sin romper el texto multilínea) y Prebattle (más compacto que
+el enlace de texto anterior). Un anchor (`wounds-and-injuries#0--2-knocked-down`)
+verificado además navegándolo directamente y comprobando `location.hash`.
