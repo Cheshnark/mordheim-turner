@@ -214,6 +214,19 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
 - Verificado en el navegador (móvil 375). `lint`/`typecheck`/`format:check`/
   `test` (55/55) verdes.
 
+### Vuelta atrás parcial: accesos de Home otra vez grandes, más separados (sesión 12 — esta)
+
+- El usuario reportó que el cambio anterior dejaba los accesos "demasiado
+  estrechos". Revertido `.acceso` a `flex: 1` + `min-height: 4.5rem` +
+  `padding: var(--espacio-4)` (como antes de la sesión 11): vuelven a
+  repartirse el alto disponible en vez de medir solo su contenido.
+- Lo que sí se mantiene del ajuste anterior es más aire *entre* accesos:
+  `.accesos` cambia `justify-content: space-evenly` + `gap: var(--espacio-2)`
+  por `gap: var(--espacio-5)` (sin `space-evenly`, ya no hace falta con
+  `flex: 1` en cada acceso).
+- Verificado en el navegador (móvil 375). `lint`/`typecheck`/`format:check`/
+  `test` (55/55) verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

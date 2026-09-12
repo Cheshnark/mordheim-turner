@@ -51,26 +51,26 @@
   text-wrap: balance;
 }
 
-/* Los 4 accesos ya no se estiran a `flex: 1` cada uno (los hacía enormes en
-   pantallas altas): tamaño por contenido + `space-evenly` reparte el alto
-   sobrante en partes iguales, incluido el margen antes del primero y
-   después del último. */
+/* Los 4 accesos vuelven a repartirse el alto disponible (`flex: 1`, como
+   antes de la sesión 11): en pantallas altas crecen en vez de quedar
+   reducidos a su contenido. El `gap` sube para separarlos más entre sí
+   (queja del usuario: con `space-evenly` + gap pequeño quedaban "estrechos"
+   de aire entre ellos). */
 .accesos {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: var(--espacio-2);
+  gap: var(--espacio-5);
 }
 
 .acceso {
-  flex: 0 0 auto;
-  min-height: var(--toque-min);
+  flex: 1;
+  min-height: 4.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--espacio-1);
-  padding: var(--espacio-3) var(--espacio-4);
+  padding: var(--espacio-4);
   background-color: var(--color-superficie);
   background-image: var(--tinte-superficie);
   border: var(--borde);
