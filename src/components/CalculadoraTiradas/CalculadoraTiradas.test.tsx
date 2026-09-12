@@ -1,10 +1,32 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { CalculadoraTiradas } from './CalculadoraTiradas'
 
+/** Por defecto una ruta que no es Home: el caso "arriba" (mayoría de pantallas). */
+const montar = (ruta = '/battle') =>
+  render(
+    <MemoryRouter initialEntries={[ruta]}>
+      <CalculadoraTiradas />
+    </MemoryRouter>,
+  )
+
 describe('CalculadoraTiradas', () => {
+  it('en Home el disparador va abajo; en el resto de rutas, arriba', () => {
+    const { unmount } = montar('/')
+    expect(
+      screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
+    ).toHaveAttribute('data-posicion', 'abajo')
+    unmount()
+
+    montar('/battle')
+    expect(
+      screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
+    ).toHaveAttribute('data-posicion', 'arriba')
+  })
+
   it('empieza cerrada y se abre al pulsar el disparador', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
     fireEvent.click(
@@ -17,7 +39,7 @@ describe('CalculadoraTiradas', () => {
   })
 
   it('Impactar arranca en 3 vs 3 y reacciona a los contadores', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     fireEvent.click(
       screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
     )
@@ -26,14 +48,14 @@ describe('CalculadoraTiradas', () => {
 
     fireEvent.click(
       screen.getByRole('button', {
-        name: /subir habilidad de combate — atacante/i,
+        name: /subir ha\/hp — atacante/i,
       }),
     )
     expect(screen.getByText('Necesitas 3+')).toBeInTheDocument()
   })
 
   it('cambia a Herir y muestra "Imposible herir" cuando corresponde', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     fireEvent.click(
       screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
     )
@@ -58,7 +80,7 @@ describe('CalculadoraTiradas', () => {
   })
 
   it('se cierra con el botón de cerrar', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     fireEvent.click(
       screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
     )
@@ -67,7 +89,7 @@ describe('CalculadoraTiradas', () => {
   })
 
   it('se cierra al pulsar fuera del diálogo', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     fireEvent.click(
       screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
     )
@@ -78,7 +100,7 @@ describe('CalculadoraTiradas', () => {
   })
 
   it('se cierra con Escape', () => {
-    render(<CalculadoraTiradas />)
+    montar()
     fireEvent.click(
       screen.getByRole('button', { name: /abrir calculadora de tiradas/i }),
     )

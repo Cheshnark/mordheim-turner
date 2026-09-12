@@ -118,10 +118,13 @@
 }
 
 /* Crédito de licencia (CC BY 3.0, exigido por game-icons.net): discreto,
-   fuera del flujo de accesos. */
+   fuera del flujo de accesos. El padding inferior reserva sitio para el
+   disparador fijo de CalculadoraTiradas, que en Home vive abajo a la
+   derecha (docs/decisions.md) — sin esto quedaría tapado. */
 .pie {
   flex: 0 0 auto;
-  padding-block: var(--espacio-3) var(--espacio-2);
+  padding-block: var(--espacio-3)
+    calc(var(--toque-min) + var(--espacio-3) + env(safe-area-inset-bottom));
   color: var(--color-texto-2);
   font-size: var(--texto-xs);
   text-align: center;

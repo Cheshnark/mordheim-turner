@@ -338,6 +338,18 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   el navegador (móvil 375): disparador y modal en Home y en el bucle de Battle, ambas
   calculadoras, caso "Imposible herir", los tres modos de cierre.
 
+### Retoques de la calculadora (sesión 13 — esta, cont.)
+
+- Etiquetas "Habilidad de Combate" → **HA/HP**; "defensor"/"objetivo" unificado en
+  **objetivo** en las dos calculadoras.
+- Posición del disparador por pantalla (`data-posicion`, vía `useLocation`): **abajo**
+  solo en Home (como al principio), **arriba** junto a "Volver" en el resto — ya no
+  compite con "Siguiente fase" en Battle. Motivo y vuelta atrás del intento intermedio
+  (padding global) en `decisions.md`.
+- **test total: 70/70.** `lint`/`typecheck`/`format:check`/`build` verdes. Verificado en
+  el navegador (móvil 375): Home abajo, Prebattle y Battle arriba, sin tapar checklist
+  ni "Siguiente fase" en reposo ni al final del scroll.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

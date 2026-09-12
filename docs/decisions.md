@@ -799,3 +799,79 @@ Confirmado en el navegador (móvil 375): disparador visible y funcional en Home 
 bucle de Battle (sin competir con el "momento audaz" de la fase activa), toggle
 Impactar/Herir, contadores, caso "Imposible herir", cierre por botón/clic fuera/Escape
 sin alterar el estado de la partida en curso.
+
+---
+
+## 2026-09-12 — Retoques de la calculadora: etiquetas HA/HP, "objetivo" único, visibilidad sin animación
+
+Tres puntualizaciones del usuario sobre la entrada anterior:
+
+1. **Etiquetas.** "Habilidad de Combate" → **HA/HP** en el toggle Impactar (ambas
+   filas, atacante y objetivo). Es la abreviatura oficial en castellano de Warhammer/
+   Mordheim (Habilidad de Armas / Habilidad de Proyectiles); aunque esta calculadora
+   solo compara HA (cuerpo a cuerpo), mostrar las dos siglas juntas evita que el
+   jugador tenga que recordar cuál de las dos es —lectura más rápida en mesa que
+   acertar el término exacto.
+2. **"Defensor" vs "objetivo".** Se pedía unificar; elegido **objetivo** para las dos
+   calculadoras (antes Impactar decía "defensor" y Herir ya decía "objetivo"). Motivo:
+   en la tirada de Herir el rival no está defendiéndose activamente, solo aporta su
+   Resistencia — "objetivo" describe igual de bien a quién apunta la tirada en ambos
+   pasos, sin la connotación de defensa activa que sí tendría sentido en Impactar pero
+   no en Herir.
+3. **Visibilidad del disparador.** El usuario proponía una animación de aparición tras
+   unos segundos. Se avisó de la contradicción con "sin animaciones decorativas, nada
+   de movimiento ambiental" (handoff §8, entrada de paleta 2026-09-09) y el riesgo de
+   que un movimiento repetido en cada pantalla distrajera jugando en mesa. Elegida en
+   su lugar una **etiqueta de texto fija** ("Tiradas") junto al icono del dado: se
+   identifica a la primera sin depender de coincidir con el momento de una animación,
+   y no añade movimiento.
+
+**Efecto colateral corregido:** el disparador, al ganar texto, se ensancha y en Home
+llegó a tapar parte del crédito de licencia CC BY 3.0 de game-icons.net (exigido por la
+licencia, ver entrada "Glifos de fase" 2026-09-12). Se corrige subiendo el padding
+inferior de `#root` (global, `global.css`) para reservar sitio al disparador fijo en
+cualquier pantalla, no solo en Home — el mismo hueco evita que tape el final de una
+lista larga en Prebattle/Postgame/Battle. Se acepta el solapamiento *transitorio* con
+un ítem de checklist mientras se hace scroll a media lista (comportamiento estándar de
+un botón flotante, deja de tapar en cuanto se sigue bajando); lo que sí se verificó es
+que el botón "Siguiente fase"/"Cerrar ronda" de Battle —el control más importante de la
+pantalla— queda siempre con margen libre respecto al disparador.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (69/69) y `build` verdes.
+Confirmado en el navegador (móvil 375): etiquetas HA/HP en Impactar, crédito de
+game-icons.net visible en Home sin solapar, "Siguiente fase" libre al final del scroll
+de Battle en las 4 fases.
+
+---
+
+## 2026-09-12 — El disparador de la calculadora se reubica: arriba salvo en Home
+
+**Supersede** la solución de padding de la entrada anterior. El usuario vio la posición
+fija abajo-derecha y no le convenció (competía visualmente con "Siguiente fase" en
+Battle, el control más importante de la pantalla). Antes de tocar nada se le preguntó
+qué fallaba exactamente y se le ofrecieron alternativas concretas.
+
+**Decisión:** posición por pantalla, vía `data-posicion` en el propio botón (mismo
+patrón que `data-estado`/`data-marcado` ya usado en la app):
+
+- **Home:** se queda **abajo** a la derecha, como estaba.
+- **Resto de pantallas** (Prebattle, Postgame, Battle): pasa a **arriba** a la derecha,
+  junto a "Volver" — encaja en el hueco libre de la cabecera (en `CabeceraPantalla` es
+  literalmente la tercera columna vacía del grid; en el bucle de Battle, el espacio
+  junto a "Volver"). Deja de competir con cualquier CTA de la parte baja.
+
+`CalculadoraTiradas` decide la posición con `useLocation().pathname === '/'` (ya vive
+dentro del `<BrowserRouter>` de `main.tsx`, montado en `App.tsx`). Se revierte el
+padding inferior global de `#root` de la entrada anterior (ya no hace falta en todas
+las pantallas) y se mueve la reserva de espacio, ahora local, a `Home.module.css`
+(`.pie`) — solo esa pantalla necesita hueco abajo.
+
+**Se acepta:** el solapamiento transitorio con el borde superior de un bloque al hacer
+scroll hacia arriba en una lista (nunca tapa una casilla ni el icono de enlace, están
+más abajo en cada item) — mismo tipo de trade-off que antes, ahora en una zona menos
+crítica que el CTA de avance.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (70/70, nuevo caso de
+posición) y `build` verdes. Confirmado en el navegador (móvil 375): Home abajo sin
+tapar el crédito de licencia; Prebattle y Battle arriba, sin tapar el checklist ni el
+botón "Siguiente fase" ni en reposo ni al final del scroll.

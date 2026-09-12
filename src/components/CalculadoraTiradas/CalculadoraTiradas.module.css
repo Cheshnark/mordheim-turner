@@ -2,15 +2,20 @@
    disparador queda neutro (sin acento rojo): ese color se reserva para la
    fase activa de Battle y no debe competir con ella (docs/decisions.md). */
 
+/* Con icono + texto (no solo icono): se identifica a la primera sin
+   necesitar animación para llamar la atención (docs/decisions.md).
+   Posición por `data-posicion` (decisión del usuario): abajo solo en Home;
+   arriba —junto a "Volver"— en el resto, para no competir con el CTA de
+   avance de fase que vive abajo del todo en Battle. */
 .disparador {
   position: fixed;
   right: var(--espacio-4);
-  bottom: calc(var(--espacio-4) + env(safe-area-inset-bottom));
   z-index: 40;
-  width: var(--toque-min);
-  height: var(--toque-min);
-  display: grid;
-  place-content: center;
+  min-height: var(--toque-min);
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: 0 var(--espacio-4);
   background-color: var(--color-superficie);
   background-image: var(--tinte-superficie);
   border: var(--borde);
@@ -20,9 +25,23 @@
   cursor: pointer;
 }
 
+.disparador[data-posicion='abajo'] {
+  bottom: calc(var(--espacio-4) + env(safe-area-inset-bottom));
+}
+
+.disparador[data-posicion='arriba'] {
+  top: calc(var(--espacio-4) + env(safe-area-inset-top));
+}
+
 .disparador:hover {
   color: var(--color-texto);
   border-color: var(--color-acento);
+}
+
+.disparadorTexto {
+  font-size: var(--texto-s);
+  font-weight: var(--peso-fuerte);
+  color: var(--color-texto);
 }
 
 /* Fondo oscurecido, no negro sólido: se ve (atenuada) la pantalla de detrás,

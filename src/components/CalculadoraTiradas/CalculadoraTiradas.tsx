@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation } from 'react-router-dom'
 import {
   TIRADAS_MAX,
   TIRADAS_MIN,
@@ -18,9 +19,15 @@ type Calculadora = 'impactar' | 'herir'
  *
  * Es una herramienta de consulta, sin relación con `useEstadoApp`: su
  * estado es local y no se persiste ni afecta a la partida en curso.
+ *
+ * Posición (`data-posicion`, decisión del usuario): en Home se queda **abajo**
+ * a la derecha, como al principio. En el resto de pantallas pasa a **arriba**
+ * a la derecha, junto a "Volver" — así no compite con el CTA de avance de
+ * fase de Battle ("Siguiente fase"), que vive abajo del todo.
  */
 export function CalculadoraTiradas() {
   const [abierta, setAbierta] = useState(false)
+  const enHome = useLocation().pathname === '/'
 
   useEffect(() => {
     if (!abierta) return
@@ -40,11 +47,13 @@ export function CalculadoraTiradas() {
       <button
         type="button"
         className={styles.disparador}
+        data-posicion={enHome ? 'abajo' : 'arriba'}
         onClick={() => setAbierta(true)}
         aria-label="Abrir calculadora de tiradas"
         title="Calculadora de tiradas"
       >
         <IconoDado />
+        <span className={styles.disparadorTexto}>Tiradas</span>
       </button>
       {abierta &&
         createPortal(
@@ -106,24 +115,24 @@ function Modal({ onCerrar }: { onCerrar: () => void }) {
   )
 }
 
-/** Impactar en cuerpo a cuerpo: Habilidad de Combate del atacante vs defensor. */
+/** Impactar en cuerpo a cuerpo: HA/HP del atacante vs objetivo. */
 function Impactar() {
   const [atacante, setAtacante] = useState(3)
-  const [defensor, setDefensor] = useState(3)
-  const resultado = tiradaImpactar(atacante, defensor)
+  const [objetivo, setObjetivo] = useState(3)
+  const resultado = tiradaImpactar(atacante, objetivo)
 
   return (
     <div className={styles.cuerpo}>
       <div className={styles.contadores}>
         <Contador
-          etiqueta="Habilidad de Combate — atacante"
+          etiqueta="HA/HP — atacante"
           valor={atacante}
           onCambiar={setAtacante}
         />
         <Contador
-          etiqueta="Habilidad de Combate — defensor"
-          valor={defensor}
-          onCambiar={setDefensor}
+          etiqueta="HA/HP — objetivo"
+          valor={objetivo}
+          onCambiar={setObjetivo}
         />
       </div>
       <Resultado texto={`Necesitas ${resultado}+`} />
