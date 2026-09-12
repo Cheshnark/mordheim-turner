@@ -558,3 +558,40 @@ licencia. No rompe el layout de pantalla completa de Home: `flex: 0 0 auto`, una
 por consola para inspeccionarlo a tamaño grande (mismo método que la entrada de huellas),
 se lee con claridad — en particular las dos huellas de Movimiento quedan separadas y no se
 funden.
+
+---
+
+## 2026-09-12 — Ornamento EstrellaFugaz: de trazo propio a "Unstable projectile"
+
+**Decisión:** el componente `EstrellaFugaz` (wordmark de Home, filete de `CabeceraPantalla`,
+`public/favicon.svg`) deja de dibujar a mano una estrella de cuatro puntas con una cola;
+pasa a usar "Unstable projectile" de game-icons.net (Lorc, CC BY 3.0) — un meteoro con cola
+y núcleo de roca. Se mantiene el nombre del componente y su contrato (`size`, `className`,
+`currentColor`) para no tocar los tres sitios que lo consumen; solo cambia el `viewBox`
+(`0 0 24 24` → `0 0 512 512`) y el contenido (antes 2 `<path>`, uno relleno y otro con
+`stroke`; ahora 1 `<path>` relleno).
+
+**Motivo (usuario):** enlazó directamente
+[game-icons.net/1x1/lorc/unstable-projectile.html](https://game-icons.net/1x1/lorc/unstable-projectile.html)
+como reemplazo del ornamento de Home. Encaja además mejor que la estrella genérica con el
+lore de Mordheim (ciudad arrasada por la caída de un cometa de wyrdstone) sin ser la cometa
+de dos colas de Games Workshop que ya se había descartado el 2026-09-10. A petición
+explícita del usuario, el cambio se aplica en los tres usos del ornamento, no solo en Home.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) verdes; confirmado en el
+navegador (móvil 375) que el wordmark de Home se ve bien con el nuevo icono.
+
+---
+
+## 2026-09-12 — Glifo de Movimiento: de huellas a "Walking boot"
+
+**Decisión:** el glifo de Movimiento vuelve a ser una bota (de perfil), esta vez "Walking
+boot" de game-icons.net (Lorc, CC BY 3.0) en vez de las dos huellas del 2026-09-11.
+
+**Motivo (usuario):** pidió directamente ese icono por nombre. A diferencia de la bota
+dibujada a mano que se descartó por "no entenderse" a 22 px, esta tiene doble contorno
+grueso y formas grandes que sí aguantan la reducción de tamaño.
+
+**Verificación:** confirmado en el navegador (móvil 375, fase Movimiento) tanto a tamaño
+real (22 px, junto al título) como clonada a 220 px por consola — silueta de bota clara y
+legible en ambos casos. `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.

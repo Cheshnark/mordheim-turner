@@ -242,6 +242,23 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   rápido, cada glifo clonado a 220 px por consola para revisar el trazo a tamaño
   grande. `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
 
+### Proyectil inestable y bota de librería (sesión 12 — esta, cont.)
+
+- `EstrellaFugaz` (wordmark de Home, filete de `CabeceraPantalla`, favicon) deja
+  el trazo propio y pasa a "Unstable projectile" de game-icons.net (Lorc) — un
+  meteoro con cola, coherente con el lore de Mordheim (ciudad golpeada por un
+  cometa de wyrdstone). Mismo componente/contrato, solo cambia el `viewBox` y
+  el contenido del SVG. Enlace propuesto por el usuario.
+- Glifo de Movimiento: de las dos huellas (sesión 11) a "Walking boot" de
+  game-icons.net — a diferencia de la bota casera descartada entonces, esta
+  tiene contorno grueso y se lee bien a 22 px.
+- Motivo completo de ambos en `decisions.md`. Pendiente: elegir un icono mejor
+  para Recuperación (sigue con "Death skull"; el usuario apuntó que buscaría
+  algo más ligado al concepto de recuperarse, sin decidir aún cuál).
+- Verificado en el navegador (móvil 375): wordmark de Home y glifo de
+  Movimiento (tamaño real y ampliado a 220 px). `lint`/`typecheck`/
+  `format:check`/`test` (55/55) verdes.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

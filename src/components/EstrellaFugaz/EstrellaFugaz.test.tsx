@@ -9,6 +9,6 @@ describe('EstrellaFugaz', () => {
     expect(svg).toHaveAttribute('aria-hidden', 'true')
     expect(svg).toHaveAttribute('width', '22')
     expect(svg?.getAttribute('class')).toBe('x')
-    expect(svg?.querySelectorAll('path')).toHaveLength(2)
+    expect(svg?.querySelectorAll('path')).toHaveLength(1)
   })
 })

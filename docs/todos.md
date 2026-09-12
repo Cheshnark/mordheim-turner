@@ -47,8 +47,17 @@
 
 - [x] ~~Decidir despliegue~~ — hecho 2026-09-11: GitHub Pages vía GitHub Actions
       (`.github/workflows/ci.yml`, job `deploy`). Detalle en `docs/deploy.md`.
-- [x] ~~Icono / favicon~~ — hecho 2026-09-10. `public/favicon.svg`: estrella fugaz propia
-      (hueso + cola roja sobre fondo oscuro). No usa marcas de GW.
+- [x] ~~Icono / favicon~~ — hecho 2026-09-10, actualizado 2026-09-12: `public/favicon.svg`
+      usa ahora "Unstable projectile" de game-icons.net (ver `decisions.md`). No usa marcas
+      de GW.
+- [x] ~~Glifos de fase propios → librería~~ — hecho 2026-09-12: game-icons.net (CC BY 3.0)
+      para los 4, con pie de crédito en Home. Ver `decisions.md`.
+- [ ] Elegir icono de Recuperación: sigue con "Death skull" (game-icons.net); el usuario
+      apuntó que preferiría algo más ligado al concepto de recuperarse (tests de
+      Desbandada/Estupidez, derribados que se levantan, Rally), sin decidir aún cuál.
+      Candidatos ya explorados: "Kneeling" (Delapouite, figura arrodillada), "Rally the
+      troops" (Lorc, bandera), "Healing" (mano con destello, tono RPG-mágico que puede
+      desentonar).
 - [ ] Revisar si el texto de tutorial necesita una segunda familia tipográfica (serif del
       sistema) o basta con tamaño/color.
 - [ ] `.env.example` si acaba habiendo alguna variable (hoy no hay backend → probablemente no).
