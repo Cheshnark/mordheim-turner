@@ -53,10 +53,12 @@
 }
 
 /* Fila superior: la fila clicable (casilla/viñeta + texto) a la izquierda,
-   el icono de enlace a la regla —si lo hay— pegado a la derecha. */
+   el icono de enlace a la regla —si lo hay— pegado a la derecha. Arriba, no
+   centrado: así queda a la altura de la casilla aunque el texto ocupe dos
+   líneas. */
 .filaSuperior {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .fila {
@@ -75,15 +77,26 @@
   min-height: 0;
 }
 
-/* Icono de "ir a la regla exacta": objetivo táctil propio, separado de la
-   casilla para no interferir con el toggle. */
+/* Icono de "ir a la regla exacta": mismo tamaño y offset que la casilla
+   (para quedar alineados), con el área de toque real ampliada a
+   `--toque-min` vía `::after` sin agrandar el icono visible. Separado de
+   la casilla para no interferir con el toggle. */
 .iconoRegla {
+  position: relative;
   flex-shrink: 0;
-  width: var(--toque-min);
-  height: var(--toque-min);
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: calc(var(--espacio-3) + 0.1rem);
+  margin-right: var(--espacio-4);
   display: grid;
   place-content: center;
   color: var(--color-enlace-externo);
+}
+
+.iconoRegla::after {
+  content: '';
+  position: absolute;
+  inset: calc((1.4rem - var(--toque-min)) / 2);
 }
 
 .iconoRegla:hover {

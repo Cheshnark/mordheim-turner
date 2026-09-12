@@ -19,6 +19,8 @@ export const CHECKLIST_POSTGAME: ChecklistItem[] = [
   {
     id: 'post-experiencia',
     texto_corto: 'Reparto de experiencia',
+    link_regla:
+      'https://mordheimer.net/docs/campaigns/experience#earning-experience',
   },
 ]
 

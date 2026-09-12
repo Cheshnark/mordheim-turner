@@ -727,3 +727,33 @@ elemento de rol `link` con `href`/`target`/`rel`, ahora con nombre accesible por
 icono alineado a la derecha sin romper el texto multilínea) y Prebattle (más compacto que
 el enlace de texto anterior). Un anchor (`wounds-and-injuries#0--2-knocked-down`)
 verificado además navegándolo directamente y comprobando `location.hash`.
+
+---
+
+## 2026-09-12 — Retoques del icono de enlace: alineación, modo rápido y experiencia
+
+**Decisión (tres puntualizaciones del usuario sobre la entrada anterior):**
+
+1. **Alineación con la casilla.** `.iconoRegla` pasa de `width/height: var(--toque-min)`
+   centrado en toda la altura de la fila, a `1.4rem` (mismo tamaño que la casilla) con el
+   mismo offset (`margin-top: calc(var(--espacio-3) + 0.1rem)`), y `.filaSuperior` pasa de
+   `align-items: center` a `flex-start`. El área de toque real sigue siendo
+   `--toque-min` vía un `::after` con `inset` negativo (no se reduce el objetivo táctil,
+   solo el tamaño visible). Antes, con texto a dos líneas, el icono quedaba centrado en
+   toda la fila y no a la altura de la casilla.
+2. **Icono también en modo rápido.** `ItemChecklist` desacopla el icono de
+   `mostrarDetalle`: antes `mostrarEnlace = mostrarDetalle && link_regla != null` (por
+   eso solo aparecía en tutorial); ahora `mostrarEnlace = link_regla != null` a secas. El
+   texto explicado sigue dependiendo de `mostrarDetalle` (sigue sin verse en rápido). El
+   test que comprobaba "oculta explicación y enlace" se divide: sigue comprobando que la
+   explicación se oculta, pero ahora comprueba que el enlace **no** se oculta.
+3. **"Reparto de experiencia" (Postgame) sin sección propia.** No la tiene en
+   `docs/rules/*` (es contenido de campaña, no de una fase de batalla), pero sí existe una
+   página dedicada `docs/campaigns/experience` con heading `#earning-experience`
+   ("earning experience") — la sección más cercana a "cuánta experiencia se gana". Añadido
+   como `link_regla` de `post-experiencia`.
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
+Confirmado en el navegador (móvil 375): icono alineado con la casilla en Recuperación
+(texto a una y dos líneas), iconos visibles en Battle modo rápido (sin checkbox, con
+viñeta), y el nuevo icono de "Reparto de experiencia" en Postgame.

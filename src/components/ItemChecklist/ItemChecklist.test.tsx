@@ -48,7 +48,7 @@ describe('ItemChecklist', () => {
     expect(onAlternar).toHaveBeenCalledOnce()
   })
 
-  it('oculta explicación y enlace cuando mostrarDetalle es false', () => {
+  it('oculta la explicación pero no el enlace cuando mostrarDetalle es false', () => {
     render(
       <ItemChecklist
         item={ITEM}
@@ -58,7 +58,8 @@ describe('ItemChecklist', () => {
       />,
     )
     expect(screen.queryByText(ITEM.texto_explicado as string)).toBeNull()
-    expect(screen.queryByRole('link')).toBeNull()
+    // El enlace no depende de mostrarDetalle: también se ve en modo rápido.
+    expect(screen.getByRole('link')).toHaveAttribute('href', ITEM.link_regla)
   })
 
   it('muestra explicación y enlace externo cuando mostrarDetalle es true', () => {

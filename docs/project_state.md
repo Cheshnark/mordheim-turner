@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-_Actualizado: 2026-09-11_
+_Actualizado: 2026-09-12_
 
 ## Dónde estamos
 
@@ -305,6 +305,21 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   general de la cabecera.
 - Verificado en el navegador (móvil 375): Battle (Recuperación, Combate) y
   Prebattle; un anchor comprobado navegándolo y leyendo `location.hash`.
+  `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
+
+### Retoques del icono de enlace (sesión 12 — esta, cont.)
+
+- Icono alineado con la casilla (antes centrado en toda la fila, se veía
+  descolgado con texto a dos líneas): mismo tamaño y offset que el
+  checkbox; el objetivo táctil de 56 px se mantiene con un `::after`
+  invisible, no agrandando el icono visible.
+- El icono ya no depende de `mostrarDetalle`: se ve también en Battle modo
+  rápido (solo el texto explicado sigue oculto ahí).
+- Postgame: "Reparto de experiencia" no tiene sección propia en
+  `docs/rules/*` (es contenido de campaña) pero sí en
+  `docs/campaigns/experience#earning-experience` — enlazado ahí.
+- Verificado en el navegador (móvil 375): alineación en Recuperación,
+  iconos en modo rápido, enlace de experiencia en Postgame.
   `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
 
 ### Nota sobre Prettier y markdown

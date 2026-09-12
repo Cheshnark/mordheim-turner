@@ -6,8 +6,9 @@ type Props = {
   marcado: boolean
   onAlternar: () => void
   /**
-   * Muestra `texto_explicado` y `link_regla`. Siempre `true` en Prebattle y
-   * Postgame; en Battle solo en modo tutorial (handoff §3).
+   * Muestra `texto_explicado`. Siempre `true` en Prebattle y Postgame; en
+   * Battle solo en modo tutorial (handoff §3). El icono de `link_regla` no
+   * depende de esto: se muestra siempre que exista, también en modo rápido.
    */
   mostrarDetalle: boolean
   /**
@@ -26,7 +27,7 @@ export function ItemChecklist({
   interactivo = true,
 }: Props) {
   const mostrarExplicado = mostrarDetalle && item.texto_explicado != null
-  const mostrarEnlace = mostrarDetalle && item.link_regla != null
+  const mostrarEnlace = item.link_regla != null
 
   return (
     <li className={styles.item} data-inerte={!interactivo || undefined}>
