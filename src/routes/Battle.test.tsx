@@ -47,7 +47,7 @@ describe('Battle — selección de modo', () => {
     ).toBeInTheDocument()
     // Sin casillas ni explicaciones: es solo referencia.
     expect(screen.queryAllByRole('checkbox')).toHaveLength(0)
-    expect(screen.queryByText(/Rout test/i)).toBeNull()
+    expect(screen.queryByText(/Liderazgo del líder/i)).toBeNull()
     // El texto corto de cada paso sí está.
     expect(screen.getByText(/Test de Desbandada si el 25/i)).toBeInTheDocument()
     // Y el enlace a la regla de la fase, por si hay dudas.
@@ -61,7 +61,7 @@ describe('Battle — selección de modo', () => {
     montar()
     await user.click(screen.getByRole('button', { name: /tutorial/i }))
 
-    expect(screen.getByText(/Rout test/i)).toBeInTheDocument()
+    expect(screen.getByText(/Liderazgo del líder/i)).toBeInTheDocument()
     expect(
       screen.getByRole('link', { name: /reglas de la fase/i }),
     ).toHaveAttribute('href', CONTENIDO_BATTLE.recuperacion.linkFase)

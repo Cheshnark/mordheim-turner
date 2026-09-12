@@ -271,6 +271,28 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   y fase Recuperación (tamaño real y ampliado a 220 px). `lint`/`typecheck`/
   `format:check`/`test` (55/55) verdes.
 
+### Puntualizaciones de contenido de reglas (sesión 12 — esta, cont.)
+
+- El usuario revisó las reglas de Recuperación/Movimiento/Combate ítem a ítem y
+  pidió ampliar varios `texto_explicado`. Cada cambio se verificó contra
+  mordheimer.net (la fuente que enlaza la app) antes de tocar el código —
+  detalle punto por punto en `decisions.md`.
+- Cambios aplicados: 2D6 explícito en Desbandada y Estupidez; qué puede hacer
+  un derribado que se levanta (mover a mitad, disparar, hechizos); qué puede
+  hacer un aturdido recién pasado a derribado (arrastrarse 2", nada más);
+  nota de hechizos en el Rally (no en Desbandada, donde la pidió el usuario —
+  pertenece al otro ítem, aclarado); breve explicación de cómo funciona una
+  carga; nuevo ítem en Combate "Quien carga o tiene Strike First golpea
+  primero".
+- **Abierto:** la cláusula "no hace falta el test de Estupidez a 3\" de un
+  héroe aliado no estúpido" no aparece en ninguna página de mordheimer.net
+  consultada — pendiente de que el usuario diga si se retira o se
+  reincorpora citando otra fuente. Ver `todos.md`.
+- `Battle.test.tsx`: dos asserts que buscaban el texto "Rout test" (ya no
+  existe en el contenido) se actualizaron a buscar "Liderazgo del líder".
+  `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
+  Verificado en el navegador (móvil 375, modo tutorial, las 4 fases).
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.

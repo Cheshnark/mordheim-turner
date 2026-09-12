@@ -26,28 +26,31 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
         texto_corto:
           'Test de Desbandada si el 25 % o más está fuera de combate',
         texto_explicado:
-          '¿25 % o más del warband fuera de combate? Test de Desbandada (Rout test) contra el Liderazgo del líder.',
+          '¿25 % o más del warband fuera de combate? Test de Desbandada (2D6 ≤ Liderazgo del líder). Si falla, la banda se retira y la partida termina.',
       },
       {
         id: 'rec-estupidez',
         texto_corto: 'Test de Estupidez de los Guerreros Estúpidos',
         texto_explicado:
-          'Si no están a 3" de un héroe aliado no estúpido, hacen test de Estupidez.',
+          'Cada miniatura estúpida: 2D6 ≤ su Liderazgo. Si falla, no lucha cuerpo a cuerpo ni lanza hechizos hasta la próxima Recuperación.',
       },
       {
         id: 'rec-levantar-derribados',
         texto_corto: 'Los derribados se levantan',
-        texto_explicado: 'No podrán correr ni cargar este turno.',
+        texto_explicado:
+          'Ese turno mueven a mitad de velocidad, pueden disparar y lanzar hechizos, pero no cargar ni correr.',
       },
       {
         id: 'rec-aturdidos-a-derribados',
         texto_corto: 'Los aturdidos pasan a derribados',
+        texto_explicado:
+          'Ya derribados, pueden arrastrarse 2" (si están trabados en combate, solo si su rival lucha con otro), pero no luchan, disparan ni lanzan hechizos.',
       },
       {
         id: 'rec-rally',
         texto_corto: 'Test de Rally de los guerreros en fuga',
         texto_explicado:
-          '2D6 ≤ Liderazgo. No se puede intentar si el enemigo más cercano está más cerca que cualquier aliado.',
+          '2D6 ≤ Liderazgo. No se puede intentar si el enemigo más cercano está más cerca que cualquier aliado. Si se recupera, no puede mover ni disparar ese turno, pero sí lanzar hechizos.',
       },
     ],
   },
@@ -60,6 +63,8 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
       {
         id: 'mov-declarar-cargas',
         texto_corto: 'Declarar todas las cargas antes de mover a nadie',
+        texto_explicado:
+          'Se declara sin medir distancia, indicando el objetivo. Es como correr (doble de Movimiento) hasta quedar peana con peana; quien carga golpea primero ese combate.',
       },
       {
         id: 'mov-movimientos-obligatorios',
@@ -111,6 +116,12 @@ export const CONTENIDO_BATTLE: Record<FaseTurno, ContenidoFase> = {
       'Esta fase se resuelve sí o sí en cada ronda si hay modelos trabados, sin importar de quién es el turno. No es un paso que se pueda saltar por no ser "tu turno".',
     ],
     items: [
+      {
+        id: 'com-strike-first',
+        texto_corto: 'Quien carga o tiene "Strike First" golpea primero',
+        texto_explicado:
+          'Si varios tienen "Strike First" entre sí, se ordenan por Iniciativa, igual que el resto.',
+      },
       {
         id: 'com-orden-golpes',
         texto_corto: 'Golpes en orden de Iniciativa, de mayor a menor',

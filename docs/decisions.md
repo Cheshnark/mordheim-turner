@@ -628,3 +628,50 @@ más limpia a tamaño de icono que la de Kneeling (figura humana detallada) desc
 **Verificación:** confirmado en el navegador (móvil 375, fase Recuperación) a tamaño real y
 clonado a 220 px por consola — bandera y lanzas se distinguen con claridad.
 `lint`/`typecheck`/`format:check`/`test` (55/55) verdes.
+
+---
+
+## 2026-09-12 — Puntualizaciones de contenido en Recuperación, Movimiento y Combate
+
+**Decisión:** varios `texto_explicado` de `src/data/battle.ts` se amplían con mecánica
+verificada contra **mordheimer.net** ("The New Mordheimer", la fuente que enlaza la app),
+no contra el reglamento clásico de memoria — hay diferencias entre ambos, ver más abajo.
+
+- `rec-rout-test`: "(Rout test)" → "(2D6 ≤ Liderazgo del líder)"; se añade la consecuencia
+  de fallarlo (la banda se retira, la partida termina). Fuente: página
+  *Leadership & Psychology*, "the rout test".
+- `rec-estupidez`: se añade "2D6 ≤ su Liderazgo" y qué implica fallar (no lucha cuerpo a
+  cuerpo ni lanza hechizos hasta la próxima Recuperación). Fuente: misma página,
+  "stupidity". **Se retira la cláusula de "a 3\" de un héroe aliado no estúpido, no hace
+  falta el test"** que llevaba el checklist desde el origen: no aparece en ninguna página
+  de mordheimer.net consultada (existe en el reglamento clásico de 1999 con un radio de
+  6" a un Héroe, pero "The New Mordheimer" no la reproduce). Pendiente de confirmar con
+  el usuario si se queda fuera definitivamente o se reincorpora citando otra fuente.
+- `rec-levantar-derribados`: se añade qué SÍ puede hacer el turno en que se levanta
+  (mover a mitad de velocidad, disparar, lanzar hechizos), no solo qué no puede. Fuente:
+  página *Wounds & Injuries*, "0-2 knocked down".
+- `rec-aturdidos-a-derribados`: gana `texto_explicado` (antes no tenía) describiendo qué
+  puede hacer un derribado recién volteado ese turno: arrastrarse 2" (matizado: si está
+  trabado en combate, solo si su rival lucha con otro), sin luchar/disparar/lanzar
+  hechizos. Misma fuente.
+- `rec-rally`: se añade que, si se recupera, no mueve ni dispara ese turno pero sí puede
+  lanzar hechizos. Fuente: página *Recovery Phase*. **Nota:** el usuario pidió esta
+  frase en el ítem de Desbandada (`rec-rout-test`), pero la regla real pertenece al Rally
+  test (recuperar guerreros en fuga, otro ítem) — el Rout test de mordheimer.net no
+  menciona hechizos en absoluto. Aplicada al ítem correcto.
+- `mov-declarar-cargas`: gana `texto_explicado` resumiendo cómo funciona una carga (se
+  declara sin medir, es como correr hasta quedar peana con peana, quien carga golpea
+  primero). Fuente: página *Movement*, "charge!".
+- Combate: nuevo ítem `com-strike-first` ("Quien carga o tiene 'Strike First' golpea
+  primero"), insertado antes de `com-orden-golpes` porque determina prioridad sobre el
+  orden por Iniciativa. Si varios tienen Strike First, se ordenan entre ellos por
+  Iniciativa. Fuente: página *Close Combat*, "who strikes first".
+
+**Motivo (usuario):** puntualizaciones de contenido tras revisar las reglas, pieza a
+pieza, con petición explícita de verificar la cláusula de Estupidez que no encontraba.
+
+**Verificación:** `Battle.test.tsx` tenía dos asserts que buscaban el texto literal
+"Rout test" (para comprobar que no aparece en rápido y sí en tutorial) — actualizados a
+buscar "Liderazgo del líder", que sigue cumpliendo el mismo propósito. `lint`/`typecheck`/
+`format:check`/`test` (55/55) y `build` verdes. Confirmado en el navegador (móvil 375):
+las 4 fases en modo tutorial, incluido el nuevo ítem de Strike First en Combate.

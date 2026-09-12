@@ -38,6 +38,17 @@
 
 ## Prioridad baja / abierto
 
+- [ ] **Decidir sobre la cláusula de Estupidez "a 3\" de un héroe aliado no estúpido, no
+      hace falta el test"** (`rec-estupidez` en `src/data/battle.ts`): no aparece en
+      ninguna página de mordheimer.net consultada (sí existe, con 6" a un Héroe, en el
+      reglamento clásico de 1999). Retirarla, o mantenerla citando otra fuente. Ver
+      `decisions.md` (2026-09-12).
+- [ ] Evaluar enlazar cada ítem del checklist a la sub-sección exacta de mordheimer.net
+      (anchor de la página, ej. `#the-rout-test`) en vez de solo al enlace de fase —
+      propuesto por el usuario 2026-09-12. Viable para los ítems con heading propio
+      (Rout test, Stupidity, who strikes first, running/charge); varios ítems no tienen
+      heading 1:1 y caerían al enlace de fase general igualmente.
+
 - [x] ~~Empujar la identidad "chulísima"~~ — hecho por partes: wordmark (2026-09-10),
       glifos de fase macizos (2026-09-10), textura de superficies + marca de agua del
       glifo en la cabecera de Battle (2026-09-11, ver `decisions.md`).
