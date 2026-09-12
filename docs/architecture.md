@@ -41,6 +41,7 @@ src/
     [x] ListaChecklist/      <ul> de ItemChecklist; sin estado, todo por props
     [x] CabeceraPantalla/    running head + título con inicial iluminada + filete (Prebattle/Postgame/Battle-modo)
     [x] GlifoFase/           svg decorativo tipo xilografía por FaseTurno (Battle, bucle)
+    [x] CalculadoraTiradas/  botón flotante + modal de calculadoras (Impactar, Herir), global (App.tsx)
   store/
     [x] tipos.ts             tipos de dominio (handoff §3)
     [x] estadoApp.ts         store zustand + persist (clave única `mordheim-turner`) + acciones
@@ -53,6 +54,8 @@ src/
   lib/
     [x] battle/fases.ts      ORDEN_FASES, faseSiguiente, cierraRonda (lógica pura)
     [x] battle/fases.test.ts
+    [x] tiradas/tiradas.ts   tiradaImpactar, tiradaHerir (lógica pura, sin UI)
+    [x] tiradas/tiradas.test.ts
   styles/
     [x] tokens.css           custom properties: color, espaciado, tipografía, --huella / --filo-activo
     [x] global.css           reset + viñeta + textura de hollín SVG + .stack / .row + reduced-motion
@@ -122,6 +125,21 @@ usuario desmarca a mano si quiere reiniciar.
     en vivo (`establecerModo`), `linkFase` y detalle de items solo en tutorial,
     `notasFijas` de la fase, `<ListaChecklist>` sobre `CONTENIDO_BATTLE[fase].items`, y
     botón "Siguiente fase" / "Cerrar ronda" (`disabled` hasta marcar todo) → `avanzarFase`.
+
+## Calculadora de tiradas
+
+`CalculadoraTiradas` se monta una única vez en `App.tsx`, fuera de `<Routes>`: botón
+flotante disponible en las 4 pantallas. Al pulsarlo abre un modal (overlay oscurecido,
+no opaco del todo — se sigue viendo la pantalla de detrás) con dos calculadoras
+intercambiables por un toggle (Impactar / Herir), cada una con dos contadores y el
+resultado. Estado 100 % local (`useState`), sin relación con `useEstadoApp`: es una
+herramienta de consulta, no forma parte de la partida ni se persiste. Se cierra con el
+botón de cerrar, clic fuera del diálogo o Escape.
+
+La lógica de las tablas vive aparte en `src/lib/tiradas/tiradas.ts` (funciones puras,
+sin JSX), verificada contra las imágenes oficiales de mordheimer.net — no contra su
+widget interactivo, que tiene un bug (no reacciona si el WS del defensor supera al del
+atacante). Detalle y motivo en `docs/decisions.md`.
 
 ## Preview local
 

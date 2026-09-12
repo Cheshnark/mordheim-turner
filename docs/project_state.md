@@ -4,9 +4,10 @@ _Actualizado: 2026-09-12_
 
 ## Dónde estamos
 
-**App funcional con la identidad visual completa.** Store + datos + las tres pantallas
-reales + capa visual grimdark + Grenze Gotisch self-hosted en titulares. La fase de UI
-del plan queda cerrada; lo que resta es "prioridad baja" (despliegue, favicon).
+**App funcional con la identidad visual completa + calculadora de tiradas.** Store +
+datos + las tres pantallas reales + capa visual grimdark + Grenze Gotisch self-hosted en
+titulares + `CalculadoraTiradas` (Impactar / Herir) disponible en toda la app. La fase de
+UI del plan queda cerrada; lo que resta es "prioridad baja" (favicon, ver `docs/todos.md`).
 
 ### Cimientos (sesión 1)
 
@@ -322,6 +323,21 @@ Sobre `docs/mordheim-battle-mockup.html`, con las divergencias ya decididas.
   iconos en modo rápido, enlace de experiencia en Postgame.
   `lint`/`typecheck`/`format:check`/`test` (55/55) y `build` verdes.
 
+### Calculadora de tiradas (sesión 13 — esta)
+
+- `src/lib/tiradas/tiradas.ts` — `tiradaImpactar` (WS vs WS) y `tiradaHerir` (Fuerza vs
+  Resistencia, `null` si es imposible), lógica pura verificada pixel a pixel contra las
+  tablas escaneadas que usa mordheimer.net (no contra su widget interactivo, que tiene
+  un bug — detalle en `decisions.md`).
+- `src/components/CalculadoraTiradas/` — botón flotante + modal, montado una vez en
+  `App.tsx` fuera de `<Routes>`: disponible en Home, Prebattle, Battle y Postgame.
+  Overlay oscurecido no opaco, toggle Impactar/Herir, contadores grandes, resultado
+  destacado. Estado 100 % local, no toca `useEstadoApp` ni `localStorage`.
+- Tests nuevos: `tiradas.test.ts` (10 casos) y `CalculadoraTiradas.test.tsx` (7).
+  **test total: 69/69.** `lint`/`typecheck`/`format:check`/`build` verdes. Verificado en
+  el navegador (móvil 375): disparador y modal en Home y en el bucle de Battle, ambas
+  calculadoras, caso "Imposible herir", los tres modos de cierre.
+
 ### Nota sobre Prettier y markdown
 
 `*.md` está en `.prettierignore`: Prettier destrozaba las tablas de prosa de los docs.
@@ -329,13 +345,14 @@ Los `.md` se mantienen a mano.
 
 ## Siguiente paso
 
-La fase de contenido/lógica/UI del plan está **cerrada**. El empuje de identidad visual
-(wordmark, glifos macizos, textura de superficies, marca de agua) está hecho. El despliegue
-también: **Turnheim está publicado en https://cheshnark.github.io/mordheim-turner/**. No
-queda ningún pendiente de prioridad alta/media/baja abierto salvo los "reconsiderables"
-menores de `todos.md` (segunda familia tipográfica en tutorial, `.env.example` si hiciera
-falta, vigilar el tamaño del bundle). Confirmar en el móvil real que se ve y navega bien
-(pendiente del usuario, no bloqueante).
+La fase de contenido/lógica/UI del plan está **cerrada**, con la calculadora de tiradas
+como añadido posterior al cierre (sesión 13). El despliegue sigue publicado:
+**Turnheim está en https://cheshnark.github.io/mordheim-turner/** (pendiente hacer push
+del cambio de esta sesión para que se vea ahí). No queda ningún pendiente de prioridad
+alta/media/baja abierto salvo los "reconsiderables" menores de `todos.md` (segunda
+familia tipográfica en tutorial, `.env.example` si hiciera falta, vigilar el tamaño del
+bundle). Confirmar en el móvil real que se ve y navega bien (pendiente del usuario, no
+bloqueante).
 
 Nota: el avance sin marcar en modo rápido ya está resuelto (rápido = referencia). En
 tutorial se mantiene el bloqueo hasta marcar todo (reconsiderable).

@@ -757,3 +757,45 @@ verificado además navegándolo directamente y comprobando `location.hash`.
 Confirmado en el navegador (móvil 375): icono alineado con la casilla en Recuperación
 (texto a una y dos líneas), iconos visibles en Battle modo rápido (sin checkbox, con
 viñeta), y el nuevo icono de "Reparto de experiencia" en Postgame.
+
+---
+
+## 2026-09-12 — Calculadora de tiradas: modal global, 2 calculadoras, tablas propias
+
+**Decisión:** nuevo `CalculadoraTiradas` (botón flotante + modal), montado una vez en
+`App.tsx` fuera de `<Routes>` → disponible en las 4 pantallas, no solo en Battle. Dos
+calculadoras intercambiables por un toggle: **Impactar** (cuerpo a cuerpo, Habilidad de
+Combate atacante vs defensor) y **Herir** (Fuerza vs Resistencia). Overlay oscurecido
+pero no opaco (se sigue viendo la pantalla de detrás, para no perder el hilo de la
+partida). Estado 100 % local, sin tocar `useEstadoApp` ni `localStorage`.
+
+**Por qué 2 calculadoras y no 3:** se valoró añadir "Impactar a distancia" (Habilidad de
+Puntería del tirador). Se descarta: a diferencia de las otras dos, esa tirada no compara
+dos valores — depende solo de la Habilidad de Puntería del tirador (con modificadores de
+situación), así que no es una "calculadora" del mismo tipo. La propia mordheimer.net
+tampoco la ofrece como widget, solo como tabla de referencia.
+
+**Por qué modal y no solo enlazar a mordheimer.net:** la página de mordheimer.net a la
+que habría que enlazar es la de referencia completa (armas, tabla de desbandada,
+secuencia post-batalla…), no un widget aislado — salir de la app ahí cuesta más
+(pestaña nueva, scroll, volver) que un modal con 4 controles dentro de la propia app.
+Se planteó al usuario, que confirmó seguir adelante.
+
+**Verificación de las tablas — importante:** el widget interactivo de mordheimer.net
+(sección Tools) tiene un bug confirmado a mano: si el WS del defensor supera al del
+atacante, el resultado no se actualiza (se queda en el de "igual"). No se ha copiado ese
+comportamiento. En su lugar, se leyeron pixel a pixel las dos imágenes escaneadas del
+reglamento que la misma web usa como fuente ("To Hit chart" y "Wound chart", en
+`docs/rules/close-combat` y `docs/tools`), y se dedujo la fórmula exacta de cada una
+(ver `src/lib/tiradas/tiradas.ts`). Rango cubierto: 1-10 (el mismo que imprimen ambas
+tablas).
+
+**Descartado:** reproducir el widget de mordheimer.net tal cual (bug incluido); mostrar
+las dos calculadoras a la vez sin toggle (no pedido, más ruido en pantalla pequeña);
+persistir los valores introducidos (es una consulta puntual, no estado de partida).
+
+**Verificación:** `lint`/`typecheck`/`format:check`/`test` (69/69) y `build` verdes.
+Confirmado en el navegador (móvil 375): disparador visible y funcional en Home y en el
+bucle de Battle (sin competir con el "momento audaz" de la fase activa), toggle
+Impactar/Herir, contadores, caso "Imposible herir", cierre por botón/clic fuera/Escape
+sin alterar el estado de la partida en curso.
